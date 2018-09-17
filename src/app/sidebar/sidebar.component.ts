@@ -33,6 +33,36 @@ export const ROUTES: RouteInfo[] = [{
             {path: 'add', title: 'Add Inventory', ab:'AD'},
         ]
     },{
+        path: '/monitoring',
+        title: 'Monitor',
+        type: 'sub',
+        icontype: 'nc-icon nc-tv-2',
+        children: [
+            {path: 'ethylene', title: 'Ethylene', ab:'ET'},
+            {path: 'carbon', title: 'Carbon Dioxide', ab:'CO'},
+            {path: 'saved', title: 'Amount Saved', ab:'AS'},
+            {path: 'waste', title: 'Waste', ab:'WA'}
+        ]
+    },{
+        path: '/history',
+        title: 'History',
+        type: 'sub',
+        icontype: 'nc-icon nc-world-2',
+    },{
+        path: '/flash-sale',
+        title: 'Flash Sale',
+        type: 'sub',
+        icontype: 'nc-icon nc-user-run',
+    },{
+        path: '/employee',
+        title: 'Employee',
+        type: 'sub',
+        icontype: 'nc-icon nc-user-run',
+        children: [
+            {path: 'show-employee', title: 'Employees', ab:'ET'},
+            {path: 'add-employee', title: 'Add employee', ab:'CO'}
+        ]
+    },{
         path: '/components',
         title: 'Components',
         type: 'sub',
