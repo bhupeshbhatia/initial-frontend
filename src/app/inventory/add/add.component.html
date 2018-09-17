@@ -1,101 +1,92 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mx-auto">
                 <div class="card">
-                    <form #f2="ngForm" class="form-horizontal" novalidate (ngSubmit)="save2(f2.value, f2.valid)">
-                      <div class="card-header ">
+                    <div class="card-header ">
                         <h4 class="card-title">Add Product</h4>
-                      </div>
-                        <div class="card-body">
-                            <fieldset>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">
-                                        Required Text
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <input class="form-control" type="text" name="text"  [ngModel]="typeValidation.text"
-                                          required  #text="ngModel">
-                                          <small [hidden]="text.valid || (text.pristine && !f2.submitted)" class="text-danger">
-                                          Text is required.
-                                          </small>
-                                    </div>
-                                    <div class="col-sm-4"><code>required</code></div>
+                    </div>
+                    <div class="card-body">
+                        <form novalidate [formGroup]="form">
+                            <!-- <fieldset formGroupName="inventory"> -->
+                            <div class="form-group" [ngClass]="displayFieldCss('itemNumber')">
+                                <label class="col-sm-2 col-md-3 control-label required"> Item Number </label>
+                                <div class="col-sm-6">
+                                    <input type="number" id="itemNumber" class="form-control" formControlName="itemNumber"
+                                        required>
+                                    <app-field-error-display [displayError]="isFieldValid('itemNumber')" errorMsg="Item ID is required">
+                                    </app-field-error-display>
                                 </div>
-                            </fieldset>
+                            </div>
+                            <div class="form-group" [ngClass]="displayFieldCss('productName')">
+                                <label class="col-sm-2 control-label"> Item Name </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" formControlName="productName" required>
+                                    <app-field-error-display [displayError]="isFieldValid('productName')" errorMsg="Product name is required">
+                                    </app-field-error-display>
+                                </div>
+                            </div>
+                            <div class="form-group" [ngClass]="displayFieldCss('origin')">
+                                <label class="col-sm-3 col-md-3 control-label"> Origin of Product </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" formControlName="origin" placeholder="State, Country (E.g. ON, Canada)"
+                                        required>
+                                    <app-field-error-display [displayError]="isFieldValid('origin')" errorMsg="Place of origin is required">
+                                    </app-field-error-display>
+                                </div>
+                            </div>
+                            <div class="form-group" [ngClass]="displayFieldCss('arrivalDate')">
+                                <label class="col-sm-2 col-md-3 control-label"> Date of Arrival </label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" formControlName="arrivalDate" required name="dp1"
+                                        ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
+                                    <app-field-error-display [displayError]="isFieldValid('arrivalDate')" errorMsg="Date of arrival is required">
+                                    </app-field-error-display>
+                                </div>
+                            </div>
+                            <div class="form-group" [ngClass]="displayFieldCss('weight')">
+                                <label class="col-sm-2 control-label"> Total Weight </label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control" formControlName="weight" required>
+                                    <app-field-error-display [displayError]="isFieldValid('weight')" errorMsg="Weight is required">
+                                    </app-field-error-display>
+                                </div>
+                            </div>
+                            <div class="form-group" [ngClass]="displayFieldCss('price')">
+                                <label class="col-sm-2 control-label"> Price </label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control" formControlName="price" required>
+                                    <app-field-error-display [displayError]="isFieldValid('price')" errorMsg="Price is required">
+                                    </app-field-error-display>
+                                </div>
+                            </div>
+                            <div class="form-group" [ngClass]="displayFieldCss('sensorId')">
+                                <label class="col-sm-2 control-label"> Monitored By </label>
+                                <div class="col-sm-6">
+                                    <input type="number" class="form-control" formControlName="sensorId" required>
+                                    <app-field-error-display [displayError]="isFieldValid('sensorId')" errorMsg="Sensor ID is required">
+                                    </app-field-error-display>
+                                </div>
+                            </div>
+                            <div class="form-group" [ngClass]="displayFieldCss('location')">
+                                <label class="col-sm-2 control-label"> Location </label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" formControlName="location" placeholder="Aisle No."
+                                        required>
+                                    <app-field-error-display [displayError]="isFieldValid('location')" errorMsg="Location is required">
+                                    </app-field-error-display>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" id="addProduct" class="btn btn-info btn-fill col-sm-6 col-md-3"
+                                    (click)="onSubmit()">Add Product</button>
+                                <button type="submit" id="cancelProduct" class="btn btn-danger btn-fill col-sm-6 col-md-3"
+                                    (click)="reset()">Reset</button>
+                            </div>
+                            <pre>{{form.value | json}}</pre>
 
-                            <fieldset>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">
-                                        Email
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <input type="email" class="form-control" name="email" [ngModel]="typeValidation.email"
-                                          required  #email="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
-                                        <small [hidden]="email.valid || (email.pristine && !f2.submitted)" class="text-danger">
-                                          Email is required and format should be <i>john@doe.com</i>.
-                                        </small>
-                                    </div>
-                                    <div class="col-sm-4"><code>email="true"</code></div>
-                                </div>
-                            </fieldset>
-
-                            <fieldset>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">
-                                        Number
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <input class="form-control" type="number" name="number" number="true" [ngModel]="typeValidation.number"
-                                          required  #number="ngModel">
-                                    </div>
-                                    <div class="col-sm-4"><code>number="true"</code></div>
-                                </div>
-                            </fieldset>
-
-                            <fieldset>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">
-                                        Url
-                                    </label>
-                                    <div class="col-sm-6">
-                                        <input class="form-control" type="text" id="url" required pattern="https?://.+" [(ngModel)]="typeValidation.url" name="url" #url="ngModel">
-                                          <small [hidden]="url.valid || (url.pristine && !f2.submitted)" class="text-danger">
-                                            Must be a valid URL!
-                                          </small>
-                                    </div>
-                                    <div class="col-sm-4"><code>url="true"</code></div>
-                                </div>
-                            </fieldset>
-
-                            <fieldset>
-                                <div class="form-group column-sizing">
-                                    <label class="col-sm-2 control-label">
-                                        Equal to
-                                    </label>
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control" name="idSource" [ngModel]="typeValidation.idSource" placeholder="#idSource"
-                                          required validateEqual="idDestination" reverse="true" #idSource="ngModel">
-                                        <small [hidden]="idSource.valid || (idSource.pristine && !f2.submitted)" class="text-danger">
-                                          IdSource is required
-                                        </small>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control" name="idDestination" [ngModel]="typeValidation.idDestination" placeholder="#idDestination"
-                                          required validateEqual="idSource" reverse="false" #idDestination="ngModel">
-                                        <small [hidden]="idDestination.valid || (idDestination.pristine && !f2.submitted)" class="text-danger">
-                                          IdSource mismatch!
-                                        </small>
-                                    </div>
-                                    <div class="col-sm-4"><code>equalTo="#idSource"</code>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="card-footer text-center">
-                            <button type="submit" class="btn btn-info btn-fill">Validate Inputs</button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
