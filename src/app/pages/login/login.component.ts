@@ -1,8 +1,21 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { PasswordValidation } from '../../forms/validationforms/password-validator.component'
 
 declare var $:any;
+
+declare interface User {
+    text?: string;
+    email?: string; //  must be valid email format
+    password?: string; // required, value must be equal to confirm password.
+    confirmPassword?: string; // required, value must be equal to password.
+    number?: number; // required, value must be equal to password.
+    url?: string;
+    idSource?: string;
+    idDestination?: string;
+}
 
 @Component({
     moduleId:module.id,
@@ -18,6 +31,7 @@ export class LoginComponent implements OnInit{
     private toggleButton;
     private sidebarVisible: boolean;
     private nativeElement: Node;
+    public typeValidation: User;
 
     constructor(private element : ElementRef) {
         this.nativeElement = element.nativeElement;
@@ -44,6 +58,21 @@ export class LoginComponent implements OnInit{
             // after 1000 ms we add the class animated to the login/register card
             $('.card').removeClass('card-hidden');
         }, 700)
+
+        this.typeValidation = {
+            text: '',
+            password:'',
+            email: '',
+            idSource: '',
+            idDestination: '',
+            url: ''
+}
+    }
+    save1(model: User, isValid: boolean) {
+        // call API to save customer
+        if (isValid) {
+            console.log(model, isValid);
+        }
     }
     ngOnDestroy(){
         var body = document.getElementsByTagName('body')[0];
