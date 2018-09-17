@@ -24,6 +24,15 @@ export const ROUTES: RouteInfo[] = [{
         type: 'link',
         icontype: 'nc-icon nc-bank'
     },{
+        path: '/inventory',
+        title: 'Inventory',
+        type: 'sub',
+        icontype: 'nc-icon nc-box-2',
+        children: [
+            {path: 'show', title: 'Show Inventory', ab:'SH'},
+            {path: 'add', title: 'Add Inventory', ab:'AD'},
+        ]
+    },{
         path: '/components',
         title: 'Components',
         type: 'sub',
