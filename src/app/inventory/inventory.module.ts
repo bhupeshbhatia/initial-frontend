@@ -8,7 +8,7 @@ import { InventoryRoutes } from './inventory.routing';
 
 import { AddComponent } from './add/add.component';
 import { ShowComponent } from './show/show.component';
-import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component';
+// import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component';
 
 
 @NgModule({
@@ -21,8 +21,8 @@ import { FieldErrorDisplayComponent } from './field-error-display/field-error-di
     ],
     declarations: [
         AddComponent,
-        ShowComponent,
-        FieldErrorDisplayComponent
+        ShowComponent
+        // FieldErrorDisplayComponent
     ]
 })
 

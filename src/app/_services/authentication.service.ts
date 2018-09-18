@@ -24,14 +24,14 @@ export class AuthenticationService {
 
   login(username: string, password: string) {
     return this.http.post<any>(`http://localhost:4200/users/authenticate`, { username, password })
-      .pipe(map(user => {
+      .pipe(map(token => {
         // login successful if there's a jwt token in the response
-        if (user && user.token) {
+        if (token.access_token && token.refresh_token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
+          localStorage.setItem('currentUser', JSON.stringify(token));
         }
 
-        return user;
+        return token;
       }));
   }
 

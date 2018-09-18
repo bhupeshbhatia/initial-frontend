@@ -24,11 +24,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 if (request.body.username === testUser.username && request.body.password === testUser.password) {
                     // if login details are valid return 200 OK with a fake jwt token
                     const body = {
-                        id: testUser.id,
-                        username: testUser.username,
-                        firstName: testUser.firstName,
-                        lastName: testUser.lastName,
-                        token: 'fake-jwt-token'
+                        access_token: 'access-token',
+                        refresh_token: 'refresh-token'
                     };
                     return of(new HttpResponse({ status: 200, body }));
                 } else {
@@ -41,7 +38,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/users') && request.method === 'GET') {
                 // check for fake auth token in header and return users if valid,
                 // this security is implemented server side in a real application
-                if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
+                if (request.headers.get('Authorization') === 'Bearer access-token') {
                     return of(new HttpResponse({ status: 200, body: [testUser] }));
                 } else {
                     // return 401 not authorised if token is null or invalid
@@ -56,7 +53,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         // call materialize and dematerialize to ensure delay even if
         // an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
         .pipe(materialize())
-        .pipe(delay(100))
+        .pipe(delay(10))
         .pipe(dematerialize());
     }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FieldErrorDisplayComponent } from '../field-error-display/field-error-display.component'
+// import { FieldErrorDisplayComponent } from '../field-error-display/field-error-display.component'
 
 // declare interface User {
 //   barcode?: string;
@@ -44,47 +44,12 @@ export class AddComponent implements OnInit {
       deviceId: [null, [Validators.required, Validators.minLength(1)]],
       location: [null, [Validators.required, Validators.minLength(1)]]
     })
-
-
-    // if ($('.datetimepicker').length !== 0) {
-    //   $('.datetimepicker').datetimepicker({
-    //     icons: {
-    //       time: 'fa fa-clock-o',
-    //       date: 'fa fa-calendar',
-    //       up: 'fa fa-chevron-up',
-    //       down: 'fa fa-chevron-down',
-    //       previous: 'fa fa-chevron-left',
-    //       next: 'fa fa-chevron-right',
-    //       today: 'fa fa-screenshot',
-    //       clear: 'fa fa-trash',
-    //       close: 'fa fa-remove'
-    //     },
-    //     debug: true
-    //   });
-    // }
-
-    // if ($('.timepicker').length !== 0) {
-    //   $('.timepicker').datetimepicker({
-    //     //          format: 'H:mm',    // use this format if you want the 24hours timepicker
-    //     format: 'h:mm A', // use this format if you want the 12hours timpiecker with AM/PM toggle
-    //     icons: {
-    //       time: 'fa fa-clock-o',
-    //       date: 'fa fa-calendar',
-    //       up: 'fa fa-chevron-up',
-    //       down: 'fa fa-chevron-down',
-    //       previous: 'fa fa-chevron-left',
-    //       next: 'fa fa-chevron-right',
-    //       today: 'fa fa-screenshot',
-    //       clear: 'fa fa-trash',
-    //       close: 'fa fa-remove'
-    //     },
-    //     debug: true
-    //   });
-    // }
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
+
+
 
   onSubmit() {
     this.formSubmitAttempt = true;
