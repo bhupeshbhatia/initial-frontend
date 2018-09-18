@@ -16,12 +16,20 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+
+// used to create fake backend
+import { fakeBackendProvider } from './_helpers';
+
+
 @NgModule({
     imports:      [
         BrowserAnimationsModule,
         FormsModule,
         RouterModule.forRoot(AppRoutes),
         NgbModule.forRoot(),
+        HttpClientModule,
         HttpModule,
         SidebarModule,
         NavbarModule,
@@ -32,6 +40,11 @@ import { AppRoutes } from './app.routing';
         AppComponent,
         AdminLayoutComponent,
         AuthLayoutComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        fakeBackendProvider
     ],
     bootstrap:    [ AppComponent ]
 })

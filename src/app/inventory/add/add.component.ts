@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FieldErrorDisplayComponent } from '../field-error-display/field-error-display.component'
 
 // declare interface User {
 //   barcode?: string;
@@ -27,19 +28,20 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveF
 export class AddComponent implements OnInit {
 
   form: FormGroup;
-  private formSubmitAttempt: boolean;
+  formSubmitAttempt: boolean;
+  error: string;
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       itemNumber: [null, [Validators.required, Validators.minLength(1)]],
-      productName: [null, Validators.required],
-      origin: [null, Validators.required],
-      arrivalDate: [null, Validators.required],
+      productName: [null, [Validators.required, Validators.minLength(1)]],
+      origin: [null, [Validators.required, Validators.minLength(1)]],
+      arrivalDate: [null, [Validators.required, Validators.minLength(1)]],
       weight: [null, [Validators.required, Validators.minLength(1)]],
       price: [null, [Validators.required, Validators.minLength(1)]],
-      sensorId: [null, [Validators.required, Validators.minLength(1)]],
+      deviceId: [null, [Validators.required, Validators.minLength(1)]],
       location: [null, [Validators.required, Validators.minLength(1)]]
     })
 
@@ -81,19 +83,8 @@ export class AddComponent implements OnInit {
     // }
   }
 
-  isFieldValid(field: string) {
-    return (
-      (!this.form.get(field).valid && this.form.get(field).touched) ||
-      (this.form.get(field).untouched && this.formSubmitAttempt)
-    );
-  }
-
-  displayFieldCss(field: string) {
-    return {
-      'has-error': this.isFieldValid(field),
-      'has-feedback': this.isFieldValid(field)
-    };
-  }
+  // convenience getter for easy access to form fields
+  get f() { return this.form.controls; }
 
   onSubmit() {
     this.formSubmitAttempt = true;
