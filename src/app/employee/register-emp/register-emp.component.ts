@@ -9,30 +9,19 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveF
 export class RegisterEmpComponent implements OnInit {
 
   registerForm: FormGroup;
-  private formSubmitAttempt: boolean;
+  formSubmitAttempt: boolean;
+  error: string
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
-      username: [null, [Validators.required, Validators.minLength(4)]],
-      password: [null, [Validators.required, Validators.minLength(8)]]
+      username: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
+      password: [null, [Validators.required, Validators.minLength(5)]]
     })
   }
 
-  isFieldValid(field: string) {
-    return (
-      (!this.registerForm.get(field).valid && this.registerForm.get(field).touched) ||
-      (this.registerForm.get(field).untouched && this.formSubmitAttempt)
-    );
-  }
-
-  displayFieldCss(field: string) {
-    return {
-      'has-error': this.isFieldValid(field),
-      'has-feedback': this.isFieldValid(field)
-    };
-  }
+  get reg() { return this.registerForm.controls; }
 
   onSubmit() {
     this.formSubmitAttempt = true;
