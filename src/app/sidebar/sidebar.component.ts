@@ -59,8 +59,7 @@ export const ROUTES: RouteInfo[] = [{
         type: 'sub',
         icontype: 'nc-icon nc-user-run',
         children: [
-            {path: 'show-employee', title: 'Employees', ab:'ET'},
-            {path: 'add-employee', title: 'Add employee', ab:'CO'}
+            {path: 'register', title: 'Register', ab:'ET'}
         ]
     },{
         path: '/components',
@@ -143,6 +142,7 @@ export const ROUTES: RouteInfo[] = [{
     moduleId: module.id,
     selector: 'sidebar-cmp',
     templateUrl: 'sidebar.component.html',
+    styleUrls: ['./sidebar.component.css']
 })
 
 export class SidebarComponent {

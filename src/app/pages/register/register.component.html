@@ -31,142 +31,16 @@
     </div>
   </div>
 </nav>
+
+
 <div class="wrapper wrapper-full-page ">
   <div class="full-page register-page section-image" filter-color="black" data-image="./assets/img/bg/jan-sendereks.jpg">
     <div class="content">
       <div class="container">
         <div class="row">
           <div class="col-lg-5 col-md-5">
-            <!-- <div class="info-area info-horizontal mt-5">
-              <div class="icon icon-primary">
-                <i class="nc-icon nc-tv-2"></i>
-              </div>
-              <div class="description">
-                <h5 class="info-title">Marketing</h5>
-                <p class="description">
-                  We've created the marketing campaign of the website. It was a very interesting collaboration.
-                </p>
-              </div>
-            </div>
-            <div class="info-area info-horizontal">
-              <div class="icon icon-primary">
-                <i class="nc-icon nc-html5"></i>
-              </div>
-              <div class="description">
-                <h5 class="info-title">Fully Coded in HTML5</h5>
-                <p class="description">
-                  We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub.
-                </p>
-              </div>
-            </div>
-            <div class="info-area info-horizontal">
-              <div class="icon icon-info">
-                <i class="nc-icon nc-atom"></i>
-              </div>
-              <div class="description">
-                <h5 class="info-title">Built Audience</h5>
-                <p class="description">
-                  There is also a Fully Customizable CMS Admin Dashboard for this product.
-                </p>
-              </div>
-            </div> -->
           </div>
-          <div class="col-lg-4 col-md-6" style="margin: 0 !important">
-            <div class="card card-signup text-center">
-              <div class="card-header ">
-                <h4 class="card-title">Enterprise Registration</h4>
-                <!-- <div class="social">
-                  <button class="btn btn-icon btn-round btn-twitter">
-                    <i class="fa fa-twitter"></i>
-                  </button>
-                  <button class="btn btn-icon btn-round btn-dribbble">
-                    <i class="fa fa-dribbble"></i>
-                  </button>
-                  <button class="btn btn-icon btn-round btn-facebook">
-                    <i class="fa fa-facebook-f"></i>
-                  </button>
-                  <p class="card-description"> or be classical </p>
-                </div> -->
-              </div>
-              <div class="card-body ">
-                <form class="form" #f2="ngForm" novalidate (ngSubmit)="save2(f2.value, f2.valid)">
-                  <small [hidden]="text.valid || (text.pristine && !f2.submitted)" class="text-danger">
-                      Company name is required.
-                    </small>
-                  <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="nc-icon nc-single-02"></i>
-                      </span>
-                    </div>
-                    <input class="form-control" type="text" name="text" placeholder="Company Name" [ngModel]="typeValidation.text"
-                                          required  #text="ngModel">
-                    <!-- <input type="text" class="form-control" placeholder="Company Name" (focus)="focus=true" (blur)="focus=false"> -->
-                  </div>
-                  <br>
-                  <!-- <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="nc-icon nc-circle-10"></i>
-                      </span>
-                    </div>
-                    <input type="text" placeholder="Last Name..." class="form-control" (focus)="focus1=true" (blur)="focus1=false">
-                  </div> -->
-                  <small [hidden]="password.valid || (password.pristine && !f2.submitted)" class="text-danger">
-                    Password is required
-                  </small>
-                  <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="nc-icon nc-key-25"></i>
-                      </span>
-                    </div>
-                    <input type="password" class="form-control" name="password" placeholder="Password" [ngModel]="typeValidation.password" required
-                      validateEqual="confirmPassword" reverse="true" #password="ngModel">
-                    <!-- <input type="password" placeholder="Password" class="form-control" (focus)="focus1=true" (blur)="focus1=false"> -->
-                  </div>
-                  <br>
-                  <small [hidden]="password.valid || (password.pristine && !f2.submitted)" class="text-danger">
-                    Confirm Password
-                  </small>
-                  <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="nc-icon nc-key-25"></i>
-                      </span>
-                    </div>
-                    <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" [ngModel]="typeValidation.password" required
-                      validateEqual="confirmPassword" reverse="true" #password="ngModel">
-                    <!-- <input type="password" placeholder="Password" class="form-control" (focus)="focus1=true" (blur)="focus1=false"> -->
-                  </div>
-                  <br>
-                  <small [hidden]="email.valid || (email.pristine && !f2.submitted)" class="text-danger">
-                    Email is required and format should be <i>john@doe.com</i>.
-                  </small>
-                  <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="nc-icon nc-email-85"></i>
-                      </span>
-                    </div>
-                    <input type="email" class="form-control" name="email" placeholder="Email" [ngModel]="typeValidation.email" required #email="ngModel" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
-                    <!-- <input type="email" class="form-control" placeholder="Email" (focus)="focus2=true" (blur)="focus2=false"> -->
-                  </div>
-                  <div class="form-check text-left">
-                    <label class="form-check-label">
-                      <input class="form-check-input" type="checkbox" value="" checked="">
-                      <span class="form-check-sign"></span>
-                      I agree to the
-                      <a href="#something">terms and conditions</a>.
-                    </label>
-                  </div>
-                </form>
-              </div>
-              <div class="card-footer ">
-                <button type="submit" href="#pablo" class="btn btn-warning btn-round btn-block mb-3">Get Started</button>
-              </div>
-            </div>
-          </div>
+
         </div>
       </div>
     </div>

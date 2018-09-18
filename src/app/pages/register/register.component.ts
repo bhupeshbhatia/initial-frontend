@@ -81,20 +81,20 @@ export class RegisterComponent implements OnInit {
         var body = document.getElementsByTagName('body')[0];
         body.classList.remove('register-page');
     }
-    sidebarToggle() {
-        var toggleButton = this.toggleButton;
-        var body = document.getElementsByTagName('body')[0];
-        var sidebar = document.getElementsByClassName('navbar-collapse')[0];
-        if (this.sidebarVisible == false) {
-            setTimeout(function () {
-                toggleButton.classList.add('toggled');
-            }, 500);
-            body.classList.add('nav-open');
-            this.sidebarVisible = true;
-        } else {
-            this.toggleButton.classList.remove('toggled');
-            this.sidebarVisible = false;
-            body.classList.remove('nav-open');
-        }
-    }
+    // sidebarToggle() {
+    //     var toggleButton = this.toggleButton;
+    //     var body = document.getElementsByTagName('body')[0];
+    //     var sidebar = document.getElementsByClassName('navbar-collapse')[0];
+    //     if (this.sidebarVisible == false) {
+    //         setTimeout(function () {
+    //             toggleButton.classList.add('toggled');
+    //         }, 500);
+    //         body.classList.add('nav-open');
+    //         this.sidebarVisible = true;
+    //     } else {
+    //         this.toggleButton.classList.remove('toggled');
+    //         this.sidebarVisible = false;
+    //         body.classList.remove('nav-open');
+    //     }
+    // }
 }

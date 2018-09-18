@@ -17,6 +17,9 @@ export const AppRoutes: Routes = [{
             path: 'inventory',
             loadChildren: './inventory/inventory.module#InventoryModule'
         },{
+            path: 'employee',
+            loadChildren: './employee/employee.module#EmployeeModule'
+        },{
             path: 'components',
             loadChildren: './components/components.module#ComponentsModule'
         },{
