@@ -7,12 +7,12 @@
                         <h4 class="card-title">Add Product</h4>
                     </div>
                     <div class="card-body">
-                        <form novalidate [formGroup]="form">
+                        <form novalidate [formGroup]="form" #addInventory="ngForm" (ngSubmit)="onSubmit(addInventory)">
                             <!-- <fieldset formGroupName="inventory"> -->
                             <div class="form-group" [ngClass]="displayFieldCss('itemNumber')">
                                 <label class="col-sm-2 col-md-3 control-label required"> Item Number </label>
                                 <div class="col-sm-6">
-                                    <input type="number" id="itemNumber" class="form-control" formControlName="itemNumber"
+                                    <input type="number" id="itemNumber" class="form-control" formControlName="itemNumber" ngModel
                                         required>
                                     <app-field-error-display [displayError]="isFieldValid('itemNumber')" errorMsg="Item ID is required">
                                     </app-field-error-display>
@@ -21,7 +21,7 @@
                             <div class="form-group" [ngClass]="displayFieldCss('productName')">
                                 <label class="col-sm-2 control-label"> Item Name </label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" formControlName="productName" required>
+                                    <input type="text" class="form-control" ngModel formControlName="productName" required>
                                     <app-field-error-display [displayError]="isFieldValid('productName')" errorMsg="Product name is required">
                                     </app-field-error-display>
                                 </div>
@@ -29,7 +29,7 @@
                             <div class="form-group" [ngClass]="displayFieldCss('origin')">
                                 <label class="col-sm-3 col-md-3 control-label"> Origin of Product </label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" formControlName="origin" placeholder="State, Country (E.g. ON, Canada)"
+                                    <input type="text" class="form-control" ngModel formControlName="origin" placeholder="State, Country (E.g. ON, Canada)"
                                         required>
                                     <app-field-error-display [displayError]="isFieldValid('origin')" errorMsg="Place of origin is required">
                                     </app-field-error-display>
@@ -38,7 +38,7 @@
                             <div class="form-group" [ngClass]="displayFieldCss('arrivalDate')">
                                 <label class="col-sm-2 col-md-3 control-label"> Date of Arrival </label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" formControlName="arrivalDate" required name="dp1"
+                                    <input class="form-control" formControlName="arrivalDate" ngModel required name="dp1"
                                         ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
                                     <app-field-error-display [displayError]="isFieldValid('arrivalDate')" errorMsg="Date of arrival is required">
                                     </app-field-error-display>
@@ -47,7 +47,7 @@
                             <div class="form-group" [ngClass]="displayFieldCss('weight')">
                                 <label class="col-sm-2 control-label"> Total Weight </label>
                                 <div class="col-sm-6">
-                                    <input type="number" class="form-control" formControlName="weight" required>
+                                    <input type="number" class="form-control" ngModel formControlName="weight" required>
                                     <app-field-error-display [displayError]="isFieldValid('weight')" errorMsg="Weight is required">
                                     </app-field-error-display>
                                 </div>
@@ -55,7 +55,7 @@
                             <div class="form-group" [ngClass]="displayFieldCss('price')">
                                 <label class="col-sm-2 control-label"> Price </label>
                                 <div class="col-sm-6">
-                                    <input type="number" class="form-control" formControlName="price" required>
+                                    <input type="number" class="form-control" ngModel formControlName="price" required>
                                     <app-field-error-display [displayError]="isFieldValid('price')" errorMsg="Price is required">
                                     </app-field-error-display>
                                 </div>
@@ -63,7 +63,7 @@
                             <div class="form-group" [ngClass]="displayFieldCss('sensorId')">
                                 <label class="col-sm-2 control-label"> Monitored By </label>
                                 <div class="col-sm-6">
-                                    <input type="number" class="form-control" formControlName="sensorId" required>
+                                    <input type="text" class="form-control" ngModel formControlName="sensorId" required>
                                     <app-field-error-display [displayError]="isFieldValid('sensorId')" errorMsg="Sensor ID is required">
                                     </app-field-error-display>
                                 </div>
@@ -71,15 +71,14 @@
                             <div class="form-group" [ngClass]="displayFieldCss('location')">
                                 <label class="col-sm-2 control-label"> Location </label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" formControlName="location" placeholder="Aisle No."
+                                    <input type="text" class="form-control" ngModel formControlName="location" placeholder="Aisle No."
                                         required>
                                     <app-field-error-display [displayError]="isFieldValid('location')" errorMsg="Location is required">
                                     </app-field-error-display>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" id="addProduct" class="btn btn-info btn-fill col-sm-6 col-md-3"
-                                    (click)="onSubmit()">Add Product</button>
+                                <button type="submit" id="addProduct" class="btn btn-info btn-fill col-sm-6 col-md-3">Add Product</button>
                                 <button type="submit" id="cancelProduct" class="btn btn-danger btn-fill col-sm-6 col-md-3"
                                     (click)="reset()">Reset</button>
                             </div>

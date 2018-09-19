@@ -1,0 +1,46 @@
+[
+	{
+		"itemNo": 1,
+		"name": "apple",
+		"origin": "farm",
+		"harvest_date": "03/03/2018",
+		"arrival_date": "03/03/2018",
+		"quantity_monitored": 22,
+		"price": 44,
+		"monitored_by": "Person1",
+		"location": "Mississauga"
+	},
+	{
+		"itemNo": 2,
+		"name": "pear",
+		"origin": "farm",
+		"harvest_date": "03/03/2018",
+		"arrival_date": "03/03/2018",
+		"quantity_monitored": 23,
+		"price": 45,
+		"monitored_by": "Person1",
+		"location": "Mississauga"
+	},
+	{
+		"itemNo": 3,
+		"name": "orange",
+		"origin": "farm",
+		"harvest_date": "03/03/2018",
+		"arrival_date": "03/03/2018",
+		"quantity_monitored": 23,
+		"price": 45,
+		"monitored_by": "Person1",
+		"location": "Mississauga"
+	},
+	{
+		"itemNo": 4,
+		"name": "grape",
+		"origin": "farm",
+		"harvest_date": "03/03/2018",
+		"arrival_date": "03/03/2018",
+		"quantity_monitored": 23,
+		"price": 45,
+		"monitored_by": "Person1",
+		"location": "Mississauga"
+	}
+]

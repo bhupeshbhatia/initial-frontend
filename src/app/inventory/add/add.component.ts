@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { InventoryModule } from '../../../../initial-frontend/src/app/inventory/inventory.module';
 
 // declare interface User {
 //   barcode?: string;
@@ -15,9 +18,18 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveF
 
 declare var $: any;
 
-
-
-
+export interface Inventory {
+  item_number: number
+  item_name: string
+  status: string
+  product_origin: string
+  arrival_date: Date
+  expiry_date: Date
+  total_weight: number
+  price: number
+  monitored_by: string
+  location: string
+}
 
 @Component({
   selector: 'app-add',
@@ -29,7 +41,9 @@ export class AddComponent implements OnInit {
   form: FormGroup;
   private formSubmitAttempt: boolean;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private _http: Http) { }
+
+
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -95,14 +109,16 @@ export class AddComponent implements OnInit {
     };
   }
 
-  onSubmit() {
-    this.formSubmitAttempt = true;
-    if (this.form.valid) {
-      console.log('form submitted');
-      const resource = JSON.stringify(this.form.value);
-
-    console.log('Add Button clicked: ' + resource);
-    }
+  onSubmit(inventory: NgForm) {
+    var json = JSON.stringify(inventory.value)
+    console.log(json)
+    // this.formSubmitAttempt = true;
+    // if (this.form.valid) {
+    //   console.log('form submitted');
+    //   const resource = JSON.stringify(this.form.value);
+    //   this._http.post('your_url', this.form).subscribe(status => console.log(JSON.stringify(status)));
+    // console.log('Add Button clicked: ' + resource);
+    // }
 
       // this.service.create(resource)
     //   .subscribe(response => console.log(response));
