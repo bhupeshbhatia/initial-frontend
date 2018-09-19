@@ -14,8 +14,8 @@ export const AppRoutes: Routes = [{
         component: AdminLayoutComponent,
         children: [{
             path: '',
-            loadChildren: './dashboard/dashboard.module#DashboardModule',
-            canActivate: [AuthGuard]
+            canActivate: [AuthGuard],
+            loadChildren: './dashboard/dashboard.module#DashboardModule'
         }, {
             path: 'inventory',
             loadChildren: './inventory/inventory.module#InventoryModule',
@@ -58,6 +58,18 @@ export const AppRoutes: Routes = [{
             children: [{
                 path: 'pages',
                 loadChildren: './pages/pages.module#PagesModule'
+            },{
+                path: '',
+                canActivate: [AuthGuard],
+                loadChildren: './dashboard/dashboard.module#DashboardModule'
+            }, {
+                path: 'inventory',
+                loadChildren: './inventory/inventory.module#InventoryModule',
+                canActivate: [AuthGuard]
+            }, {
+                path: 'employee',
+                loadChildren: './employee/employee.module#EmployeeModule',
+                canActivate: [AuthGuard]
             }]
         },
         {

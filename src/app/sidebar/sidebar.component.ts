@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentInit } from '@angular/core';
+import { TokenExtraction } from '../_helpers';
+import { Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentInit, Testability } from '@angular/core';
 
 // Metadata
 export interface RouteInfo {
@@ -145,7 +146,18 @@ export const ROUTES: RouteInfo[] = [{
     styleUrls: ['./sidebar.component.css']
 })
 
-export class SidebarComponent {
+export class SidebarComponent implements OnInit{
+
+    role: string
+    global: any
+
+    constructor(global: TokenExtraction) {
+        console.log(global, '+++++++++++++++')
+        this.global = global
+        this.role = this.global.getUserInfo().role
+    }
+
+
     public menuItems: any[];
     isNotMobileMenu() {
         if ( window.outerWidth > 991) {
@@ -156,6 +168,7 @@ export class SidebarComponent {
 
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
+        // this.userRole = 'Corporate'
     }
     ngAfterViewInit() {
     }

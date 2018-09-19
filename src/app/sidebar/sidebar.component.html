@@ -27,8 +27,8 @@
         <span class="lineEmp">
                 <b class="caret"></b>
         </span>
-        <span class="empType">
-            Corporate
+        <span class="empType" *ngIf="!!role">
+            {{role}}
         </span>
       </a>
       <div class="clearfix"></div>

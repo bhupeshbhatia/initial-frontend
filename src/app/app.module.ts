@@ -17,10 +17,14 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+
+import {
+    ErrorInterceptor,
+    JwtInterceptor,
+    TokenExtraction,
+    fakeBackendProvider } from './_helpers';
 
 // used to create fake backend
-import { fakeBackendProvider } from './_helpers';
 
 
 @NgModule({
@@ -44,6 +48,7 @@ import { fakeBackendProvider } from './_helpers';
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        TokenExtraction,
         fakeBackendProvider
     ],
     bootstrap:    [ AppComponent ]

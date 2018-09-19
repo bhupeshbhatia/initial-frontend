@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { User } from '../_models';
+import { Token } from '../_models';
 
 // method for getting all users from the api - if needed
 
@@ -13,6 +13,6 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get<User[]>(`http://localhost:4200/users`);
+    return this.http.get<Token[]>(`http://localhost:4200/users`);
   }
 }
