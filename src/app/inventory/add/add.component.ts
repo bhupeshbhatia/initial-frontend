@@ -16,7 +16,7 @@ import { InventoryModule } from '../../../../initial-frontend/src/app/inventory/
 //   idDestination?: string;
 // }
 
-declare var $: any;
+// declare var $: any;
 
 export interface Inventory {
   item_number: number
@@ -39,7 +39,8 @@ export interface Inventory {
 export class AddComponent implements OnInit {
 
   form: FormGroup;
-  private formSubmitAttempt: boolean;
+  formSubmitAttempt: boolean;
+  error: string;
 
   constructor(private formBuilder: FormBuilder, private _http: Http) { }
 
@@ -48,66 +49,20 @@ export class AddComponent implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       itemNumber: [null, [Validators.required, Validators.minLength(1)]],
-      productName: [null, Validators.required],
-      origin: [null, Validators.required],
-      arrivalDate: [null, Validators.required],
+      productName: [null, [Validators.required, Validators.minLength(1)]],
+      origin: [null, [Validators.required, Validators.minLength(1)]],
+      arrivalDate: [null, [Validators.required, Validators.minLength(1)]],
       weight: [null, [Validators.required, Validators.minLength(1)]],
       price: [null, [Validators.required, Validators.minLength(1)]],
-      sensorId: [null, [Validators.required, Validators.minLength(1)]],
+      deviceId: [null, [Validators.required, Validators.minLength(1)]],
       location: [null, [Validators.required, Validators.minLength(1)]]
     })
-
-
-    if ($('.datetimepicker').length !== 0) {
-      $('.datetimepicker').datetimepicker({
-        icons: {
-          time: 'fa fa-clock-o',
-          date: 'fa fa-calendar',
-          up: 'fa fa-chevron-up',
-          down: 'fa fa-chevron-down',
-          previous: 'fa fa-chevron-left',
-          next: 'fa fa-chevron-right',
-          today: 'fa fa-screenshot',
-          clear: 'fa fa-trash',
-          close: 'fa fa-remove'
-        },
-        debug: true
-      });
-    }
-
-    if ($('.timepicker').length !== 0) {
-      $('.timepicker').datetimepicker({
-        //          format: 'H:mm',    // use this format if you want the 24hours timepicker
-        format: 'h:mm A', // use this format if you want the 12hours timpiecker with AM/PM toggle
-        icons: {
-          time: 'fa fa-clock-o',
-          date: 'fa fa-calendar',
-          up: 'fa fa-chevron-up',
-          down: 'fa fa-chevron-down',
-          previous: 'fa fa-chevron-left',
-          next: 'fa fa-chevron-right',
-          today: 'fa fa-screenshot',
-          clear: 'fa fa-trash',
-          close: 'fa fa-remove'
-        },
-        debug: true
-      });
-    }
   }
 
-  isFieldValid(field: string) {
-    return (
-      (!this.form.get(field).valid && this.form.get(field).touched) ||
-      (this.form.get(field).untouched && this.formSubmitAttempt)
-    );
-  }
+  // convenience getter for easy access to form fields
+  get f() { return this.form.controls; }
 
-  displayFieldCss(field: string) {
-    return {
-      'has-error': this.isFieldValid(field),
-      'has-feedback': this.isFieldValid(field)
-    };
-  }
+
 
   onSubmit(inventory: NgForm) {
     var json = JSON.stringify(inventory.value)

@@ -1,0 +1,16 @@
+.empName {
+    margin-top: -8px;
+
+}
+
+.lineEmp {
+	background: white;
+    height:1px;
+    width: 100px;
+	overflow: hidden;
+    margin-left: 25px;
+}
+
+.empType {
+    font-size: 12px;
+}

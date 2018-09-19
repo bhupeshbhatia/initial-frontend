@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule } from "@angular/common/http";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent }   from './app.component';
 import { AppRoutingModule } from "./app.routing";
@@ -19,6 +18,17 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
 import { LoadInventoryJsonService } from './services/load-inventory-json/load-inventory-json.service';
 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import {
+    ErrorInterceptor,
+    JwtInterceptor,
+    TokenExtraction,
+    fakeBackendProvider } from './_helpers';
+
+// used to create fake backend
+
+
 @NgModule({
     imports:      [
         BrowserModule,
@@ -30,6 +40,7 @@ import { LoadInventoryJsonService } from './services/load-inventory-json/load-in
         FormsModule,
         RouterModule.forRoot(AppRoutes),
         NgbModule.forRoot(),
+        HttpClientModule,
         HttpModule,
         SidebarModule,
         NavbarModule,
@@ -41,7 +52,12 @@ import { LoadInventoryJsonService } from './services/load-inventory-json/load-in
         AdminLayoutComponent,
         AuthLayoutComponent
     ],
-    providers:[LoadInventoryJsonService],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        TokenExtraction,
+        fakeBackendProvider
+    ],
     bootstrap:    [ AppComponent ]
 })
 

@@ -9,72 +9,78 @@
                     <div class="card-body">
                         <form novalidate [formGroup]="form" #addInventory="ngForm" (ngSubmit)="onSubmit(addInventory)">
                             <!-- <fieldset formGroupName="inventory"> -->
-                            <div class="form-group" [ngClass]="displayFieldCss('itemNumber')">
+                            <div class="form-group">
                                 <label class="col-sm-2 col-md-3 control-label required"> Item Number </label>
                                 <div class="col-sm-6">
-                                    <input type="number" id="itemNumber" class="form-control" formControlName="itemNumber" ngModel
-                                        required>
-                                    <app-field-error-display [displayError]="isFieldValid('itemNumber')" errorMsg="Item ID is required">
-                                    </app-field-error-display>
+                                    <input type="number" id="itemNumber" class="form-control" formControlName="itemNumber" ngModel [ngClass]="{ 'is-invalid': formSubmitAttempt && f.itemNumber.errors }">
+                                        <div *ngIf="formSubmitAttempt && f.itemNumber.errors" class="invalid-feedback">
+                                            <div *ngIf="f.itemNumber.errors.required">Item number is required</div>
+                                        </div>
                                 </div>
                             </div>
-                            <div class="form-group" [ngClass]="displayFieldCss('productName')">
-                                <label class="col-sm-2 control-label"> Item Name </label>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label required"> Item Name </label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" ngModel formControlName="productName" required>
-                                    <app-field-error-display [displayError]="isFieldValid('productName')" errorMsg="Product name is required">
-                                    </app-field-error-display>
+                                    <input type="text" class="form-control" ngModel formControlName="productName" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.productName.errors }">
+                                    <div *ngIf="formSubmitAttempt && f.productName.errors" class="invalid-feedback">
+                                        <div *ngIf="f.productName.errors.required">Item name is required</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group" [ngClass]="displayFieldCss('origin')">
-                                <label class="col-sm-3 col-md-3 control-label"> Origin of Product </label>
+                            <div class="form-group">
+                                <label class="col-sm-3 col-md-3 control-label required"> Origin of Product </label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" ngModel formControlName="origin" placeholder="State, Country (E.g. ON, Canada)"
-                                        required>
-                                    <app-field-error-display [displayError]="isFieldValid('origin')" errorMsg="Place of origin is required">
-                                    </app-field-error-display>
+                                    <input type="text" class="form-control" ngModel formControlName="origin" id="origin" placeholder="State, Country (E.g. ON, Canada)" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.origin.errors }">
+                                    <div *ngIf="formSubmitAttempt && f.origin.errors" class="invalid-feedback">
+                                        <div *ngIf="f.origin.errors.required">Item name is required</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group" [ngClass]="displayFieldCss('arrivalDate')">
-                                <label class="col-sm-2 col-md-3 control-label"> Date of Arrival </label>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-md-3 control-label required"> Date of Arrival </label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" formControlName="arrivalDate" ngModel required name="dp1"
-                                        ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
-                                    <app-field-error-display [displayError]="isFieldValid('arrivalDate')" errorMsg="Date of arrival is required">
-                                    </app-field-error-display>
+                                    <input class="form-control" formControlName="arrivalDate" required name="dp1"
+                                        ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.arrivalDate.errors }">
+                                        <div *ngIf="formSubmitAttempt && f.arrivalDate.errors" class="invalid-feedback">
+                                            <div *ngIf="f.arrivalDate.errors.required">Date of arrival is required</div>
+                                        </div>
                                 </div>
                             </div>
-                            <div class="form-group" [ngClass]="displayFieldCss('weight')">
-                                <label class="col-sm-2 control-label"> Total Weight </label>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label required"> Total Weight </label>
                                 <div class="col-sm-6">
-                                    <input type="number" class="form-control" ngModel formControlName="weight" required>
-                                    <app-field-error-display [displayError]="isFieldValid('weight')" errorMsg="Weight is required">
-                                    </app-field-error-display>
+                                    <input type="number" class="form-control" ngModel formControlName="weight" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.weight.errors }">
+                                    <div *ngIf="formSubmitAttempt && f.weight.errors" class="invalid-feedback">
+                                        <div *ngIf="f.weight.errors.required">Total weight is required</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group" [ngClass]="displayFieldCss('price')">
-                                <label class="col-sm-2 control-label"> Price </label>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label required"> Price </label>
                                 <div class="col-sm-6">
-                                    <input type="number" class="form-control" ngModel formControlName="price" required>
-                                    <app-field-error-display [displayError]="isFieldValid('price')" errorMsg="Price is required">
-                                    </app-field-error-display>
+                                    <input type="number" class="form-control" ngModel formControlName="price" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.price.errors }">
+                                    <div *ngIf="formSubmitAttempt && f.price.errors" class="invalid-feedback">
+                                        <div *ngIf="f.price.errors.required">Total weight is required</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group" [ngClass]="displayFieldCss('sensorId')">
-                                <label class="col-sm-2 control-label"> Monitored By </label>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label required"> Monitored By </label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" ngModel formControlName="sensorId" required>
-                                    <app-field-error-display [displayError]="isFieldValid('sensorId')" errorMsg="Sensor ID is required">
-                                    </app-field-error-display>
+                                    <input type="number" class="form-control" ngModel formControlName="deviceId" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.deviceId.errors }">
+                                    <div *ngIf="formSubmitAttempt && f.deviceId.errors" class="invalid-feedback">
+                                        <div *ngIf="f.deviceId.errors.required">Sensor ID is required</div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group" [ngClass]="displayFieldCss('location')">
-                                <label class="col-sm-2 control-label"> Location </label>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label required"> Location </label>
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control" ngModel formControlName="location" placeholder="Aisle No."
-                                        required>
-                                    <app-field-error-display [displayError]="isFieldValid('location')" errorMsg="Location is required">
-                                    </app-field-error-display>
+                                    [ngClass]="{ 'is-invalid': formSubmitAttempt && f.location.errors }">
+                                    <div *ngIf="formSubmitAttempt && f.location.errors" class="invalid-feedback">
+                                        <div *ngIf="f.location.errors.required">Sensor ID is required</div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -82,7 +88,7 @@
                                 <button type="submit" id="cancelProduct" class="btn btn-danger btn-fill col-sm-6 col-md-3"
                                     (click)="reset()">Reset</button>
                             </div>
-                            <pre>{{form.value | json}}</pre>
+                            <!-- <pre>{{form.value | json}}</pre> -->
 
                         </form>
                     </div>
