@@ -9,12 +9,12 @@
                         <h4 class="card-title">Add Product</h4>
                     </div>
                     <div class="card-body">
-                        <form [formGroup]="form">
+                        <form novalidate [formGroup]="form" #addInventory="ngForm" (ngSubmit)="onSubmit(addInventory)">
                             <!-- <fieldset formGroupName="inventory"> -->
                             <div class="form-group">
                                 <label class="col-sm-2 col-md-3 control-label required"> Item Number </label>
                                 <div class="col-sm-6">
-                                    <input type="number" id="itemNumber" class="form-control" formControlName="itemNumber" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.itemNumber.errors }">
+                                    <input type="number" id="itemNumber" class="form-control" formControlName="itemNumber" ngModel [ngClass]="{ 'is-invalid': formSubmitAttempt && f.itemNumber.errors }">
                                         <div *ngIf="formSubmitAttempt && f.itemNumber.errors" class="invalid-feedback">
                                             <div *ngIf="f.itemNumber.errors.required">Item number is required</div>
                                         </div>
@@ -23,7 +23,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label required"> Item Name </label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" formControlName="productName" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.productName.errors }">
+                                    <input type="text" class="form-control" ngModel formControlName="productName" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.productName.errors }">
                                     <div *ngIf="formSubmitAttempt && f.productName.errors" class="invalid-feedback">
                                         <div *ngIf="f.productName.errors.required">Item name is required</div>
                                     </div>
@@ -32,7 +32,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 col-md-3 control-label required"> Origin of Product </label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" formControlName="origin" id="origin" placeholder="State, Country (E.g. ON, Canada)" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.origin.errors }">
+                                    <input type="text" class="form-control" ngModel formControlName="origin" id="origin" placeholder="State, Country (E.g. ON, Canada)" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.origin.errors }">
                                     <div *ngIf="formSubmitAttempt && f.origin.errors" class="invalid-feedback">
                                         <div *ngIf="f.origin.errors.required">Item name is required</div>
                                     </div>
@@ -51,7 +51,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label required"> Total Weight </label>
                                 <div class="col-sm-6">
-                                    <input type="number" class="form-control" formControlName="weight" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.weight.errors }">
+                                    <input type="number" class="form-control" ngModel formControlName="weight" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.weight.errors }">
                                     <div *ngIf="formSubmitAttempt && f.weight.errors" class="invalid-feedback">
                                         <div *ngIf="f.weight.errors.required">Total weight is required</div>
                                     </div>
@@ -60,7 +60,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label required"> Price </label>
                                 <div class="col-sm-6">
-                                    <input type="number" class="form-control" formControlName="price" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.price.errors }">
+                                    <input type="number" class="form-control" ngModel formControlName="price" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.price.errors }">
                                     <div *ngIf="formSubmitAttempt && f.price.errors" class="invalid-feedback">
                                         <div *ngIf="f.price.errors.required">Total weight is required</div>
                                     </div>
@@ -69,7 +69,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label required"> Monitored By </label>
                                 <div class="col-sm-6">
-                                    <input type="number" class="form-control" formControlName="deviceId" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.deviceId.errors }">
+                                    <input type="number" class="form-control" ngModel formControlName="deviceId" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.deviceId.errors }">
                                     <div *ngIf="formSubmitAttempt && f.deviceId.errors" class="invalid-feedback">
                                         <div *ngIf="f.deviceId.errors.required">Sensor ID is required</div>
                                     </div>
@@ -78,7 +78,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label required"> Location </label>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control" formControlName="location" placeholder="Aisle No."
+                                    <input type="text" class="form-control" ngModel formControlName="location" placeholder="Aisle No."
                                     [ngClass]="{ 'is-invalid': formSubmitAttempt && f.location.errors }">
                                     <div *ngIf="formSubmitAttempt && f.location.errors" class="invalid-feedback">
                                         <div *ngIf="f.location.errors.required">Sensor ID is required</div>
@@ -86,8 +86,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" id="addProduct" class="btn btn-info btn-fill col-sm-6 col-md-3"
-                                    (click)="onSubmit()">Add Product</button>
+                                <button type="submit" id="addProduct" class="btn btn-info btn-fill col-sm-6 col-md-3">Add Product</button>
                                 <button type="submit" id="cancelProduct" class="btn btn-danger btn-fill col-sm-6 col-md-3"
                                     (click)="reset()">Reset</button>
                             </div>

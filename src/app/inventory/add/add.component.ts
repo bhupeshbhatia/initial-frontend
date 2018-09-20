@@ -20,9 +20,18 @@ import swal from 'sweetalert2'
 
 // declare var $: any
 
-
-
-
+export interface Inventory {
+  item_number: number
+  item_name: string
+  status: string
+  product_origin: string
+  arrival_date: Date
+  expiry_date: Date
+  total_weight: number
+  price: number
+  monitored_by: string
+  location: string
+}
 
 @Component({
   selector: 'app-add',
