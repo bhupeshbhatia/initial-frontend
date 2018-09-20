@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
 
       this.loading = true
       console.log(this.http)
-      this.http.post('142.55.32.86/api', resource)
+      this.http.post('142.55.32.86:50281/api1', resource)
       .toPromise()
       .then(d => d.data)
       .then(data => {

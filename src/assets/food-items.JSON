@@ -1,46 +1,78 @@
 [
 	{
-		"itemNo": 1,
+		"item_id": 1,
 		"name": "apple",
 		"origin": "farm",
-		"harvest_date": "03/03/2018",
+		"expiry_date": "03/03/2018",
 		"arrival_date": "03/03/2018",
-		"quantity_monitored": 22,
+		"total_weight": 22,
 		"price": 44,
-		"monitored_by": "Person1",
+		"device_id": "Person1",
 		"location": "Mississauga"
 	},
 	{
-		"itemNo": 2,
+		"item_id": 2,
 		"name": "pear",
 		"origin": "farm",
-		"harvest_date": "03/03/2018",
+		"expiry_date": "03/03/2018",
 		"arrival_date": "03/03/2018",
-		"quantity_monitored": 23,
+		"total_weight": 23,
 		"price": 45,
-		"monitored_by": "Person1",
+		"device_id": "Person1",
 		"location": "Mississauga"
 	},
 	{
-		"itemNo": 3,
+		"item_id": 3,
 		"name": "orange",
 		"origin": "farm",
-		"harvest_date": "03/03/2018",
+		"expiry_date": "03/03/2018",
 		"arrival_date": "03/03/2018",
-		"quantity_monitored": 23,
+		"total_weight": 23,
 		"price": 45,
-		"monitored_by": "Person1",
+		"device_id": "Person1",
 		"location": "Mississauga"
 	},
 	{
-		"itemNo": 4,
+		"item_id": 4,
 		"name": "grape",
 		"origin": "farm",
-		"harvest_date": "03/03/2018",
+		"expiry_date": "03/03/2018",
 		"arrival_date": "03/03/2018",
-		"quantity_monitored": 23,
+		"total_weight": 23,
 		"price": 45,
-		"monitored_by": "Person1",
+		"device_id": "Person1",
+		"location": "Mississauga"
+	},
+	{
+		"item_id": 5,
+		"name": "grape",
+		"origin": "farm",
+		"expiry_date": "03/03/2018",
+		"arrival_date": "03/03/2018",
+		"total_weight": 23,
+		"price": 45,
+		"device_id": "Person1",
+		"location": "Mississauga"
+	},{
+		"item_id": 6,
+		"name": "grape",
+		"origin": "farm",
+		"expiry_date": "03/03/2018",
+		"arrival_date": "03/03/2018",
+		"total_weight": 23,
+		"price": 45,
+		"device_id": "Person1",
+		"location": "Mississauga"
+	},{
+		"item_id": 7,
+		"name": "grape",
+		"origin": "farm",
+		"expiry_date": "03/03/2018",
+		"arrival_date": "03/03/2018",
+		"total_weight": 23,
+		"price": 45,
+		"device_id": "Person1",
 		"location": "Mississauga"
 	}
+
 ]

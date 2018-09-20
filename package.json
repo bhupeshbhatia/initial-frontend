@@ -31,6 +31,7 @@
     "@ng-bootstrap/ng-bootstrap": "^2.1.0",
     "@ngui/map": "0.30.3",
     "@types/googlemaps": "3.26.14",
+    "@types/uuid": "^3.4.4",
     "ag-grid-angular": "^19.0.0",
     "ag-grid-community": "^19.0.0",
     "ajv": "6.5.0",

@@ -66,7 +66,7 @@ export class ShowComponent implements OnInit {
         Food = data
       })
 
-     this.form = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       item_id: [null, [Validators.required, Validators.minLength(1)]],
       name: [null, [Validators.required, Validators.minLength(1)]],
       origin: [null, [Validators.required, Validators.minLength(1)]],
@@ -75,7 +75,7 @@ export class ShowComponent implements OnInit {
       price: [null, [Validators.required, Validators.minLength(1)]],
       device_id: [null, [Validators.required, Validators.minLength(1)]],
       location: [null, [Validators.required, Validators.minLength(1)]]
-  })
+    })
 }
 
 get f() { return this.form.controls; }

@@ -12,7 +12,7 @@ export class PostInventoryDataService {
   constructor(private http: Http) { }
 
   addInventoryWithPromise(inventory: JSON, url: string): Promise<any> {
-    return this.http.post("142.55.32.86"+url, inventory).toPromise()
+    return this.http.post("142.55.32.86:50281/api2/"+url, inventory).toPromise()
                    .catch(this.handleErrorPromise);
   }
     private handleErrorPromise (error: Response | any) {

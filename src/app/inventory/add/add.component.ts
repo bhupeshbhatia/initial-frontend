@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { AuthenticationService } from '../../_services'
 import swal from 'sweetalert2'
 import { PostInventoryDataService } from "../../services/post-inventory-data/post-inventory-data.service";
+import { v4 as uuid } from 'uuid';
 
 
 // declare interface User {
@@ -23,7 +24,7 @@ import { PostInventoryDataService } from "../../services/post-inventory-data/pos
 // declare var $: any
 
 export interface Inventory {
-  item_number: number
+  item_id: number
   item_name: string
   status: string
   product_origin: string
@@ -59,13 +60,13 @@ export class AddComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      itemNumber: [null, [Validators.required, Validators.minLength(1)]],
-      productName: [null, [Validators.required, Validators.minLength(1)]],
+      item_id: [null, [Validators.required, Validators.minLength(1)]],
+      name: [null, [Validators.required, Validators.minLength(1)]],
       origin: [null, [Validators.required, Validators.minLength(1)]],
-      arrivalDate: [null, [Validators.required, Validators.minLength(1)]],
-      weight: [null, [Validators.required, Validators.minLength(1)]],
+      date_arrived: [null, [Validators.required, Validators.minLength(1)]],
+      total_weight: [null, [Validators.required, Validators.minLength(1)]],
       price: [null, [Validators.required, Validators.minLength(1)]],
-      deviceId: [null, [Validators.required, Validators.minLength(1)]],
+      device_id: [null, [Validators.required, Validators.minLength(1)]],
       location: [null, [Validators.required, Validators.minLength(1)]]
     })
 
@@ -74,7 +75,6 @@ export class AddComponent implements OnInit {
 
   // convenience getter for easy access to form fields
   get f() { return this.form.controls }
-
 
 
   onSubmit() {

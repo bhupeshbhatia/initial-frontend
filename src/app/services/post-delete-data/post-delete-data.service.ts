@@ -12,7 +12,7 @@ export class PostDeleteDataService {
   constructor(private http: Http) { }
 
   addDeleteWithPromise(deleteVal: any, url: string): Promise<any> {
-    return this.http.post("142.55.32.86"+url, deleteVal).toPromise()
+    return this.http.post("142.55.32.86:50281/api2/"+url, deleteVal).toPromise()
       .catch(this.handleErrorPromise);
   }
   private handleErrorPromise(error: Response | any) {

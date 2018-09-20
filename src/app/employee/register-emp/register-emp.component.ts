@@ -68,7 +68,7 @@ export class RegisterEmpComponent implements OnInit {
 
 
       console.log(resource)
-      this.http.post('142.55.32.86/api', resource)
+      this.http.post("142.55.32.86:50281/api1", resource)
         .toPromise()
         .then(d => d.data)
         .then(data => {
