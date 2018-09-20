@@ -1,6 +1,8 @@
 import { RouterModule } from '@angular/router'
 import { Component, OnInit } from '@angular/core'
+import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register-emp',
@@ -14,7 +16,16 @@ export class RegisterEmpComponent implements OnInit {
   error: string
   userRoles: []
 
-  constructor(private formBuilder: FormBuilder) { }
+
+  http = null
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private http: HttpClient) {
+      this.http = http
+  }
 
   ngOnInit() {
     this.userRoles = ['employee', 'corporate', 'manager']
@@ -37,8 +48,13 @@ export class RegisterEmpComponent implements OnInit {
     if (this.registerForm.valid) {
       console.log('form submitted')
       const resource = JSON.stringify(this.registerForm.value)
-
       console.log(resource)
+      this.http.post('', resource)
+        .toPromise()
+        .then(d => d.data)
+        .then(data => {
+          console.log(data.register)
+        })
     }
 
       // this.service.create(resource)
