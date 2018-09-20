@@ -18,7 +18,9 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
 import { LoadInventoryJsonService } from './services/load-inventory-json/load-inventory-json.service';
-
+import { PostInventoryDataService } from "./services/post-inventory-data/post-inventory-data.service";
+import { PostDeleteDataService } from "./services/post-delete-data/post-delete-data.service";
+import { PostDDateDataService } from "./services/post-date-data/post-date-data.service";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import {
@@ -68,7 +70,11 @@ import { AuthenticationService, UserService } from './_services'
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         TokenExtraction,
         UserService,
-        fakeBackendProvider
+        fakeBackendProvider,
+        LoadInventoryJsonService,
+        PostInventoryDataService,
+        PostDDateDataService,
+        PostDeleteDataService
     ],
     bootstrap:    [ AppComponent ]
 })

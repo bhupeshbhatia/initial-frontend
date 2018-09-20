@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveF
 import { Router, ActivatedRoute } from '@angular/router'
 import { AuthenticationService } from '../../_services'
 import swal from 'sweetalert2'
+import { PostInventoryDataService } from "../../services/post-inventory-data/post-inventory-data.service";
+
 
 // declare interface User {
 //   barcode?: string
@@ -39,7 +41,7 @@ export interface Inventory {
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-
+  postInventoryData: PostInventoryDataService;
   form: FormGroup
   formSubmitAttempt: boolean
   error: string
@@ -79,27 +81,11 @@ export class AddComponent implements OnInit {
     this.formSubmitAttempt = true
     if (this.form.valid) {
       console.log('form submitted')
-      const resource = JSON.stringify(this.form.value)
+      const resource = JSON.parse(this.form.value)
+      this.postInventoryData.addInventoryWithPromise(resource,'test')
 
       // this.authenticationService.addInventory(resource)
-      this.userService.addInventory(resource)
-        .pipe(first())
-        .subscribe(data => {
-          // this.alertService.success('Inventory added', true)
-          if (data) {
-            // this.router.navigate(['inventory/add-inv'])
-            console.log('%%%%%%%%%%%%%%%%%%%%%%%%')
-            this.showMessage('success-message')
-          }
 
-
-        },
-          error => {
-            // this.alertService.error(error)
-            this.loading = false
-          })
-
-      console.log(resource)
       this.reset()
     }
 
@@ -127,120 +113,3 @@ export class AddComponent implements OnInit {
   }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// public typeValidation: User
-
-  // constructor() { }
-
-  // ngOnInit() {
-  //   this.typeValidation = {
-  //     barcode: '',
-  //     productName: '',
-  //     email: '',
-  //     idSource: '',
-  //     idDestination: '',
-  //     url: ''
-  //   }
-
-  // }
-
-  // save(model: User, isValid: boolean) {
-  //   // call API to save customer
-  //   if (isValid) {
-  //     console.log(model, isValid)
-  //   }
-  // }
-  // save1(model: User, isValid: boolean) {
-  //   // call API to save customer
-  //   if (isValid) {
-  //     console.log(model, isValid)
-  //   }
-  // }
-  // save2(model: User, isValid: boolean) {
-  //   // call API to save customer
-  //   if (isValid) {
-  //     console.log(model, isValid)
-  //   }
-  // }
-  // onSubmit(value: any): void {
-  //   console.log(value)
-  // }
-
-
-
-  // inventoryForm: FormGroup
-  // itemNumber: FormControl
-  // productName: FormControl
-  // origin: FormControl
-  // arrivalDate: FormControl
-  // weight: FormControl
-  // price: FormControl
-  // sensorId: FormControl
-  // location: FormControl
-
-  // model2: Date
-
-
-
-
-  // this.createFormControls()
-    // this.createForm()
-
-    // this.model2 = new Date()
-
-  // createFormControls() {
-  //   this.itemNumber = new FormControl(null, [
-  //     Validators.required,
-  //     Validators.minLength(1)
-  //   ])
-
-  //   this.productName = new FormControl('', Validators.required)
-  //   this.origin = new FormControl('', Validators.required)
-  //   this.arrivalDate = new FormControl('', Validators.required)
-
-  //   this.weight = new FormControl('', [
-  //     Validators.required,
-  //     Validators.minLength(1)
-  //   ])
-
-  //   this.price = new FormControl('', [
-  //     Validators.required,
-  //     Validators.minLength(1)
-  //   ])
-
-  //   this.sensorId = new FormControl('', [
-  //     Validators.required,
-  //     Validators.minLength(1)
-  //   ])
-
-  //   this.location = new FormControl('', [
-  //     Validators.required,
-  //     Validators.minLength(3)
-  //   ])
-  // }
-
-  // createForm() {
-  //   this.inventoryForm = new FormGroup({
-  //     inventory: new FormGroup({
-  //       itemNumber: this.itemNumber,
-  //       productName: this.productName,
-  //       origin: this.origin,
-  //       arrivalDate: this.arrivalDate,
-  //       weight: this.weight,
-  //       price: this.price,
-  //       sensorId: this.sensorId,
-  //       location: this.location,
-  //     }),
-  //   })
-  // }

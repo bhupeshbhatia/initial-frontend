@@ -1,81 +1,93 @@
 <div class="main-content">
   <div class="row">
-      <div class="col-md-12">
+    <div class="col-md-12">
 
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Inventory</h4>
-            </div>
-              <div class="card-body">
-                <form>
-                  <div class="form-group col-lg-5 col-md-6 col-sm-3">
-                    <input class="form-control" placeholder="{{model}}" name="dp" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()">
-                    <!-- <input type="text" class="form-control datepicker" value="10/05/2018"> -->
-                  </div>
-                  <div class="col-lg-5 col-md-6 col-sm-3 mx-auto">
-                    <select class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Single Select">
-                      <option disabled selected>Select Range</option>
-                      <option value="2">Week</option>
-                      <option value="3">Month</option>
-                      <option value="4">3 Months</option>
-                      <option value="5">6 Months</option>
-                      <option value="6">Year</option>
-                    </select>
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Inventory</h4>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="form-group mx-auto">
+                <form id="form" #search="ngForm" (ngSubmit)="onSearch(search)">
+                  <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-10">
+                      <input type="text" ngModel class="form-control" id="datepicker" placeholder="Select a date to filter"
+                        name="dp" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()">
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2">
+                      <button id="btnSearch" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
                   </div>
                 </form>
-                  <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
-                      <tr>
-                        <th>{{ dataTable.headerRow[0] }}</th>
-                        <th class="disabled-sorting"></th>
-                        <th>{{ dataTable.headerRow[1] }}</th>
-                        <th>{{ dataTable.headerRow[2] }}</th>
-                        <th>{{ dataTable.headerRow[3] }}</th>
-                        <th>{{ dataTable.headerRow[4] }}</th>
-                        <th class="disabled-sorting text-right">{{ dataTable.headerRow[5] }}</th>
-                      </tr>
-                    </thead>
-                    <tfoot>
-                      <tr>
-                        <th>{{ dataTable.footerRow[0] }}</th>
-                        <th class="disabled-sorting"></th>
-                        <th>{{ dataTable.footerRow[1] }}</th>
-                        <th>{{ dataTable.footerRow[2] }}</th>
-                        <th>{{ dataTable.footerRow[3] }}</th>
-                        <th>{{ dataTable.footerRow[4] }}</th>
-                        <th>{{ dataTable.footerRow[5] }}
-                        </th>
-                      </tr>
-                    </tfoot>
-                    <tbody>
-                      <tr *ngFor="let row of dataTable.dataRows; let  i = index">
-                        <td>{{dataTable.dataRows[i].item_number}}</td>
-                        <td class="text-center">
-                          <div class="form-check">
-                            <label class="form-check-label">
-                              <input id="check" class="form-check-input selectedCheck not-selected" type="checkbox" (change)="checkValue($event)">
-                              <span class="form-check-sign"></span>
-                            </label>
-                          </div>
-                        </td>
-                        <td>{{dataTable.dataRows[i].item_name}}</td>
-                        <td>{{dataTable.dataRows[i].location}}</td>
-                        <td>{{dataTable.dataRows[i].status}}</td>
-                        <td>{{dataTable.dataRows[i].expiry_date | date:'M/d/yyyy'}}</td>
-                        <td class="text-right">
-                          <a id="editBtn" class="btn btn-warning btn-link btn-icon btn-md edit" data-toggle="modal" data-target="#myModal"><i
-                              class="fa fa-edit"></i></a>
-                          <a id="deleteBtn" class="btn btn-danger btn-link btn-icon btn-md remove"><i class="fa fa-times"></i></a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+
+                <!-- <input type="text" class="form-control datepicker" value="10/05/2018"> -->
               </div>
-              <!-- end content-->
-          </div>
-          <!--  end card  -->
+              <!-- <div class="col-lg-6 col-md-6 col-sm-6 ml-auto">
+                    <select ngModel class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Select Range">
+                      <option value="week">Week</option>
+                      <option value="month">Month</option>
+                      <option value="three">3 Months</option>
+                      <option value="six">6 Months</option>
+                      <option value="year">Year</option>
+                    </select>
+                  </div> -->
+            </div>
+          </form>
+          <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>{{ dataTable.headerRow[0] }}</th>
+                <th class="disabled-sorting"></th>
+                <th>{{ dataTable.headerRow[1] }}</th>
+                <th>{{ dataTable.headerRow[2] }}</th>
+                <th>{{ dataTable.headerRow[3] }}</th>
+                <th>{{ dataTable.headerRow[4] }}</th>
+                <th class="disabled-sorting text-right">{{ dataTable.headerRow[5] }}</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>{{ dataTable.footerRow[0] }}</th>
+                <th class="disabled-sorting"></th>
+                <th>{{ dataTable.footerRow[1] }}</th>
+                <th>{{ dataTable.footerRow[2] }}</th>
+                <th>{{ dataTable.footerRow[3] }}</th>
+                <th>{{ dataTable.footerRow[4] }}</th>
+                <th>{{ dataTable.footerRow[5] }}
+                </th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr *ngFor="let row of dataTable.dataRows; let  i = index">
+                <td #col>{{dataTable.dataRows[i].item_number}}</td>
+                <td class="text-center">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input id="check" class="form-check-input selectedCheck not-selected" type="checkbox" (change)="checkValue($event)">
+                      <span class="form-check-sign"></span>
+                    </label>
+                  </div>
+                </td>
+                <td>{{dataTable.dataRows[i].item_name}}</td>
+                <td>{{dataTable.dataRows[i].location}}</td>
+                <td>{{dataTable.dataRows[i].status}}</td>
+                <td>{{dataTable.dataRows[i].expiry_date | date:'yyyy-MM-dd'}}</td>
+                <td class="text-right">
+                  <a id="editBtn" (click)="populateFields(i)" class="btn btn-warning btn-link btn-icon btn-md edit"
+                    data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></a>
+                  <a id="deleteBtn" class="btn btn-danger btn-link btn-icon btn-md remove"><i class="fa fa-times"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- end content-->
       </div>
-      <!-- end col-md-12 -->
+      <!--  end card  -->
+    </div>
+    <!-- end col-md-12 -->
   </div>
   <!-- end row -->
 </div>
@@ -89,101 +101,112 @@
         <h5 class="modal-title">Edit Item</h5>
       </div>
 
-            <div class="modal-body">
-      <form novalidate [formGroup]="form">
-        <br>
-        <div class="form-group" [ngClass]="displayFieldCss('itemNumber')">
-          <div class="row">
-            <label class="col-sm-2 col-md-3 control-label required mx-auto"> Item Number </label>
-            <div class="col-sm-8 mx-auto">
-              <input type="number" id="itemNumber" class="form-control" formControlName="itemNumber" required>
-              <app-field-error-display [displayError]="isFieldValid('itemNumber')" errorMsg="Item ID is required">
-              </app-field-error-display>
+      <div class="modal-body">
+        <form novalidate [formGroup]="form" #updateInventory="ngForm" (ngSubmit)="onSubmit(updateInventory)">
+          <br>
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-2 col-md-3 control-label required"> Item Number </label>
+              <div class="col-sm-8 mx-auto">
+                <input type="number" id="item_number" class="form-control" formControlName="item_id" required *ngIf="curField"
+                  [ngModel]="curField.item_number" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.item_id.errors }">
+                <div *ngIf="formSubmitAttempt && f.item_id.errors" class="invalid-feedback">
+                  <div *ngIf="f.item_number.errors.required">Item number is required</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group" [ngClass]="displayFieldCss('productName')">
-          <div class="row">
-            <label class="col-sm-2 col-md-3 control-label required mx-auto">Item Name </label>
-            <div class="col-sm-8 mx-auto">
-              <input type="text" id="itemName" class="form-control" formControlName="productName" required>
-              <app-field-error-display [displayError]="isFieldValid('productName')" errorMsg="Product name is required">
-              </app-field-error-display>
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-2 col-md-3 control-label required"> Item Name </label>
+              <div class="col-sm-8 mx-auto">
+                <input type="text" id="itemName" class="form-control" formControlName="name" required *ngIf="curField"
+                  [ngModel]="curField.item_name" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.name.errors }">
+                <div *ngIf="formSubmitAttempt && f.name.errors" class="invalid-feedback">
+                  <div *ngIf="f.name.errors.required">Item name is required</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group" [ngClass]="displayFieldCss('origin')">
-          <div class="row">
-            <label class="col-sm-2 col-md-3 control-label mx-auto"> Origin of Product </label>
-            <div class="col-sm-8 mx-auto">
-              <input type="text" class="form-control" id="productOrigin" formControlName="origin" placeholder="State, Country (E.g. ON, Canada)"
-                required>
-              <app-field-error-display [displayError]="isFieldValid('origin')" errorMsg="Place of origin is required">
-              </app-field-error-display>
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-2 col-md-3 control-label mx-auto"> Origin of Product </label>
+              <div class="col-sm-8 mx-auto">
+                <input type="text" class="form-control" id="productOrigin" formControlName="origin" placeholder="State, Country (E.g. ON, Canada)"
+                  *ngIf="curField" [ngModel]="curField.product_origin" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.origin.errors }">
+                <div *ngIf="formSubmitAttempt && f.origin.errors" class="invalid-feedback">
+                  <div *ngIf="f.origin.errors.required">Product origin is required</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group" [ngClass]="displayFieldCss('arrivalDate')">
-          <div class="row">
-            <label class="col-sm-2 col-md-3 control-label mx-auto"> Date of Arrival </label>
-            <div class="col-sm-8 mx-auto">
-              <input class="form-control" formControlName="arrivalDate" id="arrivalDate" required name="dp1" ngbDatepicker #d1="ngbDatepicker"
-                (click)="d1.toggle()">
-              <app-field-error-display [displayError]="isFieldValid('arrivalDate')" errorMsg="Date of arrival is required">
-              </app-field-error-display>
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-2 col-md-3 control-label mx-auto"> Date of Arrival </label>
+              <div class="col-sm-8 mx-auto">
+                <input type="text" class="form-control" formControlName="date_arrived" id="date_arrived" required name="dp1"
+                  ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" *ngIf="curField" [ngModel]="curField.arrival_date"
+                  [ngClass]="{ 'is-invalid': formSubmitAttempt && f.date_arrived.errors }">
+                <div *ngIf="formSubmitAttempt && f.date_arrived.errors" class="invalid-feedback">
+                  <div *ngIf="f.date_arrived.errors.required">Arrival date is required</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group" [ngClass]="displayFieldCss('weight')">
-          <div class="row">
-            <label class="col-sm-2 col-md-3 control-label mx-auto"> Total Weight </label>
-            <div class="col-sm-8 mx-auto">
-              <input type="number" class="form-control" id="totalWeight" formControlName="weight" required>
-              <app-field-error-display [displayError]="isFieldValid('weight')" errorMsg="Weight is required">
-              </app-field-error-display>
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-2 col-md-3 control-label mx-auto"> Total Weight </label>
+              <div class="col-sm-8 mx-auto">
+                <input type="number" class="form-control" id="totalWeight" formControlName="total_weight" required
+                  *ngIf="curField" [ngModel]="curField.total_weight" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.total_weight.errors }">
+                <div *ngIf="formSubmitAttempt && f.total_weight.errors" class="invalid-feedback">
+                  <div *ngIf="f.total_weight.errors.required">Total weight is required</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group" [ngClass]="displayFieldCss('price')">
-          <div class="row">
-            <label class="col-sm-2 col-md-3 control-label mx-auto"> Price </label>
-            <div class="col-sm-8 mx-auto">
-              <input type="number" class="form-control" id="price" formControlName="price" required>
-              <app-field-error-display [displayError]="isFieldValid('price')" errorMsg="Price is required">
-              </app-field-error-display>
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-2 col-md-3 control-label mx-auto"> Price </label>
+              <div class="col-sm-8 mx-auto">
+                <input type="number" class="form-control" id="price" formControlName="price" required *ngIf="curField"
+                  [ngModel]="curField.price">
+                <div *ngIf="formSubmitAttempt && f.price.errors" class="invalid-feedback">
+                  <div *ngIf="f.price.errors.required">Price is required</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group" [ngClass]="displayFieldCss('sensorId')">
-          <div class="row">
-            <label class="col-sm-2 col-md-3 control-label mx-auto"> Monitored By </label>
-            <div class="col-sm-8 mx-auto">
-              <input type="text" class="form-control" id="monitoredBy" formControlName="sensorId" required>
-              <app-field-error-display [displayError]="isFieldValid('sensorId')" errorMsg="Sensor ID is required">
-              </app-field-error-display>
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-2 col-md-3 control-label mx-auto"> Monitored By </label>
+              <div class="col-sm-8 mx-auto">
+                <input type="text" class="form-control" id="monitoredBy" formControlName="device_id" required *ngIf="curField"
+                  [ngModel]="curField.monitored_by">
+                <div *ngIf="formSubmitAttempt && f.device_id.errors" class="invalid-feedback">
+                  <div *ngIf="f.device_id.errors.required">Monitored By is required</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group" [ngClass]="displayFieldCss('location')">
-          <div class="row">
-            <label class="col-sm-2 col-md-3 control-label mx-auto"> Location </label>
-            <div class="col-sm-8 mx-auto">
-              <input type="text" class="form-control" id="location" formControlName="location" placeholder="Aisle No." required>
-              <app-field-error-display [displayError]="isFieldValid('location')" errorMsg="Location is required">
-              </app-field-error-display>
+          <div class="form-group">
+            <div class="row">
+              <label class="col-sm-2 col-md-3 control-label mx-auto"> Location </label>
+              <div class="col-sm-8 mx-auto">
+                <input type="text" class="form-control" id="location" formControlName="location" placeholder="Aisle No."
+                  required *ngIf="curField" [ngModel]="curField.location">
+                <div *ngIf="formSubmitAttempt && f.location.errors" class="invalid-feedback">
+                  <div *ngIf="f.location.errors.required">Location is required</div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" id="addProduct" class="btn btn-info btn-fill col-sm-6 col-md-3" (click)="onSubmit()">Add
-            Product</button>
-          <button type="submit" id="cancelProduct" class="btn btn-danger btn-fill col-sm-6 col-md-3" (click)="reset()">Reset</button>
-        </div>
-      </form>
-</div>
+          <div class="modal-footer mx-auto">
+            <button type="submit" id="addProduct" class="btn btn-info btn-fill col-sm-6 col-md-6">Update Product</button>
+            <button type="submit" id="cancelProduct" class="btn btn-danger btn-fill col-sm-6 col-md-6" (click)="reset()">Reset</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
-
-
-

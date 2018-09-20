@@ -1,16 +1,19 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule, Form } from '@angular/forms';
+import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
 import { DataTableComponent } from '../../tables/datatable.net/datatable.component';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
 import { LoadInventoryJsonService } from '../../Services/load-inventory-json/load-inventory-json.service'
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { PostInventoryDataService } from "../../services/post-inventory-data/post-inventory-data.service";
+import { PostDDateDataService } from "../../services/post-date-data/post-date-data.service";
+import { PostDeleteDataService } from "../../services/post-delete-data/post-delete-data.service";
 
 declare var require: any
 declare var $:any;
 
-export interface Inventory {
+export class Inventory {
   item_number: number
   item_name: string
   status: string
@@ -29,207 +32,53 @@ declare interface DataTable {
     dataRows: Inventory[];
 }
 
-const FoodInventory: Inventory[] = [
-  {
-    "item_number": 1,
-    "item_name": "apple",
-    "status": "good",
-    "product_origin": "farm",
-    "arrival_date": new Date("2018-03-03"),
-    "expiry_date": new Date("2018-03-03"),
-    "total_weight": 22,
-    "price": 44,
-    "monitored_by": "Person1",
-    "location": "Mississauga"
-  },
-  {
-    "item_number": 2,
-    "item_name": "pear",
-    "status": "good",
-    "product_origin": "farm",
-    "arrival_date": new Date("2018-03-03"),
-    "expiry_date": new Date("2018-03-03"),
-    "total_weight": 22,
-    "price": 44,
-    "monitored_by": "Person1",
-    "location": "Mississauga"
-  },
-  {
-    "item_number": 3,
-    "item_name": "orange",
-    "status": "good",
-    "product_origin": "farm",
-    "arrival_date": new Date("2018-03-03"),
-    "expiry_date": new Date("2018-03-03"),
-    "total_weight": 22,
-    "price": 44,
-    "monitored_by": "Person1",
-    "location": "Mississauga"
-  },
-  {
-    "item_number": 4,
-    "item_name": "grape",
-    "status": "good",
-    "product_origin": "farm",
-    "arrival_date": new Date("2018-03-03"),
-    "expiry_date": new Date("2018-03-03"),
-    "total_weight": 22,
-    "price": 44,
-    "monitored_by": "Person1",
-    "location": "Mississauga"
-  },
-  {
-    "item_number": 5,
-    "item_name": "avocado",
-    "status": "good",
-    "product_origin": "farm",
-    "arrival_date": new Date("2018-03-03"),
-    "expiry_date": new Date("2018-03-03"),
-    "total_weight": 22,
-    "price": 44,
-    "monitored_by": "Person1",
-    "location": "Mississauga"
-  },
-  {
-    "item_number": 6,
-    "item_name": "eggplant",
-    "status": "good",
-    "product_origin": "farm",
-    "arrival_date": new Date("2018-03-03"),
-    "expiry_date": new Date("2018-03-03"),
-    "total_weight": 22,
-    "price": 44,
-    "monitored_by": "Person1",
-    "location": "Mississauga"
-  },
-  {
-    "item_number": 7,
-    "item_name": "mango",
-    "status": "good",
-    "product_origin": "farm",
-    "arrival_date": new Date("2018-03-03"),
-    "expiry_date": new Date("2018-03-03"),
-    "total_weight": 22,
-    "price": 44,
-    "monitored_by": "Person1",
-    "location": "Mississauga"
-  }
-]
+var Food: Inventory[]
+
 
 @Component({
-  // moduleId: module.id,
-    // selector: 'data-table-cmp',
-    // templateUrl: 'datatable.component.html'
   selector: 'app-show',
   templateUrl: './show.component.html',
   styleUrls: ['./show.component.css']
 })
 
 export class ShowComponent implements OnInit {
+  postInventoryData: PostInventoryDataService;
+  postDateData: PostDDateDataService;
+  postDeleteData: PostDeleteDataService
+  food: Inventory;
+  form: FormGroup;
+  private formSubmitAttempt: boolean;
+  dataTable: DataTable;
+  @ViewChild("datatable") datatable: DataTable;
 
-tdata: any;
-form: FormGroup;
-private formSubmitAttempt: boolean;
-
-  constructor(private formBuilder: FormBuilder, private _http: Http) { }
-@ViewChild("datatable") datatable: DataTable;
-@ViewChild("itemName") input: Input;
-
-  public dataTable: DataTable;
-  public itemName: Input
-
-  state_default: boolean = true;
-  state_plain: boolean = true;
-  state_with_icons: boolean = true;
-  tagItems = ['Amsterdam', 'Washington', 'Sydney', 'Beijing'];
-  model: Date;
-  model2: Date;
-  ngOnInit(): void{
-
-  this.dataTable = {
-    headerRow: ['Item Number', 'Item Name', 'Location', 'Status', 'Expiry'],
-    footerRow: ['Item Number', 'Item Name', 'Location', 'Status', 'Expiry'],
-    dataRows: FoodInventory
+  constructor(private formBuilder: FormBuilder, private _http: Http, private loadInventoryJsonService: LoadInventoryJsonService) {
   }
 
-  this.form = this.formBuilder.group({
-    itemNumber: [null, [Validators.required, Validators.minLength(1)]],
-    productName: [null, Validators.required],
-    origin: [null, Validators.required],
-    arrivalDate: [null, Validators.required],
-    weight: [null, [Validators.required, Validators.minLength(1)]],
-    price: [null, [Validators.required, Validators.minLength(1)]],
-    sensorId: [null, [Validators.required, Validators.minLength(1)]],
-    location: [null, [Validators.required, Validators.minLength(1)]]
+  ngOnInit(): void{
+		this.loadInventoryJsonService.getJSON()
+		  .subscribe(data => {
+			console.log(data)
+        this.dataTable = {
+          headerRow: ['Item Number', 'Item Name', 'Location', 'Status', 'Expiry'],
+          footerRow: ['Item Number', 'Item Name', 'Location', 'Status', 'Expiry'],
+          dataRows: data
+        }
+        Food = data
+      })
+
+     this.form = this.formBuilder.group({
+      item_id: [null, [Validators.required, Validators.minLength(1)]],
+      name: [null, [Validators.required, Validators.minLength(1)]],
+      origin: [null, [Validators.required, Validators.minLength(1)]],
+      date_arrived: [null, [Validators.required, Validators.minLength(1)]],
+      total_weight: [null, [Validators.required, Validators.minLength(1)]],
+      price: [null, [Validators.required, Validators.minLength(1)]],
+      device_id: [null, [Validators.required, Validators.minLength(1)]],
+      location: [null, [Validators.required, Validators.minLength(1)]]
   })
-
-    this.model = new Date();
-    this.model2 = new Date();
-    //  Activate the tooltips
-    $('[rel="tooltip"]').tooltip();
-
-        //  Init Bootstrap Select Picker
-    if ($(".selectpicker").length != 0) {
-      $(".selectpicker").selectpicker({
-        iconBase: "nc-icon",
-        tickIcon: "nc-check-2"
-      });
-    }
-
-    if ($(".datetimepicker").length != 0) {
-      $('.datetimepicker').datetimepicker({
-        icons: {
-          time: "fa fa-clock-o",
-          date: "fa fa-calendar",
-          up: "fa fa-chevron-up",
-          down: "fa fa-chevron-down",
-          previous: 'fa fa-chevron-left',
-          next: 'fa fa-chevron-right',
-          today: 'fa fa-screenshot',
-          clear: 'fa fa-trash',
-          close: 'fa fa-remove'
-        },
-        debug: true
-      });
-    }
-
-    if ($(".datepicker").length != 0) {
-      $('.datepicker').datetimepicker({
-        format: 'M/D/YYYY',
-        icons: {
-          time: "fa fa-clock-o",
-          date: "fa fa-calendar",
-          up: "fa fa-chevron-up",
-          down: "fa fa-chevron-down",
-          previous: 'fa fa-chevron-left',
-          next: 'fa fa-chevron-right',
-          today: 'fa fa-screenshot',
-          clear: 'fa fa-trash',
-          close: 'fa fa-remove'
-        },
-        debug: true
-      });
-    }
-
-    if ($(".timepicker").length != 0) {
-      $('.timepicker').datetimepicker({
-        //          format: 'H:mm',    // use this format if you want the 24hours timepicker
-        format: 'h:mm A', //use this format if you want the 12hours timpiecker with AM/PM toggle
-        icons: {
-          time: "fa fa-clock-o",
-          date: "fa fa-calendar",
-          up: "fa fa-chevron-up",
-          down: "fa fa-chevron-down",
-          previous: 'fa fa-chevron-left',
-          next: 'fa fa-chevron-right',
-          today: 'fa fa-screenshot',
-          clear: 'fa fa-trash',
-          close: 'fa fa-remove'
-        },
-        debug: true
-      });
-    }
 }
+
+get f() { return this.form.controls; }
 
 ngAfterViewInit() {
   $('#datatable').DataTable({
@@ -249,49 +98,39 @@ ngAfterViewInit() {
   });
 
   var table = $('#datatable').DataTable();
-  var itemNumber = $('#itemNumber');
-  var itemName = $('#itemName');
-  var productOrigin = $('#productOrigin');
-  var arrivalDate = $('#arrivalDate');
-  var totalWeight = $('#totalWeight');
-  var price = $('#price');
-  var monitoredBy = $('#monitoredBy');
-  var location = $('#location')
 
-  // Edit record
-  table.on('click', '.edit', function() {
-    let $tr = $(this).closest('tr');
-    var data = table.row($tr).data();
-    // alert('You press on Row: ' + data[0] + ' ' + data[2] + ' ' + data[3] + '\'s row.');
-    itemNumber.val(FoodInventory[data[0] - 1].item_number);
-    itemName.val(FoodInventory[data[0] - 1].item_name);
-    productOrigin.val(FoodInventory[data[0] - 1].product_origin);
-    arrivalDate.val(FoodInventory[data[0] - 1].arrival_date.toLocaleDateString());
-    totalWeight.val(FoodInventory[data[0] - 1].total_weight);
-    price.val(FoodInventory[data[0] - 1].price);
-    monitoredBy.val(FoodInventory[data[0] - 1].monitored_by);
-    location.val(FoodInventory[data[0] - 1].location);
-  });
-
-  // Delete a record
+  //Delete a record
   table.on('click', '.remove', function (e) {
     var tr = $("tr.selected");
+    var data = table.row(tr).data();
     var r = confirm("Delete the selected rows");
     if (r == true) {
       table.rows(tr).remove().draw();
-      alert("Rows deleted");
+      alert("Row(s) deleted");
     } else {
-      alert("Rows Not Deleted");
+      alert("Row(s) Not Deleted");
     }
     e.preventDefault();
   });
+}
 
-  // Like record
-  table.on('click', '.not-selected', function () {
-    var tr = $(this).closest('tr');
-    console.log(tr);
-    tr.addClass("selected")
-  });
+  curItemNum: any
+  addDeleteWithPromise(e){
+    if(e != null){
+      this.curItemNum = Food[e].item_number
+      console.log()
+    }
+    return e
+  }
+
+  curField: any
+
+ populateFields(e): Inventory {
+   if (e != null) {
+    this.curField = Food[e]
+     console.log()
+   }
+   return e
 }
 
   checked: number = 0;
@@ -326,23 +165,32 @@ displayFieldCss(field: string) {
   };
 }
 
-onSubmit() {
+onSearch(search: NgForm){
+      var json = search.value.dp
+      console.log($('datepicker').value)
+      var date = new Date(json.year, json.month-1, json.day);
+      var jsonStr = date.toISOString();
+      console.log(jsonStr);
+      this.postDateData.addDateWithPromise(jsonStr,'')
+}
+
+onSubmit(inventory: NgForm): void {
   this.formSubmitAttempt = true;
-  if (this.form.valid) {
-    console.log('form submitted');
-    const resource = JSON.stringify(this.form.value);
-    this._http.post('your_url', this.form).subscribe(status => console.log(JSON.stringify(status)));
-    console.log('Add Button clicked: ' + resource);
+    if (this.form.valid) {
+      var json = JSON.parse(inventory.value)
+      console.log(json)
+      this.postInventoryData.addInventoryWithPromise(json,'test')
+      alert('Your Inventory has been updated.');
+      // const resource = JSON.stringify(this.form.value);
+      // this._http.post('/inventory/show-inv', json).subscribe(status => console.log(JSON.stringify(status)));
+    console.log('Add Button clicked: ' + json);
     $('#myModal').modal('hide');
   }
 }
 
-reset() {
-  this.form.reset();
-  this.formSubmitAttempt = false;
-}
+  reset() {
+    this.form.reset();
+    this.formSubmitAttempt = false;
+  }
 
 }
-
-
-

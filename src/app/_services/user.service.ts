@@ -5,7 +5,7 @@ import { Token } from '../_models'
 
 // method for getting all users from the api - if needed
 
-@Injectable({})
+@Injectable()
 export class UserService {
 
   constructor(private http: HttpClient) { }

@@ -8,14 +8,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoadInventoryJsonService {
 
-  // constructor(private http: HttpClient) {
-  //   this.getJSON()
-  //     .subscribe(data => {
-  //       console.log(data);
-  //     });
-  // }
+  constructor(private http: HttpClient) {
+    this.getJSON()
+      .subscribe(data => {
+        console.log(data);
+      });
+  }
 
-  // public getJSON(): any {
-  //   return this.http.get('./food-items.json');
-  // }
+  public getJSON(): any {
+    return this.http.get('./food-items.json');
+  }
 }
