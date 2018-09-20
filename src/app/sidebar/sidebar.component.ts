@@ -154,7 +154,12 @@ export class SidebarComponent implements OnInit{
     constructor(global: TokenExtraction) {
         console.log(global, '+++++++++++++++')
         this.global = global
-        this.role = this.global.getUserInfo().role
+        this.role = this.upperFirstLetter(this.global.getUserInfo().role)
+        console.log(this.global.getUserInfo().role)
+    }
+
+    upperFirstLetter(word: string): string {
+        return word[0].toUpperCase() + word.slice(1)
     }
 
 

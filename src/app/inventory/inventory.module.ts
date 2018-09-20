@@ -1,14 +1,15 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgModule } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { CommonModule } from '@angular/common'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
-import { InventoryRoutes } from './inventory.routing';
+import { InventoryRoutes } from './inventory.routing'
 
-import { AddComponent } from './add/add.component';
-import { ShowComponent } from './show/show.component';
-// import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component';
+import { AddComponent } from './add/add.component'
+import { ShowComponent } from './show/show.component'
+// import { AlertService } from '../_services'
+// import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component'
 
 
 @NgModule({
@@ -23,6 +24,9 @@ import { ShowComponent } from './show/show.component';
         AddComponent,
         ShowComponent
         // FieldErrorDisplayComponent
+    ],
+    providers: [
+        // AlertService
     ]
 })
 

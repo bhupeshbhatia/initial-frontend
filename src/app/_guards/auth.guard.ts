@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Injectable } from '@angular/core'
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 
 // The auth guard is used to prevent unauthenticated users from accessing restricted routes,
 // it's used in app.routing.ts to protect the dashboard page route
@@ -12,11 +12,11 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if (localStorage.getItem('access_token')) {
             // logged in so return true
-            return true;
+            return true
         }
 
         // not logged in so redirect to login page with the return url
-        this.router.navigate(['/pages/login'], { queryParams: { returnUrl: state.url }});
-        return false;
+        this.router.navigate(['/pages/login'], { queryParams: { returnUrl: state.url }})
+        return false
     }
 }

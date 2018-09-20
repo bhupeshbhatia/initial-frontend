@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core'
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http'
+import { Observable, throwError } from 'rxjs'
+import { catchError } from 'rxjs/operators'
 
-import { AuthenticationService } from '../_services';
+import { AuthenticationService } from '../_services'
 
 // intercepts http responses from the api to check if there were any errors.
 // If there is a 401 Unauthorized response the user is automatically logged out of the application,
@@ -20,10 +20,10 @@ export class ErrorInterceptor implements HttpInterceptor {
             if (err.status === 401) {
                 // auto logout if 401 response returned from api
                 this.authenticationService.logout()
-                location.reload(true);
+                location.reload(true)
             }
-            const error = err.error.message || err.statusText;
-            return throwError(error);
+            const error = err.error.message || err.statusText
+            return throwError(error)
         }))
     }
 }

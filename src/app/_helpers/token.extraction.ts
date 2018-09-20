@@ -9,67 +9,39 @@ export class TokenExtraction {
 
     parsedToken: any
 
-    getToken(): string {
+    getAccessToken(): string {
         return localStorage.getItem('access_token');
     }
 
-    getDecodedAccessToken(): Object {
-        // try {
-        //     return jwt_decode(this.getToken());
-        // } catch (Error) {
-        //     return 'Error decoding token';
-        // }
-        return jwt_decode(this.getToken());
+    getRefreshToken(): string {
+        return localStorage.getItem('refresh_token')
     }
 
-    // isTokenExpired(): boolean{
-    //     const deToken = this.getDecodedAccessToken()
+    getDecodedAccessToken(): Object {
+        const accessToken = localStorage.getItem('access_token')
+        return jwt_decode(accessToken)
+    }
 
-    //     if (deToken.exp === undefined) {
-    //         return true;
-    //     }
+    isTokenExpired(): boolean{
+        const deToken = this.getDecodedAccessToken()
 
+        if (deToken.exp === undefined) {
+            return true
+        }
 
-    //     const date = new Date(0);
-    //     date.setUTCSeconds(deToken.exp);
-    // return date;
-    // }
+        const date = new Date(0)
+        date.setUTCSeconds(deToken.exp)
+        console.log('********************')
+        console.log(date.valueOf)
+        return !(date.valueOf() > new Date().valueOf())
+    }
 
     getUserInfo(): any {
-        if !(this.parsedToken){
+        if (!this.parsedToken){
             return this.getDecodedAccessToken()
 
         }
         return this.parsedToken
 
     }
-
-
-
-
-
-    // getTokenExpirationDate(token: any): Date {
-
-    //     if (token.exp === undefined) {
-    //         return null;
-    //     }
-
-    //     const date = new Date(0);
-    //     date.setUTCSeconds(token.exp);
-    //     return date;
-    // }
-
-    // isTokenExpired(token: any) {
-    //     const decodedToken = this.getDecodedAccessToken(token); // decode token
-    //     const date = this.getTokenExpirationDate(decodedToken)
-
-    //     if (date === undefined) {
-    //         return false;
-    //     }
-
-    //     return !(date.valueOf() > new Date().valueOf());
-    // }
-
-
-
 }

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
+import { Injectable } from '@angular/core'
+import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { Observable, of, throwError } from 'rxjs'
+import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators'
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -15,7 +15,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             password: 'testing',
             firstName: 'Test',
             lastName: 'User'
-        };
+        }
 
         // wrap in delayed observable to simulate server api call
         return of(null).pipe(mergeMap(() => {
@@ -26,11 +26,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     const body = {
                         access_token: 'eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MzczMzU3ODksImlhdCI6MTUzNzMzNDg4OSwianRpIjoiMzQxMDc5ZTEtOTc0OC00NWJkLWJlMmYtZjdkYmY4ZDNiMDFjIiwicm9sZSI6Im1hbmFnZXIiLCJzdWIiOiI2MDEwNjA0Ni1lZDUxLTQ3MzktOWI3YS1lM2QzMDYyYjhmNDcifQ.y8tJn_XWdpn7d7OvCHPbMrRmDzBEYvwSJ-470WiQq9caUpruz0A6Wal3S4t-YfCYR_c5e6j29q365J-R2wC_RtqEbSRjGSrc7W3k5btG3hke5rJpkNt_vTCsbQYw3RLs3QC1Mr-6khMWGwpu-j0BLaR3fiyZSG8D9Y9c48n-U94zQgddcGQh5d567sgOUpQp5uSOBE7Z3HEcQpAZm72729UNPHPGYux3beFSNJKDl4xwJT6mr5a6W6YJc9bW4mkXozVGfOkILRZolxjGCQ40w-95AeovC09Eq4A7Wjy77bpnL-ErskyyQrF9605T84IYd0m-AdEYmCVXmkv5k03Jzw',
                         refresh_token: 'refresh-token'
-                    };
-                    return of(new HttpResponse({ status: 200, body }));
+                    }
+                    return of(new HttpResponse({ status: 200, body }))
                 } else {
                     // else return 400 bad request
-                    return throwError({ error: { message: 'Username or password is incorrect' } });
+                    return throwError({ error: { message: 'Incorrect username or password. Please try again' } })
                 }
             }
 
@@ -39,22 +39,34 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 // check for fake auth token in header and return users if valid,
                 // this security is implemented server side in a real application
                 if (request.headers.get('Authorization') === 'Bearer access-token') {
-                    return of(new HttpResponse({ status: 200, body: [testUser] }));
+                    return of(new HttpResponse({ status: 200, body: [testUser] }))
                 } else {
                     // return 401 not authorised if token is null or invalid
-                    return throwError({ error: { message: 'Unauthorised' } });
+                    return throwError({ error: { message: 'Unauthorised' } })
+                }
+            }
+
+            if (request.url.endsWith('/inventory/add-inv') && request.method === 'POST') {
+                if (request.headers.get('Authorization') === 'Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MzczMzU3ODksImlhdCI6MTUzNzMzNDg4OSwianRpIjoiMzQxMDc5ZTEtOTc0OC00NWJkLWJlMmYtZjdkYmY4ZDNiMDFjIiwicm9sZSI6Im1hbmFnZXIiLCJzdWIiOiI2MDEwNjA0Ni1lZDUxLTQ3MzktOWI3YS1lM2QzMDYyYjhmNDcifQ.y8tJn_XWdpn7d7OvCHPbMrRmDzBEYvwSJ-470WiQq9caUpruz0A6Wal3S4t-YfCYR_c5e6j29q365J-R2wC_RtqEbSRjGSrc7W3k5btG3hke5rJpkNt_vTCsbQYw3RLs3QC1Mr-6khMWGwpu-j0BLaR3fiyZSG8D9Y9c48n-U94zQgddcGQh5d567sgOUpQp5uSOBE7Z3HEcQpAZm72729UNPHPGYux3beFSNJKDl4xwJT6mr5a6W6YJc9bW4mkXozVGfOkILRZolxjGCQ40w-95AeovC09Eq4A7Wjy77bpnL-ErskyyQrF9605T84IYd0m-AdEYmCVXmkv5k03Jzw') {
+                    const inventoryStuff = request.body
+                    localStorage.setItem('inv', inventoryStuff)
+                    const body = {reply: 'Inventory added'}
+                    return of(new HttpResponse({status: 200}))
+                }
+                else {
+                    return throwError({ error: { message: 'Unable to add inventory'}})
                 }
             }
 
             // pass through any requests not handled above
-            return next.handle(request);
+            return next.handle(request)
         }))
 
         // call materialize and dematerialize to ensure delay even if
         // an error is thrown (https://github.com/Reactive-Extensions/RxJS/issues/648)
         .pipe(materialize())
         .pipe(delay(10))
-        .pipe(dematerialize());
+        .pipe(dematerialize())
     }
 }
 
@@ -63,4 +75,4 @@ export let fakeBackendProvider = {
     provide: HTTP_INTERCEPTORS,
     useClass: FakeBackendInterceptor,
     multi: true
-};
+}

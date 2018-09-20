@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-// import { FieldErrorDisplayComponent } from '../field-error-display/field-error-display.component'
+import { UserService } from './../../_services/user.service'
+import { first } from 'rxjs/operators'
+import { Component, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { Router, ActivatedRoute } from '@angular/router'
+import { AuthenticationService } from '../../_services'
+import swal from 'sweetalert2'
 
 // declare interface User {
-//   barcode?: string;
-//   productName?: string;
-//   email?: string; //  must be valid email format
-//   password?: string; // required, value must be equal to confirm password.
-//   confirmPassword?: string; // required, value must be equal to password.
-//   number?: number; // required, value must be equal to password.
-//   url?: string;
-//   idSource?: string;
-//   idDestination?: string;
+//   barcode?: string
+//   productName?: string
+//   email?: string //  must be valid email format
+//   password?: string // required, value must be equal to confirm password.
+//   confirmPassword?: string // required, value must be equal to password.
+//   number?: number // required, value must be equal to password.
+//   url?: string
+//   idSource?: string
+//   idDestination?: string
 // }
 
-// declare var $: any;
+// declare var $: any
 
 
 
@@ -27,11 +31,20 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveF
 })
 export class AddComponent implements OnInit {
 
-  form: FormGroup;
-  formSubmitAttempt: boolean;
-  error: string;
+  form: FormGroup
+  formSubmitAttempt: boolean
+  error: string
+  returnUrl: string
+  loading = false
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private userService: UserService
+    // private alertService: AlertService
+    ) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -44,30 +57,64 @@ export class AddComponent implements OnInit {
       deviceId: [null, [Validators.required, Validators.minLength(1)]],
       location: [null, [Validators.required, Validators.minLength(1)]]
     })
+
+    this.returnUrl = this.route.snapshot.queryParams['add-inv']
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.form.controls; }
+  get f() { return this.form.controls }
 
 
 
   onSubmit() {
-    this.formSubmitAttempt = true;
+    this.formSubmitAttempt = true
     if (this.form.valid) {
-      console.log('form submitted');
-      const resource = JSON.stringify(this.form.value);
+      console.log('form submitted')
+      const resource = JSON.stringify(this.form.value)
 
-      console.log(resource);
+      // this.authenticationService.addInventory(resource)
+      this.userService.addInventory(resource)
+        .pipe(first())
+        .subscribe(data => {
+          // this.alertService.success('Inventory added', true)
+          if (data) {
+            // this.router.navigate(['inventory/add-inv'])
+            console.log('%%%%%%%%%%%%%%%%%%%%%%%%')
+            this.showMessage('success-message')
+          }
+
+
+        },
+          error => {
+            // this.alertService.error(error)
+            this.loading = false
+          })
+
+      console.log(resource)
+      this.reset()
     }
 
       // this.service.create(resource)
-    //   .subscribe(response => console.log(response));
+    //   .subscribe(response => console.log(response))
     // }
   }
 
   reset() {
-    this.form.reset();
-    this.formSubmitAttempt = false;
+    this.form.reset()
+    this.formSubmitAttempt = false
+  }
+
+  showMessage(type: string) {
+    if (type === 'success-message') {
+      swal({
+          title: 'Success',
+          text: 'Product added',
+          buttonsStyling: false,
+          confirmButtonClass: 'btn btn-success',
+          type: 'success'
+      }).catch(swal.noop)
+
+  }
   }
 
 }
@@ -83,7 +130,7 @@ export class AddComponent implements OnInit {
 
 
 
-// public typeValidation: User;
+// public typeValidation: User
 
   // constructor() { }
 
@@ -102,76 +149,76 @@ export class AddComponent implements OnInit {
   // save(model: User, isValid: boolean) {
   //   // call API to save customer
   //   if (isValid) {
-  //     console.log(model, isValid);
+  //     console.log(model, isValid)
   //   }
   // }
   // save1(model: User, isValid: boolean) {
   //   // call API to save customer
   //   if (isValid) {
-  //     console.log(model, isValid);
+  //     console.log(model, isValid)
   //   }
   // }
   // save2(model: User, isValid: boolean) {
   //   // call API to save customer
   //   if (isValid) {
-  //     console.log(model, isValid);
+  //     console.log(model, isValid)
   //   }
   // }
   // onSubmit(value: any): void {
-  //   console.log(value);
+  //   console.log(value)
   // }
 
 
 
-  // inventoryForm: FormGroup;
-  // itemNumber: FormControl;
-  // productName: FormControl;
-  // origin: FormControl;
-  // arrivalDate: FormControl;
-  // weight: FormControl;
-  // price: FormControl;
-  // sensorId: FormControl;
-  // location: FormControl;
+  // inventoryForm: FormGroup
+  // itemNumber: FormControl
+  // productName: FormControl
+  // origin: FormControl
+  // arrivalDate: FormControl
+  // weight: FormControl
+  // price: FormControl
+  // sensorId: FormControl
+  // location: FormControl
 
-  // model2: Date;
-
-
+  // model2: Date
 
 
-  // this.createFormControls();
-    // this.createForm();
 
-    // this.model2 = new Date();
+
+  // this.createFormControls()
+    // this.createForm()
+
+    // this.model2 = new Date()
 
   // createFormControls() {
   //   this.itemNumber = new FormControl(null, [
   //     Validators.required,
   //     Validators.minLength(1)
-  //   ]);
+  //   ])
 
-  //   this.productName = new FormControl('', Validators.required);
-  //   this.origin = new FormControl('', Validators.required);
-  //   this.arrivalDate = new FormControl('', Validators.required);
+  //   this.productName = new FormControl('', Validators.required)
+  //   this.origin = new FormControl('', Validators.required)
+  //   this.arrivalDate = new FormControl('', Validators.required)
 
   //   this.weight = new FormControl('', [
   //     Validators.required,
   //     Validators.minLength(1)
-  //   ]);
+  //   ])
 
   //   this.price = new FormControl('', [
   //     Validators.required,
   //     Validators.minLength(1)
-  //   ]);
+  //   ])
 
   //   this.sensorId = new FormControl('', [
   //     Validators.required,
   //     Validators.minLength(1)
-  //   ]);
+  //   ])
 
   //   this.location = new FormControl('', [
   //     Validators.required,
   //     Validators.minLength(3)
-  //   ]);
+  //   ])
   // }
 
   // createForm() {
@@ -186,5 +233,5 @@ export class AddComponent implements OnInit {
   //       sensorId: this.sensorId,
   //       location: this.location,
   //     }),
-  //   });
+  //   })
   // }

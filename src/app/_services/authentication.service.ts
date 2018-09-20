@@ -2,6 +2,7 @@ import { TokenExtraction } from './../_helpers/token.extraction';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import * as jwt_decode from 'jwt-decode';
 
 
 // used to login and logout of the application, to login it posts the users
@@ -27,24 +28,48 @@ export class AuthenticationService {
     this.global = global
   }
 
-  login(username: string, password: string) {
-    return this.http.post<any>(`http://localhost:4200/users/authenticate`, { username, password })
-      .pipe(map(token => {
-        // login successful if there's a jwt token in the response
-        if (token.access_token) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('access_token', token.access_token);
-          this.global.parsedToken = this.global.getDecodedAccessToken()
+  login(loginInfo: string) {
+    console.log("-----------------")
+    console.log(loginInfo)
+    // return
+    // this.http.post<any>()
+    //   .pipe(map(token => {
+    //     console.log(token)
+    //     // login successful if there's a jwt token in the response
+    //     // if (token.access_token) {
+    //     //   // store user details and jwt token in local storage to keep user logged in between page refreshes
+    //     //   localStorage.setItem('access_token', token.access_token);
+    //     //   this.global.parsedToken = this.global.getDecodedAccessToken()
 
-          console.log(token.access_token)
-        }
+    //     //   console.log(token.access_token)
+    //     // }
 
-        return token.access_token;
-      }));
+    //     // return token.access_token;
+
+    //     if (token.data) {
+    //       localStorage.setItem('access_token', token.data.login)
+    //       this.global.parsedToken = this.global.getDecodedAccessToken()
+    //     }
+    //     // return token
+    //   }))
+  }
+
+  decode(token) {
+    return jwt_decode(token)
+      this.global.parsedToken = this.global.getDecodedAccessToken()
   }
 
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('access_token');
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('refresh_token')
   }
+
+  // addInventory(addJson: string) {
+  //   return this.http.post<any>(`http://localhost:4200/inventory/add-inv`, {addJson})
+  //   .pipe(map(replyFromServer => {
+  //     console.log(replyFromServer.reply)
+  //     return replyFromServer.reply
+  //   }))
+  // }
 }
