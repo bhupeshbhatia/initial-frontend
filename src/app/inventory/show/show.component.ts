@@ -118,6 +118,7 @@ ngAfterViewInit() {
   addDeleteWithPromise(e){
     if(e != null){
       this.curItemNum = Food[e].item_number
+      this.addDeleteWithPromise("/delete-product");
       console.log()
     }
     return e
@@ -171,7 +172,7 @@ onSearch(search: NgForm){
       var date = new Date(json.year, json.month-1, json.day);
       var jsonStr = date.toISOString();
       console.log(jsonStr);
-      this.postDateData.addDateWithPromise(jsonStr,'')
+      this.postDateData.addDateWithPromise(jsonStr,'/get-product-range')
 }
 
 onSubmit(inventory: NgForm): void {
@@ -179,7 +180,7 @@ onSubmit(inventory: NgForm): void {
     if (this.form.valid) {
       var json = JSON.parse(inventory.value)
       console.log(json)
-      this.postInventoryData.addInventoryWithPromise(json,'test')
+      this.postInventoryData.addInventoryWithPromise(json,'/update-product')
       alert('Your Inventory has been updated.');
       // const resource = JSON.stringify(this.form.value);
       // this._http.post('/inventory/show-inv', json).subscribe(status => console.log(JSON.stringify(status)));

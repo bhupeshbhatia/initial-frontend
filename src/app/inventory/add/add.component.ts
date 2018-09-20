@@ -82,7 +82,7 @@ export class AddComponent implements OnInit {
     if (this.form.valid) {
       console.log('form submitted')
       const resource = JSON.parse(this.form.value)
-      this.postInventoryData.addInventoryWithPromise(resource,'test')
+      this.postInventoryData.addInventoryWithPromise(resource,'/add-product')
 
       // this.authenticationService.addInventory(resource)
 

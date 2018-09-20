@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     this.authenticationService.logout()
 
     // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/'
+    this.returnUrl = this.route.snapshot.queryParams[''] || '/'
   }
 
   get f() {
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
 
       this.loading = true
       console.log(this.http)
-      this.http.post('', resource)
+      this.http.post('142.55.32.86/api', resource)
       .toPromise()
       .then(d => d.data)
       .then(data => {

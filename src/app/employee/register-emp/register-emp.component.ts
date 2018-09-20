@@ -40,6 +40,9 @@ export class RegisterEmpComponent implements OnInit {
   }
 
 
+  get f() {
+    return this.registerForm.controls
+  }
 
   get reg() { return this.registerForm.controls }
 
@@ -47,9 +50,25 @@ export class RegisterEmpComponent implements OnInit {
     this.formSubmitAttempt = true
     if (this.registerForm.valid) {
       console.log('form submitted')
-      const resource = JSON.stringify(this.registerForm.value)
+      let resource = JSON.stringify(this.registerForm.value)
+
+      resource = `{
+        mutation{register(username:"${this.f.username.value}",password:"${this.f.password.value}",firstName:"${this.f.firstname.value}",
+        lastName:"${this.f.lastName.value}",email:"${this.f.email.value}",role:"${this.f.role.value}")
+        )
+        {
+          access_token,
+          refresh_token
+        }
+      }`
+
+
+
+
+
+
       console.log(resource)
-      this.http.post('', resource)
+      this.http.post('142.55.32.86/api', resource)
         .toPromise()
         .then(d => d.data)
         .then(data => {
