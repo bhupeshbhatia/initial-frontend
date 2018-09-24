@@ -18,6 +18,9 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
 import { LoadInventoryJsonService } from './services/load-inventory-json/load-inventory-json.service';
+import { LoadNumprodDataService } from "./services/load-numprod-data/load-numprod-data.service";
+import { LoadAvgprodDataService } from "./services/load-avgprod-data/load-avgprod-data.service";
+import { LoadWeightDistDataService } from "./services/load-weight-dist-data/load-weight-dist-data.service";
 import { PostInventoryDataService } from "./services/post-inventory-data/post-inventory-data.service";
 import { PostDeleteDataService } from "./services/post-delete-data/post-delete-data.service";
 import { PostDDateDataService } from "./services/post-date-data/post-date-data.service";
@@ -71,7 +74,10 @@ import { AuthenticationService, UserService } from './_services';
         TokenExtraction,
         UserService,
         fakeBackendProvider,
+        LoadAvgprodDataService,
         LoadInventoryJsonService,
+        LoadNumprodDataService,
+        LoadWeightDistDataService,
         PostInventoryDataService,
         PostDDateDataService,
         PostDeleteDataService
