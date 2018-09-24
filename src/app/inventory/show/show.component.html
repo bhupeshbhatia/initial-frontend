@@ -9,32 +9,45 @@
         </a>
       </div>
     </mat-card-header>
-
+<div class="row">
+  <div class="col-xl-6">
+    <input type="text" (keyup)="applyFilter($event.target.value)" placeholder="Search table">
+  </div>
+  <div class="col-xl-6">
+    <select [(value)]="selected" placeholder="Filter">
+      <option value="num">Item No.</option>
+      <option value="name">Name</option>
+      <option value="location">Location</option>
+      <option value="expiry">Expiry Date</option>
+    </select>
+  </div>
+</div>
     <mat-card-content class="row">
       <form class="example-form mx-auto">
         <div class="row">
-          <div class="col-xl-6">
-              <input type="text" (keyup)="applyFilter($event.target.value)" placeholder="Search table">
-          </div>
-              <div class="col-xl-4">
-                <input type="text" ngModel class="form-control" id="datepicker" placeholder="Select a date" name="dp"
-                  ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()">
+
+              <div class="col-xl-6">
+                <div class="row">
+                  <div class="col-xl-9">
+<input type="text" ngModel class="form-control" id="datepicker" placeholder="Select a date" name="dp" ngbDatepicker #d="ngbDatepicker"
+  (click)="d.toggle()">
+                  </div>
+                  <div class="col-xl-1">
+                                    <button id="btnSearch" type="submit"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
               </div>
-              <div class="col-xl-2">
-                <button id="btnSearch" type="submit"><i class="fa fa-search"></i></button>
+              <div class="col-xl-6">
+                <select [(value)]="selected" placeholder="Date range">
+                  <option value="week">Week</option>
+                  <option value="month">Month</option>
+                  <option value="3">3 Months</option>
+                  <option value="6">6 Months</option>
+                  <option value="year">Year</option>
+                </select>
               </div>
         </div>
-        <div class="row">
-          <div class="col-xl-12">
-            <select [(value)]="selected" placeholder="Date range">
-              <option value="week">Week</option>
-              <option value="month">Month</option>
-              <option value="3">3 Months</option>
-              <option value="6">6 Months</option>
-              <option value="year">Year</option>
-            </select>
-          </div>
-        </div>
+
       </form>
 
       <div class="mat-elevation-z8">
@@ -81,8 +94,7 @@
           <!-- Symbol Column -->
           <ng-container matColumnDef="expiry">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Expiry Date </th>
-            <td mat-cell *matCellDef="let element"><a> {{ today |
-                date:'dd/MM/yyyy' }}</a> </td>
+            <td mat-cell *matCellDef="let element"><a> {{ element.expiry_date }}</a> </td>
           </ng-container>
 
           <ng-container matColumnDef="modify">
@@ -116,9 +128,10 @@
       <div class="modal-body">
         <form novalidate [formGroup]="form" #updateInventory="ngForm" (ngSubmit)="onSubmit(updateInventory)">
           <br>
+
           <div class="form-group">
             <div class="row">
-              <label class="col-sm-2 col-md-3 control-label required"> Item Number </label>
+              <label class="col-sm-2 col-md-3 control-label mx-auto"> Item Number </label>
               <div class="col-sm-8 mx-auto">
                   <input type="number" class="form-control" id="item_id" formControlName="item_id" required *ngIf="curField"
                   [ngModel]="curField.item_id" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.item_id.errors }" disabled>
@@ -130,7 +143,7 @@
           </div>
           <div class="form-group">
             <div class="row">
-              <label class="col-sm-2 col-md-3 control-label required"> Item Name </label>
+              <label class="col-sm-2 col-md-3 control-label mx-auto"> Item Name </label>
               <div class="col-sm-8 mx-auto">
                 <input type="text" id="name" class="form-control" formControlName="name" required *ngIf="curField"
                   [ngModel]="curField.name" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.name.errors }">
@@ -145,7 +158,7 @@
               <label class="col-sm-2 col-md-3 control-label mx-auto"> Origin of Product </label>
               <div class="col-sm-8 mx-auto">
                 <input type="text" class="form-control" id="productOrigin" formControlName="origin" placeholder="State, Country (E.g. ON, Canada)"
-                  *ngIf="curField" [ngModel]="curField.product_origin" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.origin.errors }">
+                  *ngIf="curField" [ngModel]="curField.origin" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.origin.errors }">
                 <div *ngIf="formSubmitAttempt && f.origin.errors" class="invalid-feedback">
                   <div *ngIf="f.origin.errors.required">Product origin is required</div>
                 </div>
@@ -157,7 +170,7 @@
               <label class="col-sm-2 col-md-3 control-label mx-auto"> Date of Arrival </label>
               <div class="col-sm-8 mx-auto">
                 <input type="text" class="form-control" formControlName="date_arrived" id="date_arrived" required name="dp1"
-                  ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" *ngIf="curField" [ngModel]="curField.arrival_date"
+                  ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" *ngIf="curField" [ngModel]="curField.date_arrived"
                   [ngClass]="{ 'is-invalid': formSubmitAttempt && f.date_arrived.errors }">
                 <div *ngIf="formSubmitAttempt && f.date_arrived.errors" class="invalid-feedback">
                   <div *ngIf="f.date_arrived.errors.required">Arrival date is required</div>
