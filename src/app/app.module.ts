@@ -30,7 +30,7 @@ import {
     TokenExtraction
 
 } from './_helpers'
-import { AuthenticationService, UserService } from './_services'
+import { AuthenticationService, UserService } from './_services';
 // import { AlertComponent } from './_directives/alert.component'
 // import { AlertService } from './_services/alert.service'
 // import { AddComponent } from './inventory/add/add.component'

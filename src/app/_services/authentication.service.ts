@@ -54,10 +54,10 @@ export class AuthenticationService {
     //   }))
   }
 
-  decode(token) {
-    return jwt_decode(token)
-      this.global.parsedToken = this.global.getDecodedAccessToken()
-  }
+  // decode(token) {
+  //   return jwt_decode(token)
+  //     this.global.parsedToken = this.global.getDecodedAccessToken()
+  // }
 
   logout() {
     // remove user from local storage to log user out

@@ -16,6 +16,6 @@ export class LoadInventoryJsonService {
   }
 
   public getJSON(): any {
-    return this.http.get('./assets/food-items.json');
+    return this.http.get('./assets/food-items.JSON');
   }
 }

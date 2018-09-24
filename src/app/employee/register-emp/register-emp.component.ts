@@ -14,7 +14,7 @@ export class RegisterEmpComponent implements OnInit {
   registerForm: FormGroup
   formSubmitAttempt: boolean
   error: string
-  userRoles: []
+  userRoles: string[]
 
 
   http = null

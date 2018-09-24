@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   error = ''
   formSubmitAttempt: boolean
 
-  http = null
+  http = any
 
   constructor(
     private formBuilder: FormBuilder,
