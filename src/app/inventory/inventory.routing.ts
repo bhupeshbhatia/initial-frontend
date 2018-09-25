@@ -4,6 +4,7 @@ import { AddComponent } from './add/add.component';
 import { ShowComponent } from './show/show.component';
 import { InvDashComponent } from "./inv-dash/inv-dash.component";
 import { AuthGuard } from '../_guards';
+import { MonitoringComponent } from '../monitoring/monitoring.component';
 
 export const InventoryRoutes: Routes = [{
     path: '',
@@ -24,6 +25,13 @@ export const InventoryRoutes: Routes = [{
         children: [{
             path: 'inv-dash',
             component: InvDashComponent,
+            canActivate: [AuthGuard]
+        }]
+    }, {
+        path: '',
+        children: [{
+            path: 'monitor',
+            component: MonitoringComponent,
             canActivate: [AuthGuard]
         }]
     }

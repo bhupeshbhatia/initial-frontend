@@ -4,14 +4,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridModule } from 'ag-grid-angular';
+import { LoadNumprodDataService } from "../services/load-numprod-data/load-numprod-data.service";
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
-import { InventoryRoutes } from './inventory.routing'
-
-import { AddComponent } from './add/add.component'
-import { ShowComponent } from './show/show.component'
-import { Inventory } from "../_models/inventory"
-import { InvDashComponent } from './inv-dash/inv-dash.component'
-import { MonitoringComponent } from "../monitoring/monitoring.component";
+import { InventoryRoutes } from './monitoring.routing'
+import { MonitoringComponent } from "./monitoring.component";
 // import { AlertService } from '../_services'
 // import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component'
 
@@ -58,19 +55,17 @@ import {
         MatSortModule,
         MatTableModule,
         MatTabsModule,
-        MatToolbarModule
+        MatToolbarModule,
+        NgxChartsModule
     ],
     declarations: [
-        AddComponent,
-        ShowComponent,
-        InvDashComponent,
         MonitoringComponent
         // FieldErrorDisplayComponent,
     ],
     providers: [
         // AlertService
-        Inventory
+        LoadNumprodDataService
     ]
 })
 
-export class InventoryModule {}
+export class MonitoringModule {}
