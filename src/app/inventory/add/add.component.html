@@ -14,7 +14,7 @@
                                     <label class="col-sm-2 col-md-3 control-label required"> Item Number </label>
                                     <div class="col-sm-6">
                                         <input type="number" id="item_id" class="form-control" formControlName="item_id"
-                                            ngModel [ngClass]="{ 'is-invalid': formSubmitAttempt && f.item_id.errors }">
+                                            ngModel [ngClass]="{ 'is-invalid': formSubmitAttempt && f.item_id.errors }" disabled>
                                         <div *ngIf="formSubmitAttempt && f.item_id.errors" class="invalid-feedback">
                                             <div *ngIf="f.item_id.errors.required">Item number is required</div>
                                         </div>

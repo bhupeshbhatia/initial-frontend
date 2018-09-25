@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
 import { LoadNumprodDataService } from "../../services/load-numprod-data/load-numprod-data.service";
+import { timer, pipe } from 'rxjs';
+import { switchMap, catchError } from 'rxjs/operators';
+import { load } from '@angular/core/src/render3/instructions';
 
-const numprod: number[] = []
 const avgprod: number[] = []
 const weightdist: number[] = []
 const avgprodweight: number[] = []
@@ -48,13 +50,19 @@ export class InvDashComponent implements OnInit {
     }
   }
 
+  myChart1
+
   ngOnInit():void {
-    // this.loadNumProdDataService.getJSON()
-    //   .subscribe(data => {
-    //     console.log(data)
-    //     numprod = data
-    //     console.log(numprod[0])
-    // })
+    this.loadNumProdDataService.getJSON()
+      .subscribe(data => {
+        console.log(data)
+        // setTimeout(() => {
+        //   console.log("++++++++++++++++++=")
+        //    if (!this.myChart1) {
+        //    }
+        //   this.myChart1.update(data)
+        // }, 20000);
+      })
 
     this.chartColor = "#FFFFFF";
 
@@ -72,7 +80,7 @@ export class InvDashComponent implements OnInit {
     this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
     this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
 
-   var myChart = new Chart(this.ctx, {
+    this.myChart1 = new Chart(this.ctx, {
       type: 'bar',
       data: {
         labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
@@ -183,17 +191,7 @@ export class InvDashComponent implements OnInit {
             fill: false,
             backgroundColor: '#fcc468',
             hoverBorderColor: '#fcc468',
-            borderWidth: 1,
-            data: [100, 120, 80, 100, 90, 130, 110, 100, 80, 110, 130, 140, 130, 120, 130, 80, 100, 90, 120, 130],
-          },
-          {
-            label: "Time(H)",
-            borderColor: '#4cbdd7',
-            fill: false,
-            backgroundColor: '#4cbdd7',
-            hoverBorderColor: '#4cbdd7',
-            borderWidth: 1,
-            data: [80, 140, 50, 120, 50, 150, 60, 130, 50, 130, 150, 100, 110, 80, 140, 50, 140, 50, 110, 150],
+            borderWidth: 1
           }
         ]
       },
@@ -543,8 +541,5 @@ export class InvDashComponent implements OnInit {
           ctx.fillText(txt, centerX, centerY);
         }
       }
-    });
-
-  }
-
+    });  }
 }
