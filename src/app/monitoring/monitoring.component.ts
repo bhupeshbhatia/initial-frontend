@@ -15,17 +15,17 @@ constructor(private loadNumProd: LoadNumprodDataService){}
   chart: any
   ngOnInit(){
     // this.loadNumProd.sendDate()
-    this.loadNumProd.getJSON()
-      .subscribe(data => {
-        console.log(data)
-        this.chart.load({
-          columns: [
-            ["Total Weight",data.total_weight],
-            ["Sold Weight",data.sold_weight],
-            ["Waste Weight", data.waste_weight]
-        ]
-      })
-      })
+    // this.loadNumProd.getJSON()
+    //   .subscribe(data => {
+    //     console.log(data)
+    //     this.chart.load({
+    //       columns: [
+    //         ["Total Weight",data.total_weight],
+    //         ["Sold Weight",data.sold_weight],
+    //         ["Waste Weight", data.waste_weight]
+    //     ]
+    //   })
+    //   })
 
     this.loadChart()
     // setTimeout(()=>{

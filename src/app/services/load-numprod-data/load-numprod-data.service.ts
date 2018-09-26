@@ -29,20 +29,44 @@ export class LoadNumprodDataService {
   //     );
   // }
 
-  public getJSON(): any {
-    var from = Math.round(new Date().getTime() / 1000)
-    var to = Math.round(new Date().getTime() / 1000) - 86400
-    var sendDate = new SendDate()
-    sendDate.from = from;
-    sendDate.to = to;
+  public getJSON(days: number): any {
+
+    var sendDates = []
+
+    var sendDate = new SendDate();
+    sendDate.from = this.getDays()[0];
+    sendDate.to = this.getDays(1)[1];
+
+    var sendDate2 = new SendDate();
+    sendDate2.from = this.getDays()[0];
+    sendDate2.to = this.getDays(2)[1];
+
+    var sendDate3 = new SendDate();
+    sendDate3.from = this.getDays()[0];
+    sendDate3.to = this.getDays(3)[1];
+
+    var sendDate4 = new SendDate();
+    sendDate4.from = this.getDays()[0];
+    sendDate4.to = this.getDays(4)[1];
+
+    sendDates = [sendDate, sendDate2, sendDate3, sendDate4]
 
     console.log("}}}}}}}}}}}}}}}}}}}}")
     console.log(sendDate)
-    return this.http.post(environment.apiUrl + '/twsalewaste', sendDate, {
+    return this.http.post(environment.apiUrl + '/twsalewaste', sendDates, {
       headers: {
         "Content-Type": "application/json"
       }
     });
+  }
+
+  public getDays(days?:number): Array<any>{
+    var dates = []
+    var from = Math.round(new Date().getTime() / 1000)
+    var to = Math.round(new Date().getTime() / 1000) - (86400 * days)
+    return dates = [
+      from, to
+    ]
   }
 
   // public sendDate(): any {
