@@ -50,16 +50,16 @@ export class DashboardComponent implements OnInit {
   myChart1
 
   ngOnInit(): void {
-    this.loadNumProdDataService.getJSON()
-      .subscribe(data => {
-        console.log(data)
-        // setTimeout(() => {
-        //   console.log("++++++++++++++++++=")
-        //    if (!this.myChart1) {
-        //    }
-        //   this.myChart1.update(data)
-        // }, 20000);
-      })
+    // this.loadNumProdDataService.getJSON()
+    //   .subscribe(data => {
+    //     console.log(data)
+    //     // setTimeout(() => {
+    //     //   console.log("++++++++++++++++++=")
+    //     //    if (!this.myChart1) {
+    //     //    }
+    //     //   this.myChart1.update(data)
+    //     // }, 20000);
+    //   })
 
     this.chartColor = "#FFFFFF";
 

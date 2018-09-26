@@ -1,6 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser'
 import * as c3 from 'c3';
+import { LoadNumprodDataService } from '../services/load-numprod-data/load-numprod-data.service';
 
 @Component({
   selector: 'app-monitoring',
@@ -9,27 +10,66 @@ import * as c3 from 'c3';
 })
 export class MonitoringComponent implements OnInit {
 
+constructor(private loadNumProd: LoadNumprodDataService){}
+
   chart: any
   ngOnInit(){
-    c3.generate(
+    // this.loadNumProd.sendDate()
+    this.loadNumProd.getJSON()
+      .subscribe(data => {
+        console.log(data)
+        this.chart.load({
+          columns: [
+            ["Total Weight",data.total_weight],
+            ["Sold Weight",data.sold_weight],
+            ["Waste Weight", data.waste_weight]
+        ]
+      })
+      })
+
+    this.loadChart()
+    // setTimeout(()=>{
+    //   this.chart.load({
+    //     columns: [
+    //       ['data3', 130, -150, 200, 300, -200, 100]
+    //     ]
+    //   });
+    // },5000
+    // )
+  }
+
+  loadChart(){
+
+    this.chart = c3.generate(
       {
         data: {
           columns: [
-            ['Total Product', 30, 200, 100, 400, 150, 250],
-            ['Sold Product', 130, 100, 140, 200, 150, 50],
-            ['Waste Product', 130, 100, 140, 200, 150, 50]
           ],
           type: 'bar',
-
         },
         bar: {
           width: {
-            ratio: 0.5 // this makes bar width 50% of length between ticks
+            ratio: 0.5
           }
-          // or
-          //width: 100 // this makes bar width 100px
+        },
+        axis: {
+          y: {
+            label: { // ADD
+              text: '# of products',
+              position: 'outer-middle'
+            }
+          },
+          x: {
+            label: { // ADD
+              text: 'Date',
+              position: 'outer-middle'
+            },
+            type: 'category',
+            categories: ['todays date']
+          },
         }
       }
     );
   }
+
 }
