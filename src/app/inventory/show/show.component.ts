@@ -10,7 +10,7 @@ import { PostDeleteDataService } from "../../services/post-delete-data/post-dele
 import { Inventory } from "../../_models/inventory";
 import { SelectionModel } from '@angular/cdk/collections';
 
-const Food: Inventory[] = []
+var Food: Inventory[] = []
 const initialSelection = [];
 const allowMultiSelect = true;
 
@@ -21,6 +21,7 @@ const allowMultiSelect = true;
 })
 
 export class ShowComponent implements OnInit {
+  row: Inventory;
   postInventoryData: PostInventoryDataService;
   postDateData: PostDDateDataService;
   postDeleteData: PostDeleteDataService
@@ -77,14 +78,14 @@ export class ShowComponent implements OnInit {
     };
   }
 
-  onSearch(search: NgForm) {
-    var json = search.value.dp
-    console.log($('datepicker').value)
-    var date = new Date(json.year, json.month - 1, json.day);
-    var jsonStr = date.toISOString();
-    console.log(jsonStr);
-    this.postDateData.addDateWithPromise(jsonStr, '/get-product-range')
-  }
+  // onSearch(search: NgForm) {
+  //   var json = search.value.dp
+  //   console.log($('datepicker').value)
+  //   var date = new Date(json.year, json.month - 1, json.day);
+  //   var jsonStr = date.toISOString();
+  //   console.log(jsonStr);
+  //   this.postDateData.addDateWithPromise(jsonStr, '/get-product-range')
+  // }
 
   onSubmit(inventory: NgForm): void {
     this.formSubmitAttempt = true;
@@ -96,7 +97,7 @@ export class ShowComponent implements OnInit {
       // const resource = JSON.stringify(this.form.value);
       // this._http.post('/inventory/show-inv', json).subscribe(status => console.log(JSON.stringify(status)));
       console.log('Add Button clicked: ' + json);
-      $('#myModal').modal('hide');
+      // $('#myModal').modal('hide');
     }
   }
 
@@ -127,7 +128,7 @@ get f() { return this.form.controls; }
   masterToggle() {
     this.isAllSelected() ?
       this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
+      this.dataSource.data.forEach(row => this.selection.select(this.row));
   }
 
   removeSelectedRows() {

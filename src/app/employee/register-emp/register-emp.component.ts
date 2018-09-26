@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { AuthResponse } from "../../_models/auth-response";
 
 @Component({
   selector: 'app-register-emp',
@@ -15,9 +16,7 @@ export class RegisterEmpComponent implements OnInit {
   formSubmitAttempt: boolean
   error: string
   userRoles: string[]
-
-
-  http = null
+  data: AuthResponse
 
   constructor(
     private formBuilder: FormBuilder,
@@ -70,9 +69,9 @@ export class RegisterEmpComponent implements OnInit {
       console.log(resource)
       this.http.post("142.55.32.86:50281/api1", resource)
         .toPromise()
-        .then(d => d.data)
+        .then(d => this.data)
         .then(data => {
-          console.log(data.register)
+          console.log(data.data.register)
         })
     }
 

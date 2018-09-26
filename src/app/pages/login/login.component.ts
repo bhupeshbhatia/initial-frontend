@@ -1,11 +1,12 @@
 import { HttpModule } from '@angular/http';
-import { Component, OnInit, ElementRef } from '@angular/core'
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { first, timeInterval } from 'rxjs/operators'
 
 import { AuthenticationService } from '../../_services'
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { AuthResponse } from "../../_models/auth-response";
 
 @Component({
   moduleId: module.id,
@@ -15,14 +16,13 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 })
 
 export class LoginComponent implements OnInit {
-
+  data: AuthResponse
   loginForm: FormGroup
   loading = false
   returnUrl: string
   error = ''
   formSubmitAttempt: boolean
-
-  http = any
+  @ViewChild("response") response: Element
 
   constructor(
     private formBuilder: FormBuilder,
@@ -76,15 +76,15 @@ export class LoginComponent implements OnInit {
       console.log(this.http)
       this.http.post('142.55.32.86:50281/api1', resource)
       .toPromise()
-      .then(d => d.data)
+      .then(d => this.data)
       .then(data => {
-        console.log(data.login)
-        if (data.login.access_token == null) {
-          $("#response").text("Invalid Credentials")
+        console.log(data.data.login)
+        if (this.data.data.login.access_token == null) {
+          this.response.innerHTML = 'Invalid Credentials'
         }
         else {
-          localStorage.setItem("access_token", data.login.access_token)
-          localStorage.setItem("refresh_token", data.login.refresh_token)
+          localStorage.setItem("access_token", data.data.login.access_token)
+          localStorage.setItem("refresh_token", data.data.login.refresh_token)
           this.router.navigate([this.returnUrl])
           this.reset()
         }

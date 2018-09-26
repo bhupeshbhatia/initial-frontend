@@ -3,7 +3,6 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable } from 'rxjs';
 import * as jwt_decode from 'jwt-decode';
 
-
 @Injectable()
 export class TokenExtraction {
 
@@ -17,7 +16,7 @@ export class TokenExtraction {
         return localStorage.getItem('refresh_token')
     }
 
-    getDecodedAccessToken(): Object {
+    getDecodedAccessToken(): any {
         const accessToken = localStorage.getItem('access_token')
         return jwt_decode(accessToken)
     }
