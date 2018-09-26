@@ -1,4 +1,4 @@
 export class SendDate {
-    from: number
-    to: number
+    end_date: number
+    start_date: number
 }

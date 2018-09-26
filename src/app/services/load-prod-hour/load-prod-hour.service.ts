@@ -10,14 +10,9 @@ import { SendDate } from '../../_models'
 @Injectable({
   providedIn: 'root'
 })
-export class LoadNumprodDataService {
-  constructor(private http: HttpClient) {
-  // this.checkData()
-  }
-    // this.getJSON()
-    //   .subscribe(data => {
-    //     console.log(data);
-    //   });
+export class LoadProdHourService {
+
+  constructor(private http: HttpClient) { }
 
   public getJSON(days: number): any {
 
@@ -37,20 +32,20 @@ export class LoadNumprodDataService {
 
     var sendDate4 = new SendDate();
     sendDate4.end_date = this.getDays()[0];
-    sendDate4.start_date = this.getDays(4)[1];
+    sendDate4.start_date = this.getDays(4)[1]
 
     sendDates = [sendDate, sendDate2, sendDate3, sendDate4]
 
     console.log("}}}}}}}}}}}}}}}}}}}}")
     console.log(sendDate)
-    return this.http.post(environment.apiUrl + '/twsalewaste', sendDates, {
+    return this.http.post(environment.apiUrl + '/perday-sale', sendDates, {
       headers: {
         "Content-Type": "application/json"
       }
     });
   }
 
-  public getDays(days?:number): Array<any>{
+  public getDays(days?: number): Array<any> {
     var dates = []
     var end_date = Math.round(new Date().getTime() / 1000)
     var start_date = Math.round(new Date().getTime() / 1000) - (86400 * days)
@@ -58,5 +53,4 @@ export class LoadNumprodDataService {
       end_date, start_date
     ]
   }
-
 }
