@@ -11,8 +11,8 @@ export class PostDDateDataService {
 
   constructor(private http: Http) { }
 
-  addDateWithPromise(date: string, url: string): Promise<any> {
-    return this.http.post("142.55.32.86:50281/api2/"+url, date).toPromise()
+  addDateWithPromise(date: JSON, url: string): Promise<any> {
+    return this.http.post("localhost:8080"+url, date).toPromise()
       .catch(this.handleErrorPromise);
   }
   private handleErrorPromise(error: Response | any) {
