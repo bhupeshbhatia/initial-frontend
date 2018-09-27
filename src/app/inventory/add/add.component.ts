@@ -6,8 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { AuthenticationService } from '../../_services'
 import swal from 'sweetalert2'
 import { PostInventoryDataService } from "../../services/post-inventory-data/post-inventory-data.service";
-import { v4 as uuid } from 'uuid';
-
+import uuidv4 from 'uuid'; 
 
 // declare interface User {
 //   barcode?: string
@@ -22,7 +21,6 @@ import { v4 as uuid } from 'uuid';
 // }
 
 // declare var $: any
-
 export interface Inventory {
   item_id: number
   item_name: string
@@ -48,18 +46,23 @@ export class AddComponent implements OnInit {
   error: string
   returnUrl: string
   loading = false
-  
+  @ViewChild("uuid") uuid: ElementRef
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private userService: UserService
+    private userService: UserService,
+
     // private alertService: AlertService
     ) { }
 
+itemUuidgen: any
+deviceUuidgen: any
+
   ngOnInit() {
+    console.log(uuidv4())
     this.form = this.formBuilder.group({
       item_id: [null, [Validators.required, Validators.minLength(1)]],
       name: [null, [Validators.required, Validators.minLength(1)]],
@@ -72,6 +75,8 @@ export class AddComponent implements OnInit {
     })
 
     this.returnUrl = this.route.snapshot.queryParams['add-inv']
+    this.itemUuidgen = uuidv4();
+    this.deviceUuidgen = uuidv4();
   }
 
   // convenience getter for easy access to form fields

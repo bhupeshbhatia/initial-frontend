@@ -83,4 +83,16 @@ export class LoadInventoryJsonService {
     });
   }
 
+
+  public addProd(obj: Object): any {
+
+    console.log("}}}}}}}}}}}}}}}}}}}}")
+    console.log(obj)
+    return this.http.post(environment.apiUrl + '/add-product', obj, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }
+
 }

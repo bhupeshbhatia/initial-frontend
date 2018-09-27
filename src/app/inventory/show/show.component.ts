@@ -120,6 +120,8 @@ export class ShowComponent implements OnInit {
   onSubmit() {
     this.formSubmitAttempt = true;
     if (this.form.valid) {
+      // this.form.value.date_arrived = Math.round(new Date(this.form.value.date_arrived).getTime() / 1000)
+      console.log(this.form.value.date_arrived)
       console.log(this.form.value)
       this.loadInventoryJsonService.updateRow(this.form.value)
       .subscribe(console.log())

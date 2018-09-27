@@ -16,7 +16,7 @@
                                     <div class="row">
                                         <label class="col-sm-2 col-md-3 control-label mx-auto"> Item ID </label>
                                         <div class="col-sm-8 mx-auto">
-                                            <input #uuid type="string" class="form-control" id="item_id" formControlName="item_id" required [ngClass]="{ 'is-invalid': formSubmitAttempt && f.item_id.errors }"
+                                            <input #uuid type="string" class="form-control" [ngModel]="itemUuidgen" id="item_id" formControlName="item_id" required [ngClass]="{ 'is-invalid': formSubmitAttempt && f.item_id.errors }"
                                                 disabled>
                                             <div *ngIf="formSubmitAttempt && f().item_id.errors" class="invalid-feedback">
                                                 <div *ngIf="f().item_number.errors.required">Item number is required</div>
@@ -86,7 +86,7 @@
                                     <div class="row">
                                         <label class="col-sm-2 col-md-3 control-label mx-auto"> Device ID </label>
                                         <div class="col-sm-8 mx-auto">
-                                            <input type="text" class="form-control" id="monitoredBy" formControlName="device_id" required disabled>
+                                            <input type="text" class="form-control" id="monitoredBy" [ngModel]="deviceUuidgen" formControlName="device_id" required disabled>
                                             <div *ngIf="formSubmitAttempt && f().device_id.errors" class="invalid-feedback">
                                                 <div *ngIf="f().device_id.errors.required">Monitored By is required</div>
                                             </div>
