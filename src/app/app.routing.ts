@@ -22,6 +22,10 @@ export const AppRoutes: Routes = [{
             loadChildren: './inventory/inventory.module#InventoryModule',
             canActivate: [AuthGuard]
         }, {
+            path: 'monitoring',
+            loadChildren: './monitoring/monitoring.module#MonitoringModule',
+            canActivate: [AuthGuard]
+        }, {
             path: 'employee',
             loadChildren: './employee/employee.module#EmployeeModule',
             canActivate: [AuthGuard]
@@ -66,6 +70,10 @@ export const AppRoutes: Routes = [{
             }, {
                 path: 'inventory',
                 loadChildren: './inventory/inventory.module#InventoryModule',
+                canActivate: [AuthGuard]
+            }, {
+                path: 'monitoring',
+                loadChildren: './monitoring/monitoring.module#MonitoringModule',
                 canActivate: [AuthGuard]
             }, {
                 path: 'employee',

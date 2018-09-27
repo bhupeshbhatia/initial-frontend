@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   returnUrl: string
   error = ''
   formSubmitAttempt: boolean
-  @ViewChild("response") response: Element
+  @ViewChild('response') response: Element
   showError = false
 
   constructor(
@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
 
       this.loading = true
       console.log(this.http)
-      this.http.post('http://10.80.31.37:8081/api', resource)
+      this.http.post('http://142.55.32.86:50281/api1', resource)
       .toPromise()
       // .then(d => this.data)
       .then((data: any) => {

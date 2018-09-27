@@ -1,15 +1,28 @@
 .control-label.required:after {
-    color: #d00;
-    content: "*";
-    position: absolute;
-    margin-left: 5px;
-    top:7px;
-  }
+  color: #d00;
+  content: "*";
+  top:7px;
+}
 
-  .register-page-container {
-    margin-top: 138px;
-  }
+.control-label-container {
+  text-align: right;
+}
 
-  .selectpicker {
-    width: 100%;
-  }
+.register-page-container {
+  margin-top: 138px;
+}
+
+.selectpicker {
+  width: 100%;
+}
+
+.control-label {
+  top: 50%;
+  position: relative;
+  transform: translateY(-50%);
+}
+
+.err-msg {
+  text-align: center;
+  color: red;
+}
