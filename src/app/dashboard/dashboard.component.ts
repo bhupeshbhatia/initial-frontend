@@ -3,7 +3,7 @@ import { LoadNumprodDataService } from "../services/load-numprod-data/load-numpr
 import { HttpClient } from '@angular/common/http';
 import { LoadProdHourService } from "../services/load-prod-hour/load-prod-hour.service";
 import { LoadWeightDistDataService } from "../services/load-weight-dist-data/load-weight-dist-data.service";
-import { environment } from '../../config'
+import * as environment from '../../config'
 import { SendDate } from '../_models'
 import Chart from 'chart.js';
 
@@ -18,10 +18,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.loadTotalGraph()
-    // this.loadSoldGraph()
-    // this.loadDistGraph()
-    this.loadDonationGraph()
+     this.loadTotalGraph()
+     this.loadSoldGraph()
+     this.loadDistGraph()
+     this.loadDonationGraph()
   }
 
   // constructor(
@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
 
   getDays(days?:number): Array<any>{
     var dates = []
-    var end_date = Math.round(new Date().getTime() / 1000)
+    var end_date = Math.round(new Date().getTime() / 1000) + (86400 * days)
     var start_date = Math.round(new Date().getTime() / 1000) - (86400 * days)
     return dates = [
       end_date, start_date
@@ -53,19 +53,19 @@ export class DashboardComponent implements OnInit {
     var sendDates = []
 
     var sendDate = new SendDate();
-    sendDate.end_date = this.getDays()[0];
+    sendDate.end_date = this.getDays(1)[0];
     sendDate.start_date = this.getDays(1)[1];
 
     var sendDate2 = new SendDate();
-    sendDate2.end_date = this.getDays()[0];
+    sendDate2.end_date = this.getDays(2)[0];
     sendDate2.start_date = this.getDays(2)[1];
 
     var sendDate3 = new SendDate();
-    sendDate3.end_date = this.getDays()[0];
+    sendDate3.end_date = this.getDays(3)[0];
     sendDate3.start_date = this.getDays(3)[1];
 
     var sendDate4 = new SendDate();
-    sendDate4.end_date = this.getDays()[0];
+    sendDate4.end_date = this.getDays(4)[0];
     sendDate4.start_date = this.getDays(4)[1];
 
     sendDates = [sendDate, sendDate2, sendDate3, sendDate4]
@@ -84,19 +84,19 @@ export class DashboardComponent implements OnInit {
     var sendDates = []
 
     var sendDate = new SendDate();
-    sendDate.end_date = this.getDays()[0];
+    sendDate.end_date = this.getDays(1)[0];
     sendDate.start_date = this.getDays(1)[1];
 
     var sendDate2 = new SendDate();
-    sendDate2.end_date = this.getDays()[0];
+    sendDate2.end_date = this.getDays(2)[0];
     sendDate2.start_date = this.getDays(2)[1];
 
     var sendDate3 = new SendDate();
-    sendDate3.end_date = this.getDays()[0];
+    sendDate3.end_date = this.getDays(3)[0];
     sendDate3.start_date = this.getDays(3)[1];
 
     var sendDate4 = new SendDate();
-    sendDate4.end_date = this.getDays()[0];
+    sendDate4.end_date = this.getDays(4)[0];
     sendDate4.start_date = this.getDays(4)[1];
 
     sendDates = [sendDate, sendDate2, sendDate3, sendDate4]

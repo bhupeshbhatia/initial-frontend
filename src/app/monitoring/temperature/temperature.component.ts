@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../config'
-import { SendDate } from '../_models'
+import * as environment from '../../../config'
+import { SendDate } from '../../_models'
 import Chart from 'chart.js';
 
 @Component({
@@ -66,7 +66,7 @@ export class TemperatureComponent implements OnInit {
 
     console.log("}}}}}}}}}}}}}}}}}}}}")
     console.log(sendDates)
-    return this.http.post(environment.apiUrl + '/twsalewaste', sendDates, {
+    return this.http.post(environment + '/twsalewaste', sendDates, {
       headers: {
         "Content-Type": "application/json"
       }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../config'
+import * as environment from '../../../config'
 import { SendDate } from '../../_models/send-date'
 import Chart from 'chart.js';
 
@@ -36,7 +36,7 @@ export class CarbonComponent implements OnInit {
 
   getDays(days?: number): Array<any> {
     var dates = []
-    var end_date = Math.round(new Date().getTime() / 1000)
+    var end_date = Math.round(new Date().getTime() / 1000) + (86400 * days)
     var start_date = Math.round(new Date().getTime() / 1000) - (86400 * days)
     return dates = [
       end_date, start_date
@@ -47,26 +47,13 @@ export class CarbonComponent implements OnInit {
     var sendDates = []
 
     var sendDate = new SendDate();
-    sendDate.end_date = this.getDays()[0];
-    sendDate.start_date = this.getDays(1)[1];
+    sendDate.end_date = this.getDays(1)[0];
 
-    var sendDate2 = new SendDate();
-    sendDate2.end_date = this.getDays()[0];
-    sendDate2.start_date = this.getDays(2)[1];
-
-    var sendDate3 = new SendDate();
-    sendDate3.end_date = this.getDays()[0];
-    sendDate3.start_date = this.getDays(3)[1];
-
-    var sendDate4 = new SendDate();
-    sendDate4.end_date = this.getDays()[0];
-    sendDate4.start_date = this.getDays(4)[1];
-
-    sendDates = [sendDate, sendDate2, sendDate3, sendDate4]
+    sendDates = [sendDate]
 
     console.log("}}}}}}}}}}}}}}}}}}}}")
     console.log(sendDates)
-    return this.http.post(environment.apiUrl + '/twsalewaste', sendDates, {
+    return this.http.post(environment.apiUrl + '/sen-perday', sendDates, {
       headers: {
         "Content-Type": "application/json"
       }
