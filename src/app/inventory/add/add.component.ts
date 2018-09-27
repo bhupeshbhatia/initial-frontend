@@ -5,22 +5,9 @@ import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveF
 import { Router, ActivatedRoute } from '@angular/router'
 import { AuthenticationService } from '../../_services'
 import swal from 'sweetalert2'
-import { PostInventoryDataService } from "../../services/post-inventory-data/post-inventory-data.service";
-import uuidv4 from 'uuid'; 
+import { LoadInventoryJsonService } from "../../services/load-inventory-json/load-inventory-json.service";
+import uuidv4 from 'uuid';
 
-// declare interface User {
-//   barcode?: string
-//   productName?: string
-//   email?: string //  must be valid email format
-//   password?: string // required, value must be equal to confirm password.
-//   confirmPassword?: string // required, value must be equal to password.
-//   number?: number // required, value must be equal to password.
-//   url?: string
-//   idSource?: string
-//   idDestination?: string
-// }
-
-// declare var $: any
 export interface Inventory {
   item_id: number
   item_name: string
@@ -40,13 +27,11 @@ export interface Inventory {
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
-  postInventoryData: PostInventoryDataService;
   form: FormGroup
   formSubmitAttempt: boolean
   error: string
   returnUrl: string
   loading = false
-  @ViewChild("uuid") uuid: ElementRef
 
   constructor(
     private formBuilder: FormBuilder,
@@ -54,8 +39,7 @@ export class AddComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticationService,
     private userService: UserService,
-
-    // private alertService: AlertService
+    private loadJsonData: LoadInventoryJsonService
     ) { }
 
 itemUuidgen: any
@@ -84,19 +68,24 @@ f() { return this.form.controls; }
 
 
   onSubmit() {
+    const month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
     this.formSubmitAttempt = true
-     if (this.form.valid) {
-      console.log('form submitted')
-      console.log(this.form.value)
-      // const resource = JSON.parse(this.form.value)
-      // this.authenticationService.addInventory(resource)
-
+      const origDate = this.form.value.date_arrived
+       this.form.value.date_arrived = Math.floor(Date.parse(`${origDate.year}/${month[origDate.month]}/${origDate.day}`) / 1000)
+      this.loadJsonData.addProd(this.form.value)
     //  this.reset()
-    }
-
-      // this.service.create(resource)
-    //   .subscribe(response => console.log(response))
-    // }
   }
 
   reset() {

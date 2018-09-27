@@ -76,11 +76,16 @@ export class LoadInventoryJsonService {
 
     console.log("}}}}}}}}}}}}}}}}}}}}")
     console.log(obj)
-    return this.http.post(environment.apiUrl + '/update-product', obj, {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
+    // return this.http.post(environment.apiUrl + '/update-product', obj, {
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   }
+    // });
+    this.http.post(environment.apiUrl + '/update-product', obj)
+      .toPromise()
+      .then((data: any) => {
+      })
+
   }
 
 
@@ -88,11 +93,15 @@ export class LoadInventoryJsonService {
 
     console.log("}}}}}}}}}}}}}}}}}}}}")
     console.log(obj)
-    return this.http.post(environment.apiUrl + '/add-product', obj, {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
+    // return this.http.post(environment.apiUrl + '/add-product', obj, {
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   }
+    // });
+    this.http.post(environment.apiUrl+'/add-product', obj)
+    .toPromise()
+    .then((data: any) => {
+    })
   }
 
 }
