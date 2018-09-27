@@ -71,6 +71,10 @@ export const AppRoutes: Routes = [{
                 path: 'employee',
                 loadChildren: './employee/employee.module#EmployeeModule',
                 canActivate: [AuthGuard]
+            }, {
+                path: 'monitoring',
+                loadChildren: './monitoring/monitoring.module#MonitoringModule',
+                canActivate: [AuthGuard]
             }]
         },
         {

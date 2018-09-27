@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { LoadNumprodDataService } from "../services/load-numprod-data/load-numprod-data.service";
 import { HttpClient } from '@angular/common/http';
 import { LoadProdHourService } from "../services/load-prod-hour/load-prod-hour.service";
@@ -28,6 +28,9 @@ export class DashboardComponent implements OnInit {
   donationChart: any
   // this.loadNumProd.sendDate()
   date: any
+  @ViewChild("arrival") arrival: ElementRef
+  @ViewChild("total") total: ElementRef
+  @ViewChild("average") average: ElementRef
 
   getDays(days?:number): Array<any>{
     var dates = []
@@ -60,7 +63,7 @@ export class DashboardComponent implements OnInit {
     sendDates = [sendDate, sendDate2, sendDate3, sendDate4]
 
     console.log("}}}}}}}}}}}}}}}}}}}}")
-    console.log(sendDate)
+    console.log(sendDates)
     return this.http.post(environment.apiUrl + '/twsalewaste', sendDates, {
       headers: {
         "Content-Type": "application/json"
@@ -204,6 +207,7 @@ export class DashboardComponent implements OnInit {
         const weights = dataArr[k]
         const date = new Date(weights.dates).toDateString()
         this.totalChart.data.labels.push(date)
+        this.total.nativeElement.innerHTML = weights.total_weight
         metrics[0].push(weights.total_weight)
         metrics[1].push(weights.sold_weight)
         metrics[2].push(weights.waste_weight)
