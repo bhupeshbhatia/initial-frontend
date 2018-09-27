@@ -11,7 +11,7 @@
                             <form [formGroup]="form" #addInventory="ngForm" #addInventory="ngForm" (ngSubmit)="onSubmit(addInventory)">
                                 <!-- <fieldset formGroupName="inventory"> -->
                                 <div class="form-group">
-                                    <label class="col-sm-2 col-md-3 control-label required"> Item Number </label>
+                                    <label class="col-sm-2 col-md-3 control-label required"> Item ID </label>
                                     <div class="col-sm-6">
                                         <input type="number" id="item_id" class="form-control" formControlName="item_id"
                                             ngModel [ngClass]="{ 'is-invalid': formSubmitAttempt && f.item_id.errors }" disabled>
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label required"> Monitored By </label>
+                                    <label class="col-sm-2 control-label required"> Sensor ID </label>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control" ngModel formControlName="device_id"
                                             [ngClass]="{ 'is-invalid': formSubmitAttempt && f.device_id.errors }">

@@ -2,10 +2,6 @@
   padding-right: 10px;
 }
 
-#header{
-    text-align: center;
-}
-
 img{
     height: 400px;
     width: 400px;
@@ -54,3 +50,4 @@ th.mat-sort-header-sorted {
     margin-left: 5px;
     top:7px;
   }
+
