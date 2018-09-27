@@ -4,7 +4,7 @@ declare var $:any;
 
 
 @Component({
-    moduleId: module.id,
+    
     selector: 'extended-table-cmp',
     templateUrl: 'extendedtable.component.html'
 })

@@ -5,7 +5,7 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 declare var $:any;
 
 @Component({
-    moduleId:module.id,
+    // moduleId:module.id,
     selector: 'lock-cmp',
     templateUrl: './lock.component.html'
 })

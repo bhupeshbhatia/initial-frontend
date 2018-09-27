@@ -6,7 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { AuthenticationService } from '../../_services'
 import swal from 'sweetalert2'
 import { LoadInventoryJsonService } from "../../services/load-inventory-json/load-inventory-json.service";
-import uuidv4 from 'uuid';
+// const uuidvv = require('uuid/v4');
 
 export interface Inventory {
   item_id: number
@@ -46,7 +46,7 @@ itemUuidgen: any
 deviceUuidgen: any
 
   ngOnInit() {
-    console.log(uuidv4())
+    // console.log(uuidv4())
     this.form = this.formBuilder.group({
       item_id: [null, [Validators.required, Validators.minLength(1)]],
       name: [null, [Validators.required, Validators.minLength(1)]],
@@ -59,8 +59,8 @@ deviceUuidgen: any
     })
 
     this.returnUrl = this.route.snapshot.queryParams['add-inv']
-    this.itemUuidgen = uuidv4();
-    this.deviceUuidgen = uuidv4();
+    // this.itemUuidgen = uuidv4();
+    // this.deviceUuidgen = uuidv4();
   }
 
   // convenience getter for easy access to form fields

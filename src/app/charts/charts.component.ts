@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
 
 @Component({
-    moduleId: module.id,
+    
     selector: 'charts-cmp',
     templateUrl: './charts.component.html'
 })

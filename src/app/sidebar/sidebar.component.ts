@@ -145,7 +145,7 @@ export const ROUTES: RouteInfo[] = [{
 ];
 
 @Component({
-    moduleId: module.id,
+    
     selector: 'sidebar-cmp',
     templateUrl: 'sidebar.component.html',
     styleUrls: ['./sidebar.component.css']

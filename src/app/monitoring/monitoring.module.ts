@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridModule } from 'ag-grid-angular';
 import { LoadNumprodDataService } from "../services/load-numprod-data/load-numprod-data.service";
-import { InventoryRoutes } from './monitoring.routing'
+// import { InventoryRoutes } from './monitoring.routing'
 // import { AlertService } from '../_services'
 // import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component'
 

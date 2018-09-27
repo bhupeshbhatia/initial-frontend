@@ -14,7 +14,7 @@ declare interface User {
 }
 
 @Component({
-    moduleId: module.id,
+    
     selector: 'validationforms-cmp',
     templateUrl: 'validationforms.component.html'
 })

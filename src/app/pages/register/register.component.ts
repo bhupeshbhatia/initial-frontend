@@ -18,7 +18,7 @@ declare interface User {
 declare var $: any;
 
 @Component({
-    moduleId: module.id,
+    
     selector: 'register-cmp',
     templateUrl: './register.component.html'
 })

@@ -5,7 +5,7 @@ import PerfectScrollbar from 'perfect-scrollbar';
 declare var $: any;
 
 @Component({
-    moduleId: module.id,
+
     selector: 'calendar-cmp',
     templateUrl: 'calendar.component.html'
 })

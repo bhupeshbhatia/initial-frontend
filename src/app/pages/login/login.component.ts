@@ -10,7 +10,7 @@ import { AuthResponse } from "../../_models/auth-response";
 import { controlNameBinding } from '@angular/forms/src/directives/reactive_directives/form_control_name';
 
 @Component({
-  moduleId: module.id,
+  
   selector: 'login-cmp',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
