@@ -161,11 +161,11 @@ get f() { return this.form.controls; }
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-  }
+  // masterToggle() {
+  //   this.isAllSelected() ?
+  //     this.selection.clear() :
+  //     this.dataSource.data.forEach(row => this.selection.select(row));
+  // }
 
   removeSelectedRows() {
     this.selection.selected.forEach(item => {

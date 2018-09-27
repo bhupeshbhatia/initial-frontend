@@ -1,14 +1,11 @@
 <div class="main-content">
 <div class="container-fluid">
   <mat-card>
-    <mat-card-header class="mx-auto col-xl-12">
-      <h4 class="mx-auto">Food Inventory</h4>
-    </mat-card-header>
-
     <mat-card-content class="row table-wrapper-scroll-y">
+
       <form>
-        <div class="row mx-auto col-xl-6">
-          <div class="col-xl-5">
+        <div class="row mx-auto">
+          <div class="col-sm-6">
             <select #field name="field" class="form-control">
               <option value="item_id">Item id</option>
               <option value="name">Name</option>
@@ -16,21 +13,21 @@
               <option value="expiry">Expiry</option>
             </select>
           </div>
-          <div class="col-xl-5">
+          <div class="col-sm-6">
               <input style="height:100%" #query name="query" class="form-control" placeholder="Search">
           </div>
           </div>
-          <div class="row mx-auto col-xl-6">
-            <div class="col-xl-5">
+          <div class="row mx-auto">
+            <div class="col-auto">
               <button class="btn btn-primary" type="submit" (click)="onSearch()">
                 Search
               </button>
-            </div>
-            <div class="col-xl-5">
+              </div>
+              <div class="col-sm-6">
               <button class="btn btn-primary" type="submit" (click)="resetData()">
                 Reset
               </button>
-            </div>
+              </div>
           </div>
 
 

@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 
 import { AddComponent } from './add/add.component';
 import { ShowComponent } from './show/show.component';
-import { InvDashComponent } from "./inv-dash/inv-dash.component";
 import { AuthGuard } from '../_guards';
 
 export const InventoryRoutes: Routes = [{
@@ -15,16 +14,9 @@ export const InventoryRoutes: Routes = [{
 }, {
     path: '',
     children: [{
-        path: 'add-food',
+        path: 'add-inv',
         component: AddComponent,
         canActivate: [AuthGuard]
     }]
-    }, {
-        path: '',
-        children: [{
-            path: 'inv-dash',
-            component: InvDashComponent,
-            canActivate: [AuthGuard]
-        }]
     }
 ];
