@@ -15,7 +15,7 @@ export const InventoryRoutes: Routes = [{
 }, {
     path: '',
     children: [{
-        path: 'add-food',
+        path: 'add-inv',
         component: AddComponent,
         canActivate: [AuthGuard]
     }]

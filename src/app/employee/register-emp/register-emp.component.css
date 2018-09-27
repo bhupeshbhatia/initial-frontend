@@ -9,3 +9,7 @@
   .register-page-container {
     margin-top: 138px;
   }
+
+  .selectpicker {
+    width: 100%;
+  }

@@ -1,4 +1,132 @@
-<div class="container register-page-container">
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 mx-auto">
+                <div class="places-sweet-alerts">
+                    <div class="card">
+                        <div class="card-header ">
+                            <h4 class="card-title">Register</h4>
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="registerForm" #reg="ngForm">
+                                <!-- <fieldset formGroupName="inventory"> -->
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-md-3 control-label required"> First name </label>
+                                    <div class="col-sm-6">
+                                        <input type="text" id="firstname" class="form-control" formControlName="firstname"
+                                            ngModel [ngClass]="{ 'is-invalid': formSubmitAttempt && f.firstname.errors }">
+                                        <div *ngIf="formSubmitAttempt && f.firstname.errors" class="invalid-feedback">
+                                            <div *ngIf="f.firstname.errors.required">First name is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label required"> Last name </label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" ngModel formControlName="lastname"
+                                            [ngClass]="{ 'is-invalid': formSubmitAttempt && f.lastname.errors }">
+                                        <div *ngIf="formSubmitAttempt && f.lastname.errors" class="invalid-feedback">
+                                            <div *ngIf="f.lastname.errors.required">Last name is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 col-md-3 control-label required"> Username </label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" ngModel formControlName="username" id="username" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.username.errors }">
+                                        <div *ngIf="formSubmitAttempt && f.username.errors" class="invalid-feedback">
+                                            <div *ngIf="f.username.errors.required">Username is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 col-md-3 control-label required"> Password </label>
+                                    <div class="col-sm-6">
+                                        <input type="password" id="password" class="form-control" ngModel
+                                            formControlName="password" required [ngClass]="{ 'is-invalid': formSubmitAttempt && f.password.errors }">
+                                        <div *ngIf="formSubmitAttempt && f.password.errors" class="invalid-feedback">
+                                            <div *ngIf="f.password.errors.required">Password is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label required"> Email </label>
+                                    <div class="col-sm-6">
+                                        <input type="email" class="form-control" ngModel formControlName="email"
+                                            [ngClass]="{ 'is-invalid': formSubmitAttempt && f.weight.errors }">
+                                        <div *ngIf="formSubmitAttempt && f.email.errors" class="invalid-feedback">
+                                            <div *ngIf="f.email.errors.required">Email is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <label class="col-sm-2 control-label required"> Role </label>
+                                    <div class="col-sm-6">
+                                            <select class="form-control" [(ngModel)]="model.roleStatus" name="roleStatus">
+                                                <option value="" disabled>--Select a Role--</option>
+                                                <option [ngValue]="roleStatus" *ngFor="let role of roleStatus">
+                                                  {{ role }}
+                                                </option>
+                                      </select>
+                                        <div *ngIf="formSubmitAttempt && f.roleStatus.errors" class="invalid-feedback">
+                                            <div *ngIf="f.roleStatus.errors.required">Role is required</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <div class="card-footer">
+                                    <button type="submit" id="addProduct" class="btn btn-info btn-fill col-sm-6 col-md-3"
+                                        (click)="onSubmit(addInventory)">Register</button>
+                                    <button type="submit" id="cancelProduct" class="btn btn-danger btn-fill col-sm-6 col-md-3"
+                                        (click)="reset()">Reset</button>
+                                </div>
+                                <!-- <pre>{{form.value | json}}</pre> -->
+                                <!-- <div class="col-md-3" *ngIf="formSubmitAttempt">
+                                    <div class="card ">
+                                      <div class="card-body text-center">
+                                        <p class="card-text">{{}}</p>
+                                        <button class="btn btn-outline-default btn-round" (click)="showSwal('success-message')">Try me!</button>
+                                      </div>
+                                    </div>
+                                  </div> -->
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container register-page-container">
     <div class="col-lg-5 col-md-6 col-sm-12 ml-auto mr-auto my-5">
         <form [formGroup]="registerForm">
             <div class="card">
@@ -79,9 +207,29 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="nc-icon nc-single-02"></i>
+                                    </span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="email" id="email" class="form-control" formControlName="email"
+                                    placeholder="Email" (focus)="focus=true" (blur)="focus=false" [ngClass]="{ 'is-invalid': formSubmitAttempt && reg.email.errors }">
+                                </div>
+
+                                <div *ngIf="formSubmitAttempt && reg.email.errors" class="invalid-feedback">
+                                    <div *ngIf="submitted && reg.email.errors" class="invalid-feedback">
+                                        <div *ngIf="reg.email.errors.required">Email is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <!-- <div class="form-group">
-                            <select formControlName="role" class="selectpicker" data-size="4" data-style="btn btn-round">
+                            <select formControlName="role" class="selectpicker col-lg-12" data-size="4" data-style="btn btn-fill">
                                 <option [ngValue]="null">Select role</option>
                                 <option *ngFor="let option of userRoles"
                                         [ngValue]="option">{{option}}</option>
@@ -90,6 +238,10 @@
                                     <div *ngIf="reg.role.errors.required">Role is required</div>
                                 </div>
                         </div> -->
+
+    <!-- <select type="number" [(ngModel)]="selectedOption" (ngModelChange)="toNumber()">
+      <option *ngFor="let level of levels" [ngValue]="level.num">{{level.role}}</option>
+    </select>
 
                     </div>
                     <div class="card-footer">
@@ -101,7 +253,7 @@
             </div>
         </form>
     </div>
-</div>
+</div>  -->
 
 
 

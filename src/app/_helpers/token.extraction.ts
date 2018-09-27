@@ -17,12 +17,12 @@ export class TokenExtraction {
     }
 
     getDecodedAccessToken(): any {
-        const accessToken = localStorage.getItem('access_token')
-        return jwt_decode(accessToken)
+
     }
 
     isTokenExpired(): boolean{
-        const deToken = this.getDecodedAccessToken()
+        const accessToken = localStorage.getItem('access_token')
+        const deToken = jwt_decode(accessToken)
 
         if (deToken.exp === undefined) {
             return true
@@ -37,7 +37,8 @@ export class TokenExtraction {
 
     getUserInfo(): any {
         if (!this.parsedToken){
-            return this.getDecodedAccessToken()
+            const accessToken = localStorage.getItem('access_token')
+            return jwt_decode(accessToken)
 
         }
         return this.parsedToken

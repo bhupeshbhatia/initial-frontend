@@ -18,6 +18,10 @@ export class RegisterEmpComponent implements OnInit {
   userRoles: string[]
   data: AuthResponse
 
+  selectedOption: number
+  roleStatus = ['Employee', 'Manager', 'Corporate'];
+  model: any = {}
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -29,14 +33,17 @@ export class RegisterEmpComponent implements OnInit {
   ngOnInit() {
     this.userRoles = ['employee', 'corporate', 'manager']
     this.registerForm = this.formBuilder.group({
-      firstname: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-      lastname: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-      username: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-      password: [null, [Validators.required, Validators.minLength(5)]]
+      firstname: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      lastname: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      username: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      password: ['', [Validators.required, Validators.minLength(5)]],
+      email: ['', [Validators.required]]
       // role: [null, [Validators.required]]
     })
     // this.role.controls['type'].setValue(this.default, {onlySelf: true})
   }
+
+
 
 
   get f() {
@@ -53,7 +60,7 @@ export class RegisterEmpComponent implements OnInit {
 
       resource = `{
         mutation{register(username:"${this.f.username.value}",password:"${this.f.password.value}",firstName:"${this.f.firstname.value}",
-        lastName:"${this.f.lastName.value}",email:"${this.f.email.value}",role:"${this.f.role.value}")
+        lastName:"${this.f.lastName.value}",email:"${this.f.email.value}")
         )
         {
           access_token,
@@ -67,7 +74,7 @@ export class RegisterEmpComponent implements OnInit {
 
 
       console.log(resource)
-      this.http.post("142.55.32.86:50281/api1", resource)
+      this.http.post("/api1", resource)
         .toPromise()
         .then(d => this.data)
         .then(data => {
@@ -83,6 +90,7 @@ export class RegisterEmpComponent implements OnInit {
   reset() {
     this.registerForm.reset()
     this.formSubmitAttempt = false
+    this.model.roleStatus = ''
   }
 
 }

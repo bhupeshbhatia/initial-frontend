@@ -7,6 +7,7 @@ import { first, timeInterval } from 'rxjs/operators'
 import { AuthenticationService } from '../../_services'
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { AuthResponse } from "../../_models/auth-response";
+import { controlNameBinding } from '@angular/forms/src/directives/reactive_directives/form_control_name';
 
 @Component({
   moduleId: module.id,
@@ -16,13 +17,13 @@ import { AuthResponse } from "../../_models/auth-response";
 })
 
 export class LoginComponent implements OnInit {
-  data: AuthResponse
   loginForm: FormGroup
   loading = false
   returnUrl: string
   error = ''
   formSubmitAttempt: boolean
   @ViewChild("response") response: Element
+  showError = false
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,7 +53,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  onSubmit() {
+  onSubmit(): void {
     this.formSubmitAttempt = true
     // this.submitted = true
 
@@ -74,21 +75,31 @@ export class LoginComponent implements OnInit {
 
       this.loading = true
       console.log(this.http)
-      this.http.post('142.55.32.86:50281/api1', resource)
+      this.http.post('http://10.80.31.37:8081/api', resource)
       .toPromise()
-      .then(d => this.data)
-      .then(data => {
+      // .then(d => this.data)
+      .then((data: any) => {
         console.log(data.data.login)
-        if (this.data.data.login.access_token == null) {
-          this.response.innerHTML = 'Invalid Credentials'
-        }
-        else {
-          localStorage.setItem("access_token", data.data.login.access_token)
-          localStorage.setItem("refresh_token", data.data.login.refresh_token)
+        if (data.data.login !== null) {
+          localStorage.setItem('access_token', data.data.login.access_token)
+          localStorage.setItem('refresh_token', data.data.login.refresh_token)
           this.router.navigate([this.returnUrl])
+          this.showError = false
           this.reset()
         }
+        // if (data.data.login.access_token == null) {
+        //   this.validateAllFormFields(this.loginForm); //{7}
+        // }
+        else {
+          this.showError = true
+        }
       })
+
+
+
+
+
+
         // .pipe(first())
         // .subscribe(
         //   data => {
@@ -105,7 +116,7 @@ export class LoginComponent implements OnInit {
     // }
   }
 
-  reset() {
+  reset():void {
     this.loginForm.reset()
     this.formSubmitAttempt = false
   }

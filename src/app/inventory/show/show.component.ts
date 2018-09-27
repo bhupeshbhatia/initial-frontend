@@ -64,7 +64,7 @@ export class ShowComponent implements OnInit {
     })
 }
 
-  getData() {
+  getData(): void {
     this.loadInventoryJsonService.getJSON()
       .subscribe(data => {
         console.log(data)
@@ -82,7 +82,7 @@ export class ShowComponent implements OnInit {
   //     })
   // }
 
-  resetData(){
+  resetData(): void{
     this.loadInventoryJsonService.getJSON()
       .subscribe(data => {
         console.log(data)
@@ -164,7 +164,10 @@ get f() { return this.form.controls; }
   masterToggle() {
     this.isAllSelected() ?
       this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
+      this.dataSource.data.forEach((row: any) => {
+        this.selection.select(row)
+      })
+
   }
 
   removeSelectedRows() {

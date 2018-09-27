@@ -23,10 +23,19 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (request.url.endsWith('/users/authenticate') && request.method === 'POST') {
                 if (request.body.username === testUser.username && request.body.password === testUser.password) {
                     // if login details are valid return 200 OK with a fake jwt token
-                    const body = {
-                        access_token: 'eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MzczMzU3ODksImlhdCI6MTUzNzMzNDg4OSwianRpIjoiMzQxMDc5ZTEtOTc0OC00NWJkLWJlMmYtZjdkYmY4ZDNiMDFjIiwicm9sZSI6Im1hbmFnZXIiLCJzdWIiOiI2MDEwNjA0Ni1lZDUxLTQ3MzktOWI3YS1lM2QzMDYyYjhmNDcifQ.y8tJn_XWdpn7d7OvCHPbMrRmDzBEYvwSJ-470WiQq9caUpruz0A6Wal3S4t-YfCYR_c5e6j29q365J-R2wC_RtqEbSRjGSrc7W3k5btG3hke5rJpkNt_vTCsbQYw3RLs3QC1Mr-6khMWGwpu-j0BLaR3fiyZSG8D9Y9c48n-U94zQgddcGQh5d567sgOUpQp5uSOBE7Z3HEcQpAZm72729UNPHPGYux3beFSNJKDl4xwJT6mr5a6W6YJc9bW4mkXozVGfOkILRZolxjGCQ40w-95AeovC09Eq4A7Wjy77bpnL-ErskyyQrF9605T84IYd0m-AdEYmCVXmkv5k03Jzw',
-                        refresh_token: 'refresh-token'
-                    }
+                    // const body = {
+                    //     access_token: 'eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MzczMzU3ODksImlhdCI6MTUzNzMzNDg4OSwianRpIjoiMzQxMDc5ZTEtOTc0OC00NWJkLWJlMmYtZjdkYmY4ZDNiMDFjIiwicm9sZSI6Im1hbmFnZXIiLCJzdWIiOiI2MDEwNjA0Ni1lZDUxLTQ3MzktOWI3YS1lM2QzMDYyYjhmNDcifQ.y8tJn_XWdpn7d7OvCHPbMrRmDzBEYvwSJ-470WiQq9caUpruz0A6Wal3S4t-YfCYR_c5e6j29q365J-R2wC_RtqEbSRjGSrc7W3k5btG3hke5rJpkNt_vTCsbQYw3RLs3QC1Mr-6khMWGwpu-j0BLaR3fiyZSG8D9Y9c48n-U94zQgddcGQh5d567sgOUpQp5uSOBE7Z3HEcQpAZm72729UNPHPGYux3beFSNJKDl4xwJT6mr5a6W6YJc9bW4mkXozVGfOkILRZolxjGCQ40w-95AeovC09Eq4A7Wjy77bpnL-ErskyyQrF9605T84IYd0m-AdEYmCVXmkv5k03Jzw',
+                    //     refresh_token: 'refresh-token'
+                    // }
+
+                   const body = `{
+                        login(username:"${request.body.username}",password:"${request.body.password}")
+                        {
+                          access_token: 'eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MzczMzU3ODksImlhdCI6MTUzNzMzNDg4OSwianRpIjoiMzQxMDc5ZTEtOTc0OC00NWJkLWJlMmYtZjdkYmY4ZDNiMDFjIiwicm9sZSI6Im1hbmFnZXIiLCJzdWIiOiI2MDEwNjA0Ni1lZDUxLTQ3MzktOWI3YS1lM2QzMDYyYjhmNDcifQ.y8tJn_XWdpn7d7OvCHPbMrRmDzBEYvwSJ-470WiQq9caUpruz0A6Wal3S4t-YfCYR_c5e6j29q365J-R2wC_RtqEbSRjGSrc7W3k5btG3hke5rJpkNt_vTCsbQYw3RLs3QC1Mr-6khMWGwpu-j0BLaR3fiyZSG8D9Y9c48n-U94zQgddcGQh5d567sgOUpQp5uSOBE7Z3HEcQpAZm72729UNPHPGYux3beFSNJKDl4xwJT6mr5a6W6YJc9bW4mkXozVGfOkILRZolxjGCQ40w-95AeovC09Eq4A7Wjy77bpnL-ErskyyQrF9605T84IYd0m-AdEYmCVXmkv5k03Jzw',
+                          refresh_token: 'eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MzczMzU3ODksImlhdCI6MTUzNzMzNDg4OSwianRpIjoiMzQxMDc5ZTEtOTc0OC00NWJkLWJlMmYtZjdkYmY4ZDNiMDFjIiwicm9sZSI6Im1hbmFnZXIiLCJzdWIiOiI2MDEwNjA0Ni1lZDUxLTQ3MzktOWI3YS1lM2QzMDYyYjhmNDcifQ.y8tJn_XWdpn7d7OvCHPbMrRmDzBEYvwSJ-470WiQq9caUpruz0A6Wal3S4t-YfCYR_c5e6j29q365J-R2wC_RtqEbSRjGSrc7W3k5btG3hke5rJpkNt_vTCsbQYw3RLs3QC1Mr-6khMWGwpu-j0BLaR3fiyZSG8D9Y9c48n-U94zQgddcGQh5d567sgOUpQp5uSOBE7Z3HEcQpAZm72729UNPHPGYux3beFSNJKDl4xwJT6mr5a6W6YJc9bW4mkXozVGfOkILRZolxjGCQ40w-95AeovC09Eq4A7Wjy77bpnL-ErskyyQrF9605T84IYd0m-AdEYmCVXmkv5k03Jzw'
+                        }
+                      }`
+
                     return of(new HttpResponse({ status: 200, body }))
                 } else {
                     // else return 400 bad request

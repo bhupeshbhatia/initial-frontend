@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
+import { AuthResponse } from "../_models/auth-response";
 
 
 // used to login and logout of the application, to login it posts the users
@@ -23,14 +24,37 @@ import * as jwt_decode from 'jwt-decode';
 })
 export class AuthenticationService {
 
+  data: AuthResponse
+
   global: any
   constructor(private http: HttpClient, global: TokenExtraction) {
     this.global = global
   }
 
-  login(loginInfo: string) {
-    console.log("-----------------")
-    console.log(loginInfo)
+  login(resource: string) {
+    console.log('-----------------')
+    console.log(resource)
+
+    console.log(this.http)
+    // this.http.post('localhost:8080/users/authenticate', resource)
+    //   .toPromise()
+    //   .then(d => this.data)
+    //   .then(data => {
+    //     console.log(data.data.login)
+    //     if (this.data.data.login.access_token == null) {
+    //       // this.response.innerHTML = 'Invalid Credentials'
+    //       console.log('invalid credentials')
+    //     }
+    //     else {
+    //       localStorage.setItem('access_token', data.data.login.access_token)
+    //       localStorage.setItem('refresh_token', data.data.login.refresh_token)
+    //       return data
+
+    //     }
+    //   })
+
+
+
     // return
     // this.http.post<any>()
     //   .pipe(map(token => {
