@@ -99,13 +99,6 @@ export class ShowComponent implements OnInit {
     );
   }
 
-  displayFieldCss(field: string) {
-    return {
-      'has-error': this.isFieldValid(field),
-      'has-feedback': this.isFieldValid(field)
-    };
-  }
-
   onSearch() {
     var query = this.query.nativeElement.value
     var field = this.field.nativeElement.value
@@ -124,15 +117,13 @@ export class ShowComponent implements OnInit {
       })
   }
 
-  onSubmit(inventory: NgForm): void {
+  onSubmit() {
     this.formSubmitAttempt = true;
     if (this.form.valid) {
-      var json = JSON.parse(inventory.value)
-      console.log(json)
-      this.postInventoryData.addInventoryWithPromise(json, '/update-product')
+      console.log(this.form.value)
+      this.loadInventoryJsonService.updateRow(this.form.value)
+      .subscribe(console.log())
       alert('Your Inventory has been updated.');
-
-      console.log('Add Button clicked: ' + json);
       // $('#myModal').modal('hide');
     }
   }

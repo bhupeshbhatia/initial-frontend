@@ -1,6 +1,6 @@
 import { UserService } from './../../_services/user.service'
 import { first } from 'rxjs/operators'
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
 import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router'
 import { AuthenticationService } from '../../_services'
@@ -48,6 +48,7 @@ export class AddComponent implements OnInit {
   error: string
   returnUrl: string
   loading = false
+  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -74,18 +75,18 @@ export class AddComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.form.controls }
+f() { return this.form.controls; }
 
 
   onSubmit() {
     this.formSubmitAttempt = true
-    if (this.form.valid) {
+     if (this.form.valid) {
       console.log('form submitted')
       console.log(this.form.value)
       // const resource = JSON.parse(this.form.value)
       // this.authenticationService.addInventory(resource)
 
-      this.reset()
+    //  this.reset()
     }
 
       // this.service.create(resource)
