@@ -7,10 +7,13 @@
         <div class="row mx-auto">
           <div class="col-sm-6">
             <select #field name="field" class="form-control">
-              <option value="item_id">Item id</option>
               <option value="name">Name</option>
+              <option value="origin">Origin</option>
               <option value="location">Location</option>
-              <option value="expiry">Expiry</option>
+              <option value="date_arrived">Arrival Date</option>
+              <option value="expiry_date">Expiry Date</option>
+              <option value="sale_price">Sale Price</option>
+              <option value="sold_weight">Sold Weight</option>
             </select>
           </div>
           <div class="col-sm-6">
@@ -45,16 +48,11 @@
               Select
             </th>
             <td mat-cell *matCellDef="let row">
-              <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+              <section class="example-section"></section>
+              <mat-checkbox (change)="$event ? selection.toggle(row) : null">
               </mat-checkbox>
-            </td>
-          </ng-container>
-
-          <!-- Position Column -->
-          <ng-container matColumnDef="item_id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Item No. </th>
-            <td mat-cell *matCellDef="let element"><a>{{ element.item_id }}</a>
-            </td>
+<section class="example-section">
+              </td>
           </ng-container>
 
           <!-- Name Column -->
@@ -65,6 +63,13 @@
           </ng-container>
 
           <!-- Weight Column -->
+          <ng-container matColumnDef="origin">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Origin </th>
+            <td mat-cell *matCellDef="let element"><a> {{ element.origin
+                }}</a> </td>
+          </ng-container>
+
+          <!-- Weight Column -->
           <ng-container matColumnDef="location">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
             <td mat-cell *matCellDef="let element"><a> {{ element.location
@@ -72,16 +77,28 @@
           </ng-container>
 
           <!-- Symbol Column -->
-          <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-            <td #status mat-cell *matCellDef="let element"><a>Expired</a>
+          <ng-container matColumnDef="date_arrived">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Arrival Date </th>
+            <td #status mat-cell *matCellDef="let element"><a>{{ element.date_arrived | date: 'dd/MM/yyyy' }}</a>
             </td>
           </ng-container>
 
           <!-- Symbol Column -->
-          <ng-container matColumnDef="expiry">
+          <ng-container matColumnDef="expiry_date">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Expiry Date </th>
-            <td mat-cell *matCellDef="let element"><a> {{ element.expiry_date }}</a> </td>
+            <td mat-cell *matCellDef="let element"><a> {{ element.expiry_date | date: 'dd/MM/yyyy' }}</a> </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="sale_price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sale Price </th>
+            <td mat-cell *matCellDef="let element"><a> {{ element.sale_price }}</a> </td>
+          </ng-container>
+
+          <!-- Symbol Column -->
+          <ng-container matColumnDef="total_weight">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
+            <td mat-cell *matCellDef="let element"><a> {{ element.total_weight }}</a> </td>
           </ng-container>
 
           <ng-container matColumnDef="modify">
@@ -113,14 +130,14 @@
       </div>
 
       <div class="modal-body">
-        <form novalidate [formGroup]="form" #updateInventory="ngForm" (ngSubmit)="onSubmit(updateInventory)">
+        <form [formGroup]="form" #updateInventory="ngForm" (ngSubmit)="onSubmit(updateInventory)">
           <br>
 
           <div class="form-group">
             <div class="row">
-              <label class="col-sm-2 col-md-3 control-label mx-auto"> Item Number </label>
+              <label class="col-sm-2 col-md-3 control-label mx-auto"> Item ID </label>
               <div class="col-sm-8 mx-auto">
-                  <input type="number" class="form-control" id="item_id" formControlName="item_id" required *ngIf="curField"
+                  <input type="string" class="form-control" id="item_id" formControlName="item_id" required *ngIf="curField"
                   [ngModel]="curField.item_id" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.item_id.errors }" disabled>
                 <div *ngIf="formSubmitAttempt && f.item_id.errors" class="invalid-feedback">
                   <div *ngIf="f.item_number.errors.required">Item number is required</div>
@@ -156,7 +173,7 @@
             <div class="row">
               <label class="col-sm-2 col-md-3 control-label mx-auto"> Date of Arrival </label>
               <div class="col-sm-8 mx-auto">
-                <input type="text" class="form-control" formControlName="date_arrived" id="date_arrived" required name="dp1"
+                <input #formDate type="date" class="form-control" formControlName="date_arrived" id="date_arrived" required name="dp1"
                   ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()" *ngIf="curField" [ngModel]="curField.date_arrived"
                   [ngClass]="{ 'is-invalid': formSubmitAttempt && f.date_arrived.errors }">
                 <div *ngIf="formSubmitAttempt && f.date_arrived.errors" class="invalid-feedback">
@@ -167,7 +184,7 @@
           </div>
           <div class="form-group">
             <div class="row">
-              <label class="col-sm-2 col-md-3 control-label mx-auto"> Total Weight </label>
+              <label class="col-sm-2 col-md-3 control-label mx-auto"> Weight </label>
               <div class="col-sm-8 mx-auto">
                 <input type="number" class="form-control" id="totalWeight" formControlName="total_weight" required
                   *ngIf="curField" [ngModel]="curField.total_weight" [ngClass]="{ 'is-invalid': formSubmitAttempt && f.total_weight.errors }">
@@ -191,9 +208,9 @@
           </div>
           <div class="form-group">
             <div class="row">
-              <label class="col-sm-2 col-md-3 control-label mx-auto"> Monitored By </label>
+              <label class="col-sm-2 col-md-3 control-label mx-auto"> Device ID </label>
               <div class="col-sm-8 mx-auto">
-                <input type="number" class="form-control" id="monitoredBy" formControlName="device_id" required *ngIf="curField"
+                <input type="text" class="form-control" id="monitoredBy" formControlName="device_id" required disabled *ngIf="curField"
                   [ngModel]="curField.device_id">
                 <div *ngIf="formSubmitAttempt && f.device_id.errors" class="invalid-feedback">
                   <div *ngIf="f.device_id.errors.required">Monitored By is required</div>
@@ -205,7 +222,7 @@
             <div class="row">
               <label class="col-sm-2 col-md-3 control-label mx-auto"> Location </label>
               <div class="col-sm-8 mx-auto">
-                <input type="number" class="form-control" id="location" formControlName="location" placeholder="Aisle No."
+                <input type="text" class="form-control" id="location" formControlName="location" placeholder="Aisle No."
                   required *ngIf="curField" [ngModel]="curField.location">
                 <div *ngIf="formSubmitAttempt && f.location.errors" class="invalid-feedback">
                   <div *ngIf="f.location.errors.required">Location is required</div>

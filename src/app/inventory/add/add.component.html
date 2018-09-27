@@ -13,8 +13,8 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 col-md-3 control-label required"> Item ID </label>
                                     <div class="col-sm-6">
-                                        <input type="number" id="item_id" class="form-control" formControlName="item_id"
-                                            ngModel [ngClass]="{ 'is-invalid': formSubmitAttempt && f.item_id.errors }" disabled>
+                                        <input type="text" id="item_id" class="form-control" formControlName="item_id"
+                                            ngModel [ngClass]="{ 'is-invalid': formSubmitAttempt && f.item_id.errors }" >
                                         <div *ngIf="formSubmitAttempt && f.item_id.errors" class="invalid-feedback">
                                             <div *ngIf="f.item_id.errors.required">Item number is required</div>
                                         </div>
@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label required"> Total Weight </label>
+                                    <label class="col-sm-2 control-label required"> Weight </label>
                                     <div class="col-sm-6">
                                         <input type="number" class="form-control" ngModel formControlName="total_weight"
                                             [ngClass]="{ 'is-invalid': formSubmitAttempt && f.weight.errors }">
@@ -92,9 +92,9 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button type="submit" id="addProduct" class="btn btn-info btn-fill col-sm-6 col-md-6"
+                                    <button type="submit" id="addProduct" class="btn btn-info btn-fill col-sm-6 col-md-3"
                                         (click)="onSubmit(addInventory)">Add Product</button>
-                                    <button type="submit" id="cancelProduct" class="btn btn-danger btn-fill col-sm-6 col-md-6"
+                                    <button type="submit" id="cancelProduct" class="btn btn-danger btn-fill col-sm-6 col-md-3"
                                         (click)="reset()">Reset</button>
                                 </div>
                                 <!-- <pre>{{form.value | json}}</pre> -->

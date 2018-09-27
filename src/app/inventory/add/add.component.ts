@@ -81,9 +81,8 @@ export class AddComponent implements OnInit {
     this.formSubmitAttempt = true
     if (this.form.valid) {
       console.log('form submitted')
-      const resource = JSON.parse(this.form.value)
-      this.postInventoryData.addInventoryWithPromise(resource,'/add-product')
-
+      console.log(this.form.value)
+      // const resource = JSON.parse(this.form.value)
       // this.authenticationService.addInventory(resource)
 
       this.reset()
@@ -96,7 +95,7 @@ export class AddComponent implements OnInit {
 
   reset() {
     this.form.reset()
-    this.formSubmitAttempt = false
+    //this.formSubmitAttempt = false
   }
 
   showMessage(type: string) {

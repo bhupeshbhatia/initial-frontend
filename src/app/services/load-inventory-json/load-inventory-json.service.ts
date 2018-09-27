@@ -42,4 +42,34 @@ export class LoadInventoryJsonService {
     ]
   }
 
+  public getSearchJSON(query, field): any {
+
+    var search = {
+          search_key: field,
+          search_val: query
+    }
+
+    console.log("}}}}}}}}}}}}}}}}}}}}")
+    console.log(search)
+    return this.http.post(environment.apiUrl + '/search-table', search, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }
+
+  public deleteRow(item_id): any {
+
+    var item = [{
+        item_id: item_id
+    }]
+    console.log("}}}}}}}}}}}}}}}}}}}}")
+    console.log(item)
+    return this.http.post(environment.apiUrl + '/delete-product', item, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  }
+
 }
