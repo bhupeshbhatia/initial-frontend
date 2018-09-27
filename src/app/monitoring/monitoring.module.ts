@@ -29,7 +29,7 @@ import {
     MatToolbarModule
 
  } from "@angular/material";
-import { CarbonComponent } from './carbon/carbon/carbon.component';
+import { CarbonComponent } from './carbon/carbon.component';
 import { EthyleneComponent } from './ethylene/ethylene.component';
 import { SensorComponent } from './sensor/sensor.component';
 import { TemperatureComponent } from './temperature/temperature.component';

@@ -10,7 +10,7 @@ import { InventoryRoutes } from './inventory.routing'
 import { AddComponent } from './add/add.component'
 import { ShowComponent } from './show/show.component'
 import { Inventory } from "../_models/inventory"
-import { InvDashComponent } from './inv-dash/inv-dash.component'
+// import { InvDashComponent } from './inv-dash/inv-dash.component'
 // import { AlertService } from '../_services'
 // import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component'
 
@@ -62,7 +62,7 @@ import {
     declarations: [
         AddComponent,
         ShowComponent,
-        InvDashComponent
+        // InvDashComponent
         // FieldErrorDisplayComponent,
     ],
     providers: [

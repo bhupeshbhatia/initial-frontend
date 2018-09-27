@@ -10,6 +10,9 @@ import { PostDeleteDataService } from "../../services/post-delete-data/post-dele
 import { Inventory } from "../../_models/inventory";
 import { Query } from "../../_models/query";
 import { SelectionModel } from '@angular/cdk/collections';
+import { HttpClient, HttpHeaderResponse } from '@angular/common/http';
+import { environment } from '../../../config'
+
 
 var Food: Inventory[] = []
 const initialSelection = [];
@@ -29,16 +32,18 @@ export class ShowComponent implements OnInit {
   form: FormGroup;
   queryForm: FormGroup;
   private formSubmitAttempt: boolean;
-  displayedColumns: string[] = ['item_id', 'select','name', 'location', 'status', 'expiry', 'modify']
+  displayedColumns: string[] = ['select','name', 'origin' ,'location', 'date_arrived', 'expiry_date', 'sale_price', 'total_weight', 'modify']
   dataSource = new MatTableDataSource()
   today: number = Date.now()
   @ViewChild(MatPaginator) paginator: MatPaginator
   @ViewChild(MatSort) sort: MatSort
   @ViewChild("query") query: ElementRef
   @ViewChild("field") field: ElementRef
+  @ViewChild("formDate") formDate : ElementRef
+
   selection = new SelectionModel<Inventory>(true, []);
 
-  constructor(private formBuilder: FormBuilder, private _http: Http, private loadInventoryJsonService: LoadInventoryJsonService) {
+  constructor(private formBuilder: FormBuilder, private http: Http, private loadInventoryJsonService: LoadInventoryJsonService) {
   }
 
   ngOnInit(): void{
@@ -114,14 +119,18 @@ export class ShowComponent implements OnInit {
     var query = this.query.nativeElement.value
     var field = this.field.nativeElement.value
 
-    var json =
-      {
-      'search_key': field,
-      'search_val': query
-      }
+    this.getSearchData(query, field)
 
-    console.log(json)
     //post
+  }
+
+  getSearchData(query, field) {
+    this.loadInventoryJsonService.getSearchJSON(query, field)
+      .subscribe(data => {
+        console.log(data)
+        this.dataSource.data = data
+        Food = data
+      })
   }
 
   onSubmit(inventory: NgForm): void {
@@ -147,8 +156,14 @@ get f() { return this.form.controls; }
   curField: any
 
  populateFields(e): Inventory {
+   console.log(e)
    if (e != null) {
-    this.curField = Food[e- 1]
+    this.curField = Food.find(function(){
+      return e
+    })
+    console.log(this.curField)
+    console.log(this.curField.date_arrived)
+    this.formDate.nativeElement.value = this.curField.date_arrived
      console.log()
    }
    return e
@@ -164,19 +179,20 @@ get f() { return this.form.controls; }
   masterToggle() {
     this.isAllSelected() ?
       this.selection.clear() :
-      this.dataSource.data.forEach((row: any) => {
-        this.selection.select(row)
-      })
-
+      this.dataSource.data.forEach((row: any) => this.selection.select(row));
   }
 
   removeSelectedRows() {
     this.selection.selected.forEach(item => {
       let index: number = Food.findIndex(d => d === item);
-      console.log(Food.findIndex(d => d === item));
+      console.log(index)
       console.log(item.item_id);
-      // this.postDeleteData.addDeleteWithPromise(item.item_id, "")
-      // this.dataSource.data.splice(index, 1);
+
+      console.log("++++++++++++++++++==")
+      this.loadInventoryJsonService.deleteRow(item.item_id)
+      .subscribe(console.log)
+
+      this.dataSource.data.splice(index, 1);
 
       this.dataSource = new MatTableDataSource<Inventory>(Food);
     });

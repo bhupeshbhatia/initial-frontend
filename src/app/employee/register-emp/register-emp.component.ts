@@ -19,7 +19,7 @@ export class RegisterEmpComponent implements OnInit {
   data: AuthResponse
 
   selectedOption: number
-  roleStatus = ['Employee', 'Manager', 'Corporate'];
+  roleStatus = ['Employee', 'Manager', 'Corporate']
   model: any = {}
 
   constructor(
@@ -37,20 +37,21 @@ export class RegisterEmpComponent implements OnInit {
       lastname: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
       username: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
       password: ['', [Validators.required, Validators.minLength(5)]],
-      email: ['', [Validators.required]]
-      // role: [null, [Validators.required]]
+      email: ['', [Validators.required]],
+      roleSelect: ['', [Validators.required]]
     })
     // this.role.controls['type'].setValue(this.default, {onlySelf: true})
   }
 
 
 
-
-  get f() {
+// That "f" comes from here? Ye
+// show ne problems
+  f(): any {
     return this.registerForm.controls
   }
 
-  get reg() { return this.registerForm.controls }
+  // get reg() { return this.registerForm.controls }
 
   onSubmit() {
     this.formSubmitAttempt = true
@@ -59,8 +60,9 @@ export class RegisterEmpComponent implements OnInit {
       let resource = JSON.stringify(this.registerForm.value)
 
       resource = `{
-        mutation{register(username:"${this.f.username.value}",password:"${this.f.password.value}",firstName:"${this.f.firstname.value}",
-        lastName:"${this.f.lastName.value}",email:"${this.f.email.value}")
+        mutation{register(username:"${this.f().username.value}",
+        password:"${this.f().password.value}",firstName:"${this.f().firstname.value}",
+        lastName:"${this.f().lastName.value}",email:"${this.f().email.value}")
         )
         {
           access_token,
@@ -69,17 +71,18 @@ export class RegisterEmpComponent implements OnInit {
       }`
 
 
+      console.log(this.model.roleStatus)
 
 
 
 
       console.log(resource)
-      this.http.post("/api1", resource)
-        .toPromise()
-        .then(d => this.data)
-        .then(data => {
-          console.log(data.data.register)
-        })
+      // this.http.post("/api1", resource)
+      //   .toPromise()
+      //   .then(d => this.data)
+      //   .then(data => {
+      //     console.log(data.data.register)
+      //   })
     }
 
       // this.service.create(resource)
