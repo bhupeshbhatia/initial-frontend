@@ -1,0 +1,22 @@
+[
+    {
+        "prod_weight": 500,
+        "prod_name": "apple"
+    },
+    {
+        "prod_weight": 400,
+        "prod_name": "pear"
+    },
+    {
+        "prod_weight": 350,
+        "prod_name": "apple"
+    },
+    {
+        "prod_weight": 200,
+        "prod_name": "apple"
+    },
+    {
+        "prod_weight": 100,
+        "prod_name": "apple"
+    }
+]

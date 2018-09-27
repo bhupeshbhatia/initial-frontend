@@ -6,7 +6,7 @@ import { EthyleneComponent } from "./ethylene/ethylene.component";
 import { SensorComponent } from "./sensor/sensor.component";
 import { TemperatureComponent } from "./temperature/temperature.component";
 
-export const InventoryRoutes: Routes = [{
+export const MonitoringRoutes: Routes = [{
     path: '',
     children: [{
         path: 'carbon',
@@ -21,14 +21,6 @@ export const InventoryRoutes: Routes = [{
             canActivate: [AuthGuard]
         }]
 }, {
-    path: '',
-        children: [{
-            path: 'sensor',
-            component: SensorComponent,
-            canActivate: [AuthGuard]
-        }]
-},
-{
     path: '',
         children: [{
             path: 'sensor',

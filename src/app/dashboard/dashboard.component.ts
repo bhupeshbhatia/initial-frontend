@@ -16,6 +16,14 @@ export class DashboardComponent implements OnInit {
   constructor(private http: HttpClient) {
     // this.checkData()
   }
+
+  ngOnInit(): void {
+    // this.loadTotalGraph()
+    // this.loadSoldGraph()
+    // this.loadDistGraph()
+    this.loadDonationGraph()
+  }
+
   // constructor(
   //   private loadNumProdData: Load NumprodDataService,
   //   private loadProdHourData: LoadProdHourService,
@@ -104,37 +112,13 @@ export class DashboardComponent implements OnInit {
 
   getDistJSON(): any {
 
-    var sendDates = []
-
-    var sendDate = new SendDate();
-    sendDate.end_date = this.getDays()[0];
-    sendDate.start_date = this.getDays(1)[1];
-
-    var sendDate2 = new SendDate();
-    sendDate2.end_date = this.getDays()[0];
-    sendDate2.start_date = this.getDays(2)[1];
-
-    var sendDate3 = new SendDate();
-    sendDate3.end_date = this.getDays()[0];
-    sendDate3.start_date = this.getDays(3)[1];
-
-    var sendDate4 = new SendDate();
-    sendDate4.end_date = this.getDays()[0];
-    sendDate4.start_date = this.getDays(4)[1];
-
-    sendDates = [sendDate, sendDate2, sendDate3, sendDate4]
 
     console.log("}}}}}}}}}}}}}}}}}}}}")
-    console.log(sendDate)
-    return this.http.post(environment.apiUrl + '/dist-weight', sendDates, {
+    return this.http.get(environment.apiUrl + '/dist-weight', {
       headers: {
         "Content-Type": "application/json"
       }
     });
-  }
-
-  ngOnInit(): void {
-    this.loadTotalGraph()
   }
 
   changeAxis(dateArray: JSON): JSON {
@@ -239,7 +223,7 @@ export class DashboardComponent implements OnInit {
             label: 'Average Products',
             data: [],
             backgroundColor: 'rgba(255, 99, 132, 1)',
-            fill: "true"
+            fill: false
           }
         ]
       },
@@ -283,13 +267,13 @@ export class DashboardComponent implements OnInit {
         const prods = dataArr[k]
         const date = new Date(prods.dates).toDateString()
         this.soldChart.data.labels.push(date)
-        metrics[0].push(prods.total_weight)
+        metrics[0].push(prods.sold_weight)
       })
 
       this.soldChart.data.datasets.forEach((dataset, index) =>
         dataset.data = dataset.data.concat(metrics[index])
       );
-      this.totalChart.update()
+      this.soldChart.update()
 
       // Moving Graph
       setInterval(() => {
@@ -311,7 +295,7 @@ export class DashboardComponent implements OnInit {
           {
             label: 'Fruit',
             data: [],
-            backgroundColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: ['#001f3f', '#0074D9', '#7FDBFF', '#39CCCC', '#FFCC00', '##FFAC00', '#FF0000', '#FF4136', '#FF851B'],
             fill: "true"
           }
         ]
@@ -354,9 +338,9 @@ export class DashboardComponent implements OnInit {
       // total_weight: 195, sold_weight: 58, waste_weight: 49
       Object.keys(dataArr).forEach(k => {
         const prods = dataArr[k]
-        const date = new Date(prods.dates).toDateString()
-        this.distChart.data.labels.push(date)
-        metrics[0].push(prods.total_weight)
+        // const date = new Date(prods.dates).toDateString()
+        this.distChart.data.labels.push(prods.prod_name)
+        metrics[0].push(prods.prod_weight)
       })
 
       this.distChart.data.datasets.forEach((dataset, index) =>
@@ -428,7 +412,7 @@ export class DashboardComponent implements OnInit {
         const donations = dataArr[k]
         const date = new Date(donations.dates).toDateString()
         this.donationChart.data.labels.push(date)
-        metrics[0].push(donations.total_weight)
+        metrics[0].push(donations.donate_weight)
       })
 
       this.donationChart.data.datasets.forEach((dataset, index) =>

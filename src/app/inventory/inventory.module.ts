@@ -4,9 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridModule } from 'ag-grid-angular';
-
 import { InventoryRoutes } from './inventory.routing'
-
 import { AddComponent } from './add/add.component'
 import { ShowComponent } from './show/show.component'
 import { Inventory } from "../_models/inventory"

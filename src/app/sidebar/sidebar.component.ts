@@ -39,10 +39,10 @@ export const ROUTES: RouteInfo[] = [{
         type: 'sub',
         icontype: 'nc-icon nc-tv-2',
         children: [
-            {path: 'ethylene', title: 'Ethylene', ab: 'ET'},
-            {path: 'carbon', title: 'Carbon Dioxide', ab: 'CO'},
-            {path: 'saved', title: 'Amount Saved', ab: 'AS'},
-            {path: 'waste', title: 'Waste', ab: 'WA'}
+            {path: 'carbon', title: 'Carbon Dioxide', ab: 'ET'},
+            {path: 'ethylene', title: 'Ethylene', ab: 'CO'},
+            {path: 'sensor', title: 'Sensors', ab: 'AS'},
+            {path: 'temperature', title: 'Temperature', ab: 'WA'}
         ]
     }, {
         path: '/history',
