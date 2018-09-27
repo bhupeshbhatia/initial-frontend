@@ -46,6 +46,12 @@ export class DashboardComponent implements OnInit {
 
     var sendDates = []
 
+    // for (let i = 0; i < days; i++) {
+    //   var sendDate = new SendDate();
+    //   sendDate.end_date = this.getDays()[0];
+    //   sendDate.start_date = this.getDays(1)[1];
+    // }
+
     var sendDate = new SendDate();
     sendDate.end_date = this.getDays()[0];
     sendDate.start_date = this.getDays(1)[1];
@@ -74,27 +80,38 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+
+  }
+
+  changeAxis(dateArray: JSON): JSON {
+    return dateArray
+  }
+
+
+  loadTotalGraph(){
     this.totalChart = new Chart("totalChart", {
       type: 'bar',
       data: {
-          labels: [],
-          datasets: [
-            {
-              label: 'Total Weight',
-              data: [],
-              backgroundColor: 'rgba(255, 99, 132, 1)',
-            },
-            {
-              label: 'Sold Weight',
-              data: [],
-              backgroundColor: 'rgba(25, 99, 132, 1)',
-            },
-            {
-              label: 'Waste Weight',
-              data: [],
-              backgroundColor: 'rgba(125, 30, 255, 1)',
-            }
-          ]
+        labels: [],
+        datasets: [
+          {
+            label: 'Total Weight',
+            data: [],
+            backgroundColor: 'rgba(255, 99, 132, 1)',
+          },
+          {
+            label: 'Sold Weight',
+            data: [],
+            backgroundColor: 'rgba(25, 99, 132, 1)',
+          },
+          {
+            label: 'Waste Weight',
+            data: [],
+            backgroundColor: 'rgba(125, 30, 255, 1)',
+          }
+        ]
       },
       options: {
         responsive: true,
@@ -119,12 +136,12 @@ export class DashboardComponent implements OnInit {
               labelString: 'Weight'
             },
             ticks: {
-              beginAtZero:true
+              beginAtZero: true
             }
           }]
         }
       }
-  });
+    });
 
     this.getJSON(3).subscribe(dataArr => {
       console.log(dataArr)
@@ -148,116 +165,101 @@ export class DashboardComponent implements OnInit {
       );
       this.totalChart.update()
 
-        // Moving Graph
-        setInterval(() => {
-          this.totalChart.data.datasets.forEach((dataset, index) => {
-            const metric = dataset.data.shift()
-            dataset.data.push(metric + 1)
-          });
-          this.totalChart.update()
+      // Moving Graph
+      setInterval(() => {
+        this.totalChart.data.datasets.forEach((dataset, index) => {
+          const metric = dataset.data.shift()
+          dataset.data.push(metric + 1)
+        });
+        this.totalChart.update()
       }, 5000)
     })
-
-
   }
 
-  changeAxis(dateArray: JSON): JSON {
-    return dateArray
-  }
+  loadSoldGraph(){
+    this.totalChart = new Chart("totalChart", {
+      type: 'bar',
+      data: {
+        labels: [],
+        datasets: [
+          {
+            label: 'Total Weight',
+            data: [],
+            backgroundColor: 'rgba(255, 99, 132, 1)',
+          },
+          {
+            label: 'Sold Weight',
+            data: [],
+            backgroundColor: 'rgba(25, 99, 132, 1)',
+          },
+          {
+            label: 'Waste Weight',
+            data: [],
+            backgroundColor: 'rgba(125, 30, 255, 1)',
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        hover: {
+          mode: 'dataset'
+        },
+        legend: {
+          display: true
+        },
+        scales: {
+          xAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Date'
+            }
+          }],
+          yAxes: [{
+            display: true,
+            scaleLabel: {
+              display: true,
+              labelString: 'Weight'
+            },
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
 
-  loadChart() {
+    this.getJSON(3).subscribe(dataArr => {
+      console.log(dataArr)
+      const metrics: any = [
+        [],
+        [],
+        [],
+      ]
+      // total_weight: 195, sold_weight: 58, waste_weight: 49
+      Object.keys(dataArr).forEach(k => {
+        const weights = dataArr[k]
+        const date = new Date(weights.dates).toDateString()
+        this.totalChart.data.labels.push(date)
+        metrics[0].push(weights.total_weight)
+        metrics[1].push(weights.sold_weight)
+        metrics[2].push(weights.waste_weight)
+      })
 
-    // this.soldChart = c3.generate(
-    //   {
-    //     bindto: '#soldChart',
-    //     data: {
-    //       columns: [
-    //       ],
-    //       type: 'line',
-    //     },
-    //     bar: {
-    //       width: {
-    //         ratio: 0.5
-    //       }
-    //     },
-    //     axis: {
-    //       y: {
-    //         label: { // ADD
-    //           text: '# of products',
-    //           position: 'outer-middle'
-    //         }
-    //       },
-    //       x: {
-    //         label: { // ADD
-    //           text: 'Date',
-    //           position: 'outer-middle'
-    //         }
-    //       },
-    //     }
-    //   }
-    // );
+      this.totalChart.data.datasets.forEach((dataset, index) =>
+        dataset.data = dataset.data.concat(metrics[index])
+      );
+      this.totalChart.update()
 
-    // this.distChart = c3.generate(
-    //   {
-    //     bindto: '#distChart',
-    //     data: {
-    //       columns: [
-    //       ],
-    //       type: 'pie',
-    //     },
-    //     bar: {
-    //       width: {
-    //         ratio: 0.5
-    //       }
-    //     },
-    //     axis: {
-    //       y: {
-    //         label: { // ADD
-    //           text: '# of products',
-    //           position: 'outer-middle'
-    //         }
-    //       },
-    //       x: {
-    //         label: { // ADD
-    //           text: 'Date',
-    //           position: 'outer-middle'
-    //         }
-    //       },
-    //     }
-    //   }
-    // );
-
-
-
-    // this.donationChart = c3.generate(
-    //   {
-    //     bindto: '#donationChart',
-    //     data: {
-    //       columns: [
-    //       ],
-    //       type: 'bar',
-    //     },
-    //     bar: {
-    //       width: {
-    //         ratio: 0.5
-    //       }
-    //     },
-    //     axis: {
-    //       y: {
-    //         label: { // ADD
-    //           text: '# of products',
-    //           position: 'outer-middle'
-    //         }
-    //       },
-    //       x: {
-    //         label: { // ADD
-    //           text: 'Date',
-    //           position: 'outer-middle'
-    //         }
-    //       },
-    //     }
-    //   }
-    // );
+      // Moving Graph
+      setInterval(() => {
+        this.totalChart.data.datasets.forEach((dataset, index) => {
+          const metric = dataset.data.shift()
+          dataset.data.push(metric + 1)
+        });
+        this.totalChart.update()
+      }, 5000)
+    })
   }
 
 }
