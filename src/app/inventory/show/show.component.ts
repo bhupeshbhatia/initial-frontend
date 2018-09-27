@@ -78,16 +78,7 @@ export class ShowComponent implements OnInit {
       })
   }
 
-  // getSearchData(){
-  //   this.loadInventoryJsonService.getSearchJSON()
-  //     .subscribe(data => {
-  //       console.log(data)
-  //       this.dataSource.data = data
-  //       Food = data
-  //     })
-  // }
-
-  resetData(): void{
+  resetData(){
     this.loadInventoryJsonService.getJSON()
       .subscribe(data => {
         console.log(data)
@@ -108,13 +99,6 @@ export class ShowComponent implements OnInit {
     );
   }
 
-  displayFieldCss(field: string) {
-    return {
-      'has-error': this.isFieldValid(field),
-      'has-feedback': this.isFieldValid(field)
-    };
-  }
-
   onSearch() {
     var query = this.query.nativeElement.value
     var field = this.field.nativeElement.value
@@ -133,17 +117,27 @@ export class ShowComponent implements OnInit {
       })
   }
 
-  onSubmit(inventory: NgForm): void {
-    this.formSubmitAttempt = true;
-    if (this.form.valid) {
-      var json = JSON.parse(inventory.value)
-      console.log(json)
-      this.postInventoryData.addInventoryWithPromise(json, '/update-product')
-      alert('Your Inventory has been updated.');
-
-      console.log('Add Button clicked: ' + json);
+  onSubmit() {
+    const month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+    this.formSubmitAttempt = true
+    const origDate = this.form.value.date_arrived
+    this.form.value.date_arrived = Math.floor(Date.parse(`${origDate.year}/${month[origDate.month]}/${origDate.day}`) / 1000)
+      this.loadInventoryJsonService.updateRow(this.form.value)
+      // alert('Your Inventory has been updated.');
       // $('#myModal').modal('hide');
-    }
+
   }
 
   reset() {

@@ -23,7 +23,7 @@ export class LoadInventoryJsonService {
 
 
     var sendDate = new SendDate();
-    sendDate.end_date = this.getDays()[0];
+    sendDate.end_date = this.getDays(2)[0];
     console.log("}}}}}}}}}}}}}}}}}}}}")
     console.log(sendDate)
     return this.http.post(environment.apiUrl + '/load-table', sendDate, {
@@ -35,7 +35,7 @@ export class LoadInventoryJsonService {
 
   public getDays(days?: number): Array<any> {
     var dates = []
-    var end_date = Math.round(new Date().getTime() / 1000)
+    var end_date = Math.round(new Date().getTime() / 1000) + (86400 * days)
     var start_date = Math.round(new Date().getTime() / 1000) - (86400 * days)
     return dates = [
       end_date, start_date
@@ -70,6 +70,38 @@ export class LoadInventoryJsonService {
         "Content-Type": "application/json"
       }
     });
+  }
+
+  public updateRow(obj: Object): any {
+
+    console.log("}}}}}}}}}}}}}}}}}}}}")
+    console.log(obj)
+    // return this.http.post(environment.apiUrl + '/update-product', obj, {
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   }
+    // });
+    this.http.post(environment.apiUrl + '/update-product', obj)
+      .toPromise()
+      .then((data: any) => {
+      })
+
+  }
+
+
+  public addProd(obj: Object): any {
+
+    console.log("}}}}}}}}}}}}}}}}}}}}")
+    console.log(obj)
+    // return this.http.post(environment.apiUrl + '/add-product', obj, {
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   }
+    // });
+    this.http.post(environment.apiUrl+'/add-product', obj)
+    .toPromise()
+    .then((data: any) => {
+    })
   }
 
 }
