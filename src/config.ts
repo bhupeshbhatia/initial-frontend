@@ -1,4 +1,4 @@
 export const environment = {
-    apiUrl: 'http://10.80.5.182:8080',
+    apiUrl: 'http://142.55.32.86:50280/api2',
     debugMode: false
 }

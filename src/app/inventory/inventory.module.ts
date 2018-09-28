@@ -8,7 +8,7 @@ import { AgGridModule } from 'ag-grid-angular'
 import { InventoryRoutes } from './inventory.routing'
 
 import { AddComponent } from './add/add.component'
-import { ShowComponent, DialogDataDialog } from './show/show.component'
+import { ShowComponent } from './show/show.component'
 import { Inventory } from "../_models/inventory"
 // import { InvDashComponent } from './inv-dash/inv-dash.component'
 // import { AlertService } from '../_services'
@@ -33,7 +33,8 @@ import {
     MatTabsModule,
     MatToolbarModule
 
- } from "@angular/material"
+ } from "@angular/material";
+import { DialogDataDialog } from './dialog-data/dialog-data.component'
 @NgModule({
     imports: [
         AgGridModule.withComponents([]),
@@ -62,6 +63,7 @@ import {
     declarations: [
         AddComponent,
         ShowComponent,
+        DialogDataDialog,
         DialogDataDialog
         // InvDashComponent
         // FieldErrorDisplayComponent,
