@@ -38,7 +38,7 @@ import { OverviewComponent } from './overview/overview.component';
     imports: [
         AgGridModule.withComponents([]),
         CommonModule,
-        RouterModule.forChild(InventoryRoutes),
+        RouterModule.forChild(MonitoringRoutes),
         FormsModule,
         ReactiveFormsModule,
         NgbModule,

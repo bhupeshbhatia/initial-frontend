@@ -1,16 +1,16 @@
-import { HttpModule } from '@angular/http';
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core'
-import { Router, ActivatedRoute } from '@angular/router'
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
+import { HttpModule } from '@angular/http'
+import { Component, OnInit, ViewChild } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { first, timeInterval } from 'rxjs/operators'
 
 import { AuthenticationService } from '../../_services'
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { AuthResponse } from "../../_models/auth-response";
-import { controlNameBinding } from '@angular/forms/src/directives/reactive_directives/form_control_name';
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+// import { AuthResponse } from "../../_models/auth-response"
+import { controlNameBinding } from '@angular/forms/src/directives/reactive_directives/form_control_name'
 
 @Component({
-  
+
   selector: 'login-cmp',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -35,10 +35,10 @@ export class LoginComponent implements OnInit {
     this.http = http
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: [null, [Validators.required, Validators.minLength(4)]],
-      password: [null, [Validators.required, Validators.minLength(5)]]
+      username: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(5)]]
     })
 
     // reset login status
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams[''] || '/'
   }
 
-  get f() {
+  f() {
     return this.loginForm.controls
   }
 
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
 
       console.log(resource)
       resource = `{
-        login(username:"${this.f.username.value}",password:"${this.f.password.value}")
+        login(username:"${this.loginForm.controls.username.value}",password:"${this.loginForm.controls.value}")
         {
           access_token,
           refresh_token
@@ -88,35 +88,16 @@ export class LoginComponent implements OnInit {
           this.reset()
         }
         // if (data.data.login.access_token == null) {
-        //   this.validateAllFormFields(this.loginForm); //{7}
+        //   this.validateAllFormFields(this.loginForm) //{7}
         // }
         else {
           this.showError = true
         }
       })
-
-
-
-
-
-
-        // .pipe(first())
-        // .subscribe(
-        //   data => {
-        //   },
-        //   error => {
-        //     // this.alertService.error(error)
-        //     this.loading = false
-        //   })
     }
-
-
-    // this.service.create(resource)
-    //   .subscribe(response => console.log(response))
-    // }
   }
 
-  reset():void {
+  reset(): void {
     this.loginForm.reset()
     this.formSubmitAttempt = false
   }

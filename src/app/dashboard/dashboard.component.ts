@@ -1,11 +1,11 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { LoadNumprodDataService } from "../services/load-numprod-data/load-numprod-data.service";
-import { HttpClient } from '@angular/common/http';
-import { LoadProdHourService } from "../services/load-prod-hour/load-prod-hour.service";
-import { LoadWeightDistDataService } from "../services/load-weight-dist-data/load-weight-dist-data.service";
+import { ElementRef, Component, OnInit, ViewChild } from '@angular/core'
+import { LoadNumprodDataService } from "../services/load-numprod-data/load-numprod-data.service"
+import { HttpClient } from '@angular/common/http'
+import { LoadProdHourService } from "../services/load-prod-hour/load-prod-hour.service"
+import { LoadWeightDistDataService } from "../services/load-weight-dist-data/load-weight-dist-data.service"
 import * as environment from '../../config'
 import { SendDate } from '../_models'
-import Chart from 'chart.js';
+import Chart from 'chart.js'
 
 @Component({
   selector: 'app-dashboard',
@@ -13,9 +13,19 @@ import Chart from 'chart.js';
 })
 
 export class DashboardComponent implements OnInit {
-  constructor(private http: HttpClient) {
-    // this.checkData()
-  }
+
+
+  totalChart: any
+  soldChart: any
+  distChart: any
+  donationChart: any
+  date: any
+
+  @ViewChild('arrival') arrival: ElementRef
+  @ViewChild('total') total: ElementRef
+  @ViewChild('average') average: ElementRef
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
      this.loadTotalGraph()
@@ -24,26 +34,11 @@ export class DashboardComponent implements OnInit {
      this.loadDonationGraph()
   }
 
-  // constructor(
-  //   private loadNumProdData: Load NumprodDataService,
-  //   private loadProdHourData: LoadProdHourService,
-  //   private loadWeightDistData: LoadWeightDistDataService
-  // ) {}
-
-  totalChart: any
-  soldChart: any
-  distChart: any
-  donationChart: any
-  // this.loadNumProd.sendDate()
-  date: any
-  @ViewChild("arrival") arrival: ElementRef
-  @ViewChild("total") total: ElementRef
-  @ViewChild("average") average: ElementRef
 
   getDays(days?:number): Array<any>{
-    var dates = []
-    var end_date = Math.round(new Date().getTime() / 1000) + (86400 * days)
-    var start_date = Math.round(new Date().getTime() / 1000) - (86400 * days)
+    let dates = []
+    const end_date = Math.round((new Date().getTime() / 1000) + (86400 * days))
+    const start_date = Math.round(new Date().getTime() / 1000) - (86400 * days)
     return dates = [
       end_date, start_date
     ]
@@ -52,52 +47,51 @@ export class DashboardComponent implements OnInit {
   getJSON(): any {
     var sendDates = []
 
-    var sendDate = new SendDate();
-    sendDate.end_date = this.getDays(1)[0];
-    sendDate.start_date = this.getDays(1)[1];
+    const sendDate = new SendDate()
+    sendDate.end_date = this.getDays(1)[0]
+    sendDate.start_date = this.getDays(1)[1]
 
-    var sendDate2 = new SendDate();
-    sendDate2.end_date = this.getDays(2)[0];
-    sendDate2.start_date = this.getDays(2)[1];
+    const sendDate2 = new SendDate()
+    sendDate2.end_date = this.getDays(2)[0]
+    sendDate2.start_date = this.getDays(2)[1]
 
-    var sendDate3 = new SendDate();
-    sendDate3.end_date = this.getDays(3)[0];
-    sendDate3.start_date = this.getDays(3)[1];
+    const sendDate3 = new SendDate()
+    sendDate3.end_date = this.getDays(3)[0]
+    sendDate3.start_date = this.getDays(3)[1]
 
-    var sendDate4 = new SendDate();
-    sendDate4.end_date = this.getDays(4)[0];
-    sendDate4.start_date = this.getDays(4)[1];
+    const sendDate4 = new SendDate()
+    sendDate4.end_date = this.getDays(4)[0]
+    sendDate4.start_date = this.getDays(4)[1]
 
     sendDates = [sendDate, sendDate2, sendDate3, sendDate4]
 
-    console.log("}}}}}}}}}}}}}}}}}}}}")
-    console.log(sendDates)
+
     return this.http.post(environment.apiUrl + '/twsalewaste', sendDates, {
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       }
-    });
+    })
   }
 
   getSoldJSON(): any {
 
     var sendDates = []
 
-    var sendDate = new SendDate();
-    sendDate.end_date = this.getDays(1)[0];
-    sendDate.start_date = this.getDays(1)[1];
+    const sendDate = new SendDate()
+    sendDate.end_date = this.getDays(1)[0]
+    sendDate.start_date = this.getDays(1)[1]
 
-    var sendDate2 = new SendDate();
-    sendDate2.end_date = this.getDays(2)[0];
-    sendDate2.start_date = this.getDays(2)[1];
+    const sendDate2 = new SendDate()
+    sendDate2.end_date = this.getDays(2)[0]
+    sendDate2.start_date = this.getDays(2)[1]
 
-    var sendDate3 = new SendDate();
-    sendDate3.end_date = this.getDays(3)[0];
-    sendDate3.start_date = this.getDays(3)[1];
+    const sendDate3 = new SendDate()
+    sendDate3.end_date = this.getDays(3)[0]
+    sendDate3.start_date = this.getDays(3)[1]
 
-    var sendDate4 = new SendDate();
-    sendDate4.end_date = this.getDays(4)[0];
-    sendDate4.start_date = this.getDays(4)[1];
+    const sendDate4 = new SendDate()
+    sendDate4.end_date = this.getDays(4)[0]
+    sendDate4.start_date = this.getDays(4)[1]
 
     sendDates = [sendDate, sendDate2, sendDate3, sendDate4]
 
@@ -105,20 +99,19 @@ export class DashboardComponent implements OnInit {
     console.log(sendDate)
     return this.http.post(environment.apiUrl + '/perhr-sale', sendDates, {
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       }
-    });
+    })
   }
 
   getDistJSON(): any {
 
 
-    console.log("}}}}}}}}}}}}}}}}}}}}")
     return this.http.get(environment.apiUrl + '/dist-weight', {
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       }
-    });
+    })
   }
 
   changeAxis(dateArray: JSON): JSON {
@@ -126,8 +119,8 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  loadTotalGraph(){
-    this.totalChart = new Chart("totalChart", {
+  loadTotalGraph(): void{
+    this.totalChart = new Chart('totalChart', {
       type: 'bar',
       data: {
         labels: [],
@@ -177,17 +170,19 @@ export class DashboardComponent implements OnInit {
           }]
         }
       }
-    });
+    })
 
-    this.getJSON().subscribe(dataArr => {
+    this.getJSON()
+      .subscribe(dataArr => {
       console.log(dataArr)
       const metrics: any = [
         [],
         [],
-        [],
+        []
       ]
       // total_weight: 195, sold_weight: 58, waste_weight: 49
-      Object.keys(dataArr).forEach(k => {
+      Object.keys(dataArr)
+      .forEach(k => {
         const weights = dataArr[k]
         const date = new Date(weights.dates).toDateString()
         this.totalChart.data.labels.push(date)
@@ -199,7 +194,7 @@ export class DashboardComponent implements OnInit {
 
       this.totalChart.data.datasets.forEach((dataset, index) =>
         dataset.data = dataset.data.concat(metrics[index])
-      );
+      )
       this.totalChart.update()
 
       // Moving Graph
@@ -207,7 +202,7 @@ export class DashboardComponent implements OnInit {
         this.totalChart.data.datasets.forEach((dataset, index) => {
           const metric = dataset.data.shift()
           dataset.data.push(metric + 1)
-        });
+        })
         this.totalChart.update()
       }, 5000)
     })
@@ -255,7 +250,7 @@ export class DashboardComponent implements OnInit {
           }]
         }
       }
-    });
+    })
 
     this.getSoldJSON().subscribe(dataArr => {
       console.log(dataArr)
@@ -272,7 +267,7 @@ export class DashboardComponent implements OnInit {
 
       this.soldChart.data.datasets.forEach((dataset, index) =>
         dataset.data = dataset.data.concat(metrics[index])
-      );
+      )
       this.soldChart.update()
 
       // Moving Graph
@@ -280,7 +275,7 @@ export class DashboardComponent implements OnInit {
         this.soldChart.data.datasets.forEach((dataset, index) => {
           const metric = dataset.data.shift()
           dataset.data.push(metric + 1)
-        });
+        })
         this.soldChart.update()
       }, 5000)
     })
@@ -328,7 +323,7 @@ export class DashboardComponent implements OnInit {
         //   }]
         // }
       }
-    });
+    })
 
     this.getDistJSON().subscribe(dataArr => {
       console.log(dataArr)
@@ -345,7 +340,7 @@ export class DashboardComponent implements OnInit {
 
       this.distChart.data.datasets.forEach((dataset, index) =>
         dataset.data = dataset.data.concat(metrics[index])
-      );
+      )
       this.distChart.update()
 
       // Moving Graph
@@ -353,7 +348,7 @@ export class DashboardComponent implements OnInit {
         this.distChart.data.datasets.forEach((dataset, index) => {
           const metric = dataset.data.shift()
           dataset.data.push(metric + 1)
-        });
+        })
         this.distChart.update()
       }, 5000)
     })
@@ -400,7 +395,7 @@ export class DashboardComponent implements OnInit {
           }]
         }
       }
-    });
+    })
 
     this.getJSON().subscribe(dataArr => {
       console.log(dataArr)
@@ -417,7 +412,7 @@ export class DashboardComponent implements OnInit {
 
       this.donationChart.data.datasets.forEach((dataset, index) =>
         dataset.data = dataset.data.concat(metrics[index])
-      );
+      )
       this.donationChart.update()
 
       // Moving Graph
@@ -425,7 +420,7 @@ export class DashboardComponent implements OnInit {
         this.donationChart.data.datasets.forEach((dataset, index) => {
           const metric = dataset.data.shift()
           dataset.data.push(metric + 1)
-        });
+        })
         this.donationChart.update()
       }, 5000)
     })
