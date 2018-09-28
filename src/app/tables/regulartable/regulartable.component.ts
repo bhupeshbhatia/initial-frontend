@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 declare interface TableData {
-    headerRow: string[];
-    dataRows: string[][];
+    headerRow: string[]
+    dataRows: string[][]
 }
 
 @Component({
-    moduleId: module.id,
+
     selector: 'regular-table-cmp',
     templateUrl: 'regulartable.component.html'
 })
 
 export class RegularTableComponent implements OnInit{
-    public tableData1: TableData;
-    public tableData2: TableData;
-    public tableData3: TableData;
+    public tableData1: TableData
+    public tableData2: TableData
+    public tableData3: TableData
 
     ngOnInit(){
         this.tableData1 = {
@@ -27,7 +27,7 @@ export class RegularTableComponent implements OnInit{
                 ['5', 'Doris Greene', 'Malawi', 'Feldkirchen in Kärnten', '$63,542'],
                 ['6', 'Mason Porter', 'Chile', 'Gloucester', '$78,615']
             ]
-        };
+        }
         this.tableData2 = {
             headerRow: [ 'ID', 'Name',  'Salary', 'Country', 'City' ],
             dataRows: [
@@ -38,7 +38,7 @@ export class RegularTableComponent implements OnInit{
                 ['5', 'Doris Greene', '$63,542', 'Malawi', 'Feldkirchen in Kärnten', ],
                 ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
             ]
-        };
+        }
         this.tableData3 = {
             headerRow: [ 'ID', 'Name',  'Salary', 'Country', 'City' ],
             dataRows: [
@@ -50,6 +50,6 @@ export class RegularTableComponent implements OnInit{
                 ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ],
                 ['7', 'Mike Chaney (Warning)', '$38,735', 'Romania', 'Bucharest' ]
             ]
-        };
+        }
     }
 }

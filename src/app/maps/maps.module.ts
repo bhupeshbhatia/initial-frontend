@@ -1,15 +1,15 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { CommonModule } from '@angular/common'
+import { FormsModule } from '@angular/forms'
 
-import { NguiMapModule} from '@ngui/map';
+import { NguiMapModule} from '@ngui/map'
 
-import { MapsRoutes } from './maps.routing';
+import { MapsRoutes } from './maps.routing'
 
-import { FullScreenMapsComponent } from './fullscreenmap/fullscreenmap.component';
-import { GoogleMapsComponent } from './googlemaps/googlemaps.component';
-import { VectorMapsComponent } from './vectormaps/vectormaps.component';
+import { FullScreenMapsComponent } from './fullscreenmap/fullscreenmap.component'
+import { GoogleMapsComponent } from './googlemaps/googlemaps.component'
+import { VectorMapsComponent } from './vectormaps/vectormaps.component'
 
 
 @NgModule({

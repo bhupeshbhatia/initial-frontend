@@ -1,41 +1,41 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 declare var require: any
-declare var $:any;
+declare var $:any
 
 @Component({
-    moduleId: module.id,
+
     selector: 'extendedforms-cmp',
     templateUrl: 'extendedforms.component.html'
 })
 
 export class ExtendedFormsComponent implements OnInit{
-    state_default: boolean = true;
-    state_plain: boolean = true;
-    state_with_icons: boolean = true;
-    tagItems = ['Amsterdam', 'Washington', 'Sydney', 'Beijing'];
-    model: Date;
-    model2: Date;
+    state_default: boolean = true
+    state_plain: boolean = true
+    state_with_icons: boolean = true
+    tagItems = ['Amsterdam', 'Washington', 'Sydney', 'Beijing']
+    model: Date
+    model2: Date
     ngOnInit() {
-      this.model = new Date();
-      this.model2 = new Date();
+      this.model = new Date()
+      this.model2 = new Date()
         //  Activate the tooltips
-        $('[rel="tooltip"]').tooltip();
+        $('[rel="tooltip"]').tooltip()
 
-        var tagClass = $('.tagsinput').data('color');
+        var tagClass = $('.tagsinput').data('color')
 
         if ($(".tagsinput").length != 0) {
-          $('.tagsinput').tagsinput();
+          $('.tagsinput').tagsinput()
         }
 
-        $('.bootstrap-tagsinput').addClass('' + tagClass + '-badge');
+        $('.bootstrap-tagsinput').addClass('' + tagClass + '-badge')
 
         //  Init Bootstrap Select Picker
         if ($(".selectpicker").length != 0) {
           $(".selectpicker").selectpicker({
             iconBase: "nc-icon",
             tickIcon: "nc-check-2"
-          });
+          })
         }
 
         if ($(".datetimepicker").length != 0) {
@@ -52,7 +52,7 @@ export class ExtendedFormsComponent implements OnInit{
               close: 'fa fa-remove'
             },
             debug: true
-          });
+          })
         }
 
         if ($(".datepicker").length != 0) {
@@ -70,7 +70,7 @@ export class ExtendedFormsComponent implements OnInit{
               close: 'fa fa-remove'
             },
             debug: true
-          });
+          })
         }
 
         if ($(".timepicker").length != 0) {
@@ -89,11 +89,11 @@ export class ExtendedFormsComponent implements OnInit{
               close: 'fa fa-remove'
             },
             debug: true
-          });
+          })
         }
 
-        var noUiSlider = require('nouislider');
-        var sliderRegular = document.getElementById('sliderRegular');
+        var noUiSlider = require('nouislider')
+        var sliderRegular = document.getElementById('sliderRegular')
 
         noUiSlider.create(sliderRegular, {
             start: 40,
@@ -102,9 +102,9 @@ export class ExtendedFormsComponent implements OnInit{
                 min: 0,
                 max: 100
             }
-        });
+        })
 
-        var sliderDouble = document.getElementById('sliderDouble');
+        var sliderDouble = document.getElementById('sliderDouble')
 
         noUiSlider.create(sliderDouble, {
             start: [ 20, 60 ],
@@ -113,6 +113,6 @@ export class ExtendedFormsComponent implements OnInit{
                 min:  0,
                 max:  100
             }
-        });
+        })
     }
 }

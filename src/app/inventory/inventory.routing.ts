@@ -1,8 +1,8 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'
 
-import { AddComponent } from './add/add.component';
-import { ShowComponent } from './show/show.component';
-import { AuthGuard } from '../_guards';
+import { AddComponent } from './add/add.component'
+import { ShowComponent } from './show/show.component'
+import { AuthGuard } from '../_guards'
 
 export const InventoryRoutes: Routes = [{
     path: '',
@@ -19,4 +19,4 @@ export const InventoryRoutes: Routes = [{
         canActivate: [AuthGuard]
     }]
     }
-];
+]

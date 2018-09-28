@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AgGridModule } from 'ag-grid-angular';
-import { LoadNumprodDataService } from "../services/load-numprod-data/load-numprod-data.service";
-import { InventoryRoutes } from './monitoring.routing'
+import { NgModule } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { CommonModule } from '@angular/common'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { AgGridModule } from 'ag-grid-angular'
+import { LoadNumprodDataService } from "../services/load-numprod-data/load-numprod-data.service"
+import { MonitoringRoutes } from './monitoring.routing'
 // import { AlertService } from '../_services'
 // import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component'
 
@@ -28,17 +28,17 @@ import {
     MatTabsModule,
     MatToolbarModule
 
- } from "@angular/material";
-import { CarbonComponent } from './carbon/carbon.component';
-import { EthyleneComponent } from './ethylene/ethylene.component';
-import { SensorComponent } from './sensor/sensor.component';
-import { TemperatureComponent } from './temperature/temperature.component';
-import { OverviewComponent } from './overview/overview.component';
+ } from "@angular/material"
+import { CarbonComponent } from './carbon/carbon.component'
+import { EthyleneComponent } from './ethylene/ethylene.component'
+import { SensorComponent } from './sensor/sensor.component'
+import { TemperatureComponent } from './temperature/temperature.component'
+import { OverviewComponent } from './overview/overview.component'
 @NgModule({
     imports: [
         AgGridModule.withComponents([]),
         CommonModule,
-        RouterModule.forChild(InventoryRoutes),
+        RouterModule.forChild(MonitoringRoutes),
         FormsModule,
         ReactiveFormsModule,
         NgbModule,

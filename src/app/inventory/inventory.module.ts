@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AgGridModule } from 'ag-grid-angular';
+import { NgModule } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { CommonModule } from '@angular/common'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { AgGridModule } from 'ag-grid-angular'
 
 import { InventoryRoutes } from './inventory.routing'
 
@@ -33,7 +33,7 @@ import {
     MatTabsModule,
     MatToolbarModule
 
- } from "@angular/material";
+ } from "@angular/material"
 @NgModule({
     imports: [
         AgGridModule.withComponents([]),

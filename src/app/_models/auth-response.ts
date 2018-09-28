@@ -1,4 +1,4 @@
-import { registerLocaleData } from "@angular/common";
+import { registerLocaleData } from "@angular/common"
 
 export interface AuthResponse {
     data: AuthActions

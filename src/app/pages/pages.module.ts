@@ -1,4 +1,4 @@
-import { HttpModule } from '@angular/http';
+import { HttpModule } from '@angular/http'
 import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
 import { CommonModule } from '@angular/common'

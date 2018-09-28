@@ -1,10 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaderResponse } from '@angular/common/http';
-import { interval } from 'rxjs/observable/interval';
-import { timer, pipe } from 'rxjs';
-import { Observable } from "rxjs/observable";
-import { switchMap, catchError } from 'rxjs/operators';
-import { environment } from '../../../config'
+import { Injectable } from '@angular/core'
+import { HttpClient, HttpHeaderResponse } from '@angular/common/http'
+import { environment } from 'config'
 import { SendDate } from '../../_models'
 
 @Injectable({
@@ -12,25 +8,20 @@ import { SendDate } from '../../_models'
 })
 export class LoadInventoryJsonService {
   constructor(private http: HttpClient) {
-    // this.checkData()
   }
-  // this.getJSON()
-  //   .subscribe(data => {
-  //     console.log(data);
-  //   });
 
   public getJSON(): any {
 
 
-    var sendDate = new SendDate();
-    sendDate.end_date = this.getDays(2)[0];
+    var sendDate = new SendDate()
+    sendDate.end_date = this.getDays(2)[0]
     console.log("}}}}}}}}}}}}}}}}}}}}")
     console.log(sendDate)
     return this.http.post(environment.apiUrl + '/load-table', sendDate, {
       headers: {
         "Content-Type": "application/json"
       }
-    });
+    })
   }
 
   public getDays(days?: number): Array<any> {
@@ -55,7 +46,7 @@ export class LoadInventoryJsonService {
       headers: {
         "Content-Type": "application/json"
       }
-    });
+    })
   }
 
   public deleteRow(item_id): any {
@@ -69,18 +60,13 @@ export class LoadInventoryJsonService {
       headers: {
         "Content-Type": "application/json"
       }
-    });
+    })
   }
 
   public updateRow(obj: Object): any {
 
     console.log("}}}}}}}}}}}}}}}}}}}}")
     console.log(obj)
-    // return this.http.post(environment.apiUrl + '/update-product', obj, {
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   }
-    // });
     this.http.post(environment.apiUrl + '/update-product', obj)
       .toPromise()
       .then((data: any) => {
@@ -93,11 +79,6 @@ export class LoadInventoryJsonService {
 
     console.log("}}}}}}}}}}}}}}}}}}}}")
     console.log(obj)
-    // return this.http.post(environment.apiUrl + '/add-product', obj, {
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   }
-    // });
     this.http.post(environment.apiUrl+'/add-product', obj)
     .toPromise()
     .then((data: any) => {

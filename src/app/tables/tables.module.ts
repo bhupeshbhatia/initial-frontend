@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { CommonModule } from '@angular/common'
+import { FormsModule } from '@angular/forms'
 
 
-import { TablesRoutes } from './tables.routing';
+import { TablesRoutes } from './tables.routing'
 
-import { ExtendedTableComponent } from './extendedtable/extendedtable.component';
-import { RegularTableComponent } from './regulartable/regulartable.component';
-import { DataTableComponent } from './datatable.net/datatable.component';
+import { ExtendedTableComponent } from './extendedtable/extendedtable.component'
+import { RegularTableComponent } from './regulartable/regulartable.component'
+import { DataTableComponent } from './datatable.net/datatable.component'
 
 
 @NgModule({

@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaderResponse } from '@angular/common/http';
-import { interval } from 'rxjs/observable/interval';
-import { timer, pipe } from 'rxjs';
-import { Observable } from "rxjs/observable";
-import { switchMap, catchError } from 'rxjs/operators';
-import { environment } from '../../../config'
+import { Injectable } from '@angular/core'
+import { HttpClient, HttpHeaderResponse } from '@angular/common/http'
+import { interval } from 'rxjs/observable/interval'
+import { timer, pipe } from 'rxjs'
+import { Observable } from "rxjs/observable"
+import { switchMap, catchError } from 'rxjs/operators'
+import { environment } from 'config'
 import { SendDate } from '../../_models'
 
 @Injectable({
@@ -25,7 +25,7 @@ export class LoadWeightDistDataService {
       headers: {
         "Content-Type": "application/json"
       }
-    });
+    })
   }
 
   public getDays(days?: number): Array<any> {

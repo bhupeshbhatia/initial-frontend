@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
-declare var $: any;
+declare var $: any
 
 @Component({
-    moduleId: module.id,
+
     selector: 'vector-maps-cmp',
     templateUrl: './vectormaps.component.html'
 })
@@ -22,7 +22,7 @@ export class VectorMapsComponent implements OnInit{
             "RO": 600,
             "RU": 300,
             "US": 2920,
-        };
+        }
 
         $('#worldMap').vectorMap({
             map: 'world_mill_en',
@@ -45,6 +45,6 @@ export class VectorMapsComponent implements OnInit{
                     normalizeFunction: 'polynomial'
                 }]
             },
-        });
+        })
     }
 }

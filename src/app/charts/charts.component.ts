@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import Chart from 'chart.js';
+import { Component, OnInit } from '@angular/core'
+import Chart from 'chart.js'
 
 @Component({
-    moduleId: module.id,
+
     selector: 'charts-cmp',
     templateUrl: './charts.component.html'
 })
 
 export class ChartsComponent implements OnInit{
-  public gradientStroke;
-  public chartColor = "#FFFFFF";
-  public canvas : any;
-  public ctx;
-  public gradientFill;
-  public gradientChartOptionsConfiguration: any;
-  public gradientChartOptionsConfigurationWithNumbersAndGrid: any;
-  public myChart: any;
+  public gradientStroke
+  public chartColor = "#FFFFFF"
+  public canvas : any
+  public ctx
+  public gradientFill
+  public gradientChartOptionsConfiguration: any
+  public gradientChartOptionsConfigurationWithNumbersAndGrid: any
+  public myChart: any
     ngOnInit(){
-      this.canvas = document.getElementById("chartHours");
-      this.ctx = this.canvas.getContext("2d");
+      this.canvas = document.getElementById("chartHours")
+      this.ctx = this.canvas.getContext("2d")
 
       this.myChart = new Chart(this.ctx, {
         type: 'line',
@@ -93,11 +93,11 @@ export class ChartsComponent implements OnInit{
             }]
           },
         }
-      });
+      })
 
 
-      this.canvas = document.getElementById("chartEmail");
-      this.ctx = this.canvas.getContext("2d");
+      this.canvas = document.getElementById("chartEmail")
+      this.ctx = this.canvas.getContext("2d")
 
       this.myChart = new Chart(this.ctx, {
         type: 'pie',
@@ -154,19 +154,19 @@ export class ChartsComponent implements OnInit{
             }]
           },
         }
-      });
+      })
 
 
-      this.canvas = document.getElementById("chartActivity");
-      this.ctx = this.canvas.getContext("2d");
+      this.canvas = document.getElementById("chartActivity")
+      this.ctx = this.canvas.getContext("2d")
 
-      this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
-      this.gradientStroke.addColorStop(0, '#80b6f4');
-      this.gradientStroke.addColorStop(1, this.chartColor);
+      this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0)
+      this.gradientStroke.addColorStop(0, '#80b6f4')
+      this.gradientStroke.addColorStop(1, this.chartColor)
 
-      this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
-      this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-      this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
+      this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50)
+      this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)")
+      this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)")
 
       this.myChart = new Chart(this.ctx, {
         type: 'bar',
@@ -253,18 +253,18 @@ export class ChartsComponent implements OnInit{
             }]
           }
         }
-      });
+      })
 
-      this.canvas = document.getElementById("chartViews");
-      this.ctx = this.canvas.getContext("2d");
+      this.canvas = document.getElementById("chartViews")
+      this.ctx = this.canvas.getContext("2d")
 
-      this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
-      this.gradientStroke.addColorStop(0, '#80b6f4');
-      this.gradientStroke.addColorStop(1, this.chartColor);
+      this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0)
+      this.gradientStroke.addColorStop(0, '#80b6f4')
+      this.gradientStroke.addColorStop(1, this.chartColor)
 
-      this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
-      this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-      this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
+      this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50)
+      this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)")
+      this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)")
 
       this.myChart = new Chart(this.ctx, {
         type: 'bar',
@@ -342,19 +342,19 @@ export class ChartsComponent implements OnInit{
             }]
           }
         }
-      });
+      })
 
 
-      this.canvas = document.getElementById("chartStock");
-      this.ctx = this.canvas.getContext("2d");
+      this.canvas = document.getElementById("chartStock")
+      this.ctx = this.canvas.getContext("2d")
 
-      this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
-      this.gradientStroke.addColorStop(0, '#80b6f4');
-      this.gradientStroke.addColorStop(1, this.chartColor);
+      this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0)
+      this.gradientStroke.addColorStop(0, '#80b6f4')
+      this.gradientStroke.addColorStop(1, this.chartColor)
 
-      this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
-      this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-      this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
+      this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50)
+      this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)")
+      this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)")
 
       this.myChart = new Chart(this.ctx, {
         type: 'line',
@@ -415,19 +415,19 @@ export class ChartsComponent implements OnInit{
             }]
           },
         }
-      });
+      })
 
 
-      this.canvas = document.getElementById("activeUsers");
-      this.ctx = this.canvas.getContext("2d");
+      this.canvas = document.getElementById("activeUsers")
+      this.ctx = this.canvas.getContext("2d")
 
-      this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
-      this.gradientStroke.addColorStop(0, '#80b6f4');
-      this.gradientStroke.addColorStop(1, this.chartColor);
+      this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0)
+      this.gradientStroke.addColorStop(0, '#80b6f4')
+      this.gradientStroke.addColorStop(1, this.chartColor)
 
-      this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
-      this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-      this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)");
+      this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50)
+      this.gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)")
+      this.gradientFill.addColorStop(1, "rgba(249, 99, 59, 0.40)")
 
       this.myChart = new Chart(this.ctx, {
         type: 'line',
@@ -486,7 +486,7 @@ export class ChartsComponent implements OnInit{
             }]
           },
         }
-      });
+      })
 
 
       // General configuration for the charts with Line gradientStroke
@@ -539,7 +539,7 @@ export class ChartsComponent implements OnInit{
             bottom: 15
           }
         }
-      };
+      }
 
       this.gradientChartOptionsConfigurationWithNumbersAndGrid = {
         maintainAspectRatio: false,
@@ -583,7 +583,7 @@ export class ChartsComponent implements OnInit{
             bottom: 15
           }
         }
-      };
+      }
 
     }
 }

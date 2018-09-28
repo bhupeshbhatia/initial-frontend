@@ -1,6 +1,6 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'
 
-import { TimelineComponent } from './timeline.component';
+import { TimelineComponent } from './timeline.component'
 
 export const TimelineRoutes: Routes = [{
     path: '',
@@ -8,4 +8,4 @@ export const TimelineRoutes: Routes = [{
         path: 'pages/timeline',
         component: TimelineComponent
     }]
-}];
+}]

@@ -1,11 +1,8 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { LoadNumprodDataService } from "../services/load-numprod-data/load-numprod-data.service";
-import { HttpClient } from '@angular/common/http';
-import { LoadProdHourService } from "../services/load-prod-hour/load-prod-hour.service";
-import { LoadWeightDistDataService } from "../services/load-weight-dist-data/load-weight-dist-data.service";
-import * as environment from '../../config'
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { environment } from 'config'
 import { SendDate } from '../_models'
-import Chart from 'chart.js';
+import Chart from 'chart.js'
 
 @Component({
   selector: 'app-dashboard',
@@ -52,21 +49,21 @@ export class DashboardComponent implements OnInit {
   getJSON(): any {
     var sendDates = []
 
-    var sendDate = new SendDate();
-    sendDate.end_date = this.getDays(1)[0];
-    sendDate.start_date = this.getDays(1)[1];
+    var sendDate = new SendDate()
+    sendDate.end_date = this.getDays(1)[0]
+    sendDate.start_date = this.getDays(1)[1]
 
-    var sendDate2 = new SendDate();
-    sendDate2.end_date = this.getDays(2)[0];
-    sendDate2.start_date = this.getDays(2)[1];
+    var sendDate2 = new SendDate()
+    sendDate2.end_date = this.getDays(2)[0]
+    sendDate2.start_date = this.getDays(2)[1]
 
-    var sendDate3 = new SendDate();
-    sendDate3.end_date = this.getDays(3)[0];
-    sendDate3.start_date = this.getDays(3)[1];
+    var sendDate3 = new SendDate()
+    sendDate3.end_date = this.getDays(3)[0]
+    sendDate3.start_date = this.getDays(3)[1]
 
-    var sendDate4 = new SendDate();
-    sendDate4.end_date = this.getDays(4)[0];
-    sendDate4.start_date = this.getDays(4)[1];
+    var sendDate4 = new SendDate()
+    sendDate4.end_date = this.getDays(4)[0]
+    sendDate4.start_date = this.getDays(4)[1]
 
     sendDates = [sendDate, sendDate2, sendDate3, sendDate4]
 
@@ -76,28 +73,28 @@ export class DashboardComponent implements OnInit {
       headers: {
         "Content-Type": "application/json"
       }
-    });
+    })
   }
 
   getSoldJSON(): any {
 
     var sendDates = []
 
-    var sendDate = new SendDate();
-    sendDate.end_date = this.getDays(1)[0];
-    sendDate.start_date = this.getDays(1)[1];
+    var sendDate = new SendDate()
+    sendDate.end_date = this.getDays(1)[0]
+    sendDate.start_date = this.getDays(1)[1]
 
-    var sendDate2 = new SendDate();
-    sendDate2.end_date = this.getDays(2)[0];
-    sendDate2.start_date = this.getDays(2)[1];
+    var sendDate2 = new SendDate()
+    sendDate2.end_date = this.getDays(2)[0]
+    sendDate2.start_date = this.getDays(2)[1]
 
-    var sendDate3 = new SendDate();
-    sendDate3.end_date = this.getDays(3)[0];
-    sendDate3.start_date = this.getDays(3)[1];
+    var sendDate3 = new SendDate()
+    sendDate3.end_date = this.getDays(3)[0]
+    sendDate3.start_date = this.getDays(3)[1]
 
-    var sendDate4 = new SendDate();
-    sendDate4.end_date = this.getDays(4)[0];
-    sendDate4.start_date = this.getDays(4)[1];
+    var sendDate4 = new SendDate()
+    sendDate4.end_date = this.getDays(4)[0]
+    sendDate4.start_date = this.getDays(4)[1]
 
     sendDates = [sendDate, sendDate2, sendDate3, sendDate4]
 
@@ -107,7 +104,7 @@ export class DashboardComponent implements OnInit {
       headers: {
         "Content-Type": "application/json"
       }
-    });
+    })
   }
 
   getDistJSON(): any {
@@ -118,7 +115,7 @@ export class DashboardComponent implements OnInit {
       headers: {
         "Content-Type": "application/json"
       }
-    });
+    })
   }
 
   changeAxis(dateArray: JSON): JSON {
@@ -177,7 +174,7 @@ export class DashboardComponent implements OnInit {
           }]
         }
       }
-    });
+    })
 
     this.getJSON().subscribe(dataArr => {
       console.log(dataArr)
@@ -199,7 +196,7 @@ export class DashboardComponent implements OnInit {
 
       this.totalChart.data.datasets.forEach((dataset, index) =>
         dataset.data = dataset.data.concat(metrics[index])
-      );
+      )
       this.totalChart.update()
 
       // Moving Graph
@@ -207,7 +204,7 @@ export class DashboardComponent implements OnInit {
         this.totalChart.data.datasets.forEach((dataset, index) => {
           const metric = dataset.data.shift()
           dataset.data.push(metric + 1)
-        });
+        })
         this.totalChart.update()
       }, 5000)
     })
@@ -255,7 +252,7 @@ export class DashboardComponent implements OnInit {
           }]
         }
       }
-    });
+    })
 
     this.getSoldJSON().subscribe(dataArr => {
       console.log(dataArr)
@@ -272,7 +269,7 @@ export class DashboardComponent implements OnInit {
 
       this.soldChart.data.datasets.forEach((dataset, index) =>
         dataset.data = dataset.data.concat(metrics[index])
-      );
+      )
       this.soldChart.update()
 
       // Moving Graph
@@ -280,7 +277,7 @@ export class DashboardComponent implements OnInit {
         this.soldChart.data.datasets.forEach((dataset, index) => {
           const metric = dataset.data.shift()
           dataset.data.push(metric + 1)
-        });
+        })
         this.soldChart.update()
       }, 5000)
     })
@@ -328,7 +325,7 @@ export class DashboardComponent implements OnInit {
         //   }]
         // }
       }
-    });
+    })
 
     this.getDistJSON().subscribe(dataArr => {
       console.log(dataArr)
@@ -345,7 +342,7 @@ export class DashboardComponent implements OnInit {
 
       this.distChart.data.datasets.forEach((dataset, index) =>
         dataset.data = dataset.data.concat(metrics[index])
-      );
+      )
       this.distChart.update()
 
       // Moving Graph
@@ -353,7 +350,7 @@ export class DashboardComponent implements OnInit {
         this.distChart.data.datasets.forEach((dataset, index) => {
           const metric = dataset.data.shift()
           dataset.data.push(metric + 1)
-        });
+        })
         this.distChart.update()
       }, 5000)
     })
@@ -400,7 +397,7 @@ export class DashboardComponent implements OnInit {
           }]
         }
       }
-    });
+    })
 
     this.getJSON().subscribe(dataArr => {
       console.log(dataArr)
@@ -417,7 +414,7 @@ export class DashboardComponent implements OnInit {
 
       this.donationChart.data.datasets.forEach((dataset, index) =>
         dataset.data = dataset.data.concat(metrics[index])
-      );
+      )
       this.donationChart.update()
 
       // Moving Graph
@@ -425,7 +422,7 @@ export class DashboardComponent implements OnInit {
         this.donationChart.data.datasets.forEach((dataset, index) => {
           const metric = dataset.data.shift()
           dataset.data.push(metric + 1)
-        });
+        })
         this.donationChart.update()
       }, 5000)
     })

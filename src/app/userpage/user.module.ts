@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { CommonModule } from '@angular/common'
+import { FormsModule } from '@angular/forms'
 
-import { UserComponent } from './user.component';
-import { UserRoutes } from './user.routing';
+import { UserComponent } from './user.component'
+import { UserRoutes } from './user.routing'
 
 @NgModule({
     imports: [

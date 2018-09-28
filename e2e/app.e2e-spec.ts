@@ -1,14 +1,14 @@
-import { PdPPage } from './app.po';
+import { PdPPage } from './app.po'
 
 describe('pd-p App', () => {
-  let page: PdPPage;
+  let page: PdPPage
 
   beforeEach(() => {
-    page = new PdPPage();
-  });
+    page = new PdPPage()
+  })
 
   it('should display message saying app works', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
-  });
-});
+    page.navigateTo()
+    expect(page.getParagraphText()).toEqual('app works!')
+  })
+})

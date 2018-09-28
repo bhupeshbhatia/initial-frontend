@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core'
+import { RouterModule } from '@angular/router'
+import { CommonModule } from '@angular/common'
+import { FormsModule } from '@angular/forms'
 
-import { ChartsComponent } from './charts.component';
-import { ChartsRoutes } from './charts.routing';
+import { ChartsComponent } from './charts.component'
+import { ChartsRoutes } from './charts.routing'
 
 @NgModule({
     imports: [

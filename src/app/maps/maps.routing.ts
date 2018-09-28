@@ -1,8 +1,8 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'
 
-import { FullScreenMapsComponent } from './fullscreenmap/fullscreenmap.component';
-import { GoogleMapsComponent } from './googlemaps/googlemaps.component';
-import { VectorMapsComponent } from './vectormaps/vectormaps.component';
+import { FullScreenMapsComponent } from './fullscreenmap/fullscreenmap.component'
+import { GoogleMapsComponent } from './googlemaps/googlemaps.component'
+import { VectorMapsComponent } from './vectormaps/vectormaps.component'
 
 export const MapsRoutes: Routes = [{
         path: '',
@@ -23,4 +23,4 @@ export const MapsRoutes: Routes = [{
             component: VectorMapsComponent
         }]
     }
-];
+]

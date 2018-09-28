@@ -1,22 +1,22 @@
-import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core'
+import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms'
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material'
+import { Http, Response, Headers, RequestOptions } from '@angular/http'
+import { Observable } from 'rxjs/Observable'
 import { LoadInventoryJsonService } from '../../services/load-inventory-json/load-inventory-json.service'
-import { PostInventoryDataService } from "../../services/post-inventory-data/post-inventory-data.service";
-import { PostDDateDataService } from "../../services/post-date-data/post-date-data.service";
-import { PostDeleteDataService } from "../../services/post-delete-data/post-delete-data.service";
-import { Inventory } from "../../_models/inventory";
-import { Query } from "../../_models/query";
-import { SelectionModel } from '@angular/cdk/collections';
-import { HttpClient, HttpHeaderResponse } from '@angular/common/http';
+import { PostInventoryDataService } from "../../services/post-inventory-data/post-inventory-data.service"
+import { PostDDateDataService } from "../../services/post-date-data/post-date-data.service"
+import { PostDeleteDataService } from "../../services/post-delete-data/post-delete-data.service"
+import { Inventory } from "../../_models/inventory"
+import { Query } from "../../_models/query"
+import { SelectionModel } from '@angular/cdk/collections'
+import { HttpClient, HttpHeaderResponse } from '@angular/common/http'
 import { environment } from '../../../config'
 
 
 var Food: Inventory[] = []
-const initialSelection = [];
-const allowMultiSelect = true;
+const initialSelection = []
+const allowMultiSelect = true
 
 @Component({
   selector: 'app-show',
@@ -25,13 +25,13 @@ const allowMultiSelect = true;
 })
 
 export class ShowComponent implements OnInit {
-  postInventoryData: PostInventoryDataService;
-  postDateData: PostDDateDataService;
+  postInventoryData: PostInventoryDataService
+  postDateData: PostDDateDataService
   postDeleteData: PostDeleteDataService
-  food: Inventory;
-  form: FormGroup;
-  queryForm: FormGroup;
-  private formSubmitAttempt: boolean;
+  food: Inventory
+  form: FormGroup
+  queryForm: FormGroup
+  private formSubmitAttempt: boolean
   displayedColumns: string[] = ['select','name', 'origin' ,'location', 'date_arrived', 'expiry_date', 'sale_price', 'total_weight', 'modify']
   dataSource = new MatTableDataSource()
   today: number = Date.now()
@@ -41,7 +41,7 @@ export class ShowComponent implements OnInit {
   @ViewChild("field") field: ElementRef
   @ViewChild("formDate") formDate : ElementRef
 
-  selection = new SelectionModel<Inventory>(true, []);
+  selection = new SelectionModel<Inventory>(true, [])
 
   constructor(private formBuilder: FormBuilder, private http: Http, private loadInventoryJsonService: LoadInventoryJsonService) {
   }
@@ -96,7 +96,7 @@ export class ShowComponent implements OnInit {
     return (
       (!this.form.get(field).valid && this.form.get(field).touched) ||
       (this.form.get(field).untouched && this.formSubmitAttempt)
-    );
+    )
   }
 
   onSearch() {
@@ -118,34 +118,34 @@ export class ShowComponent implements OnInit {
   }
 
   onSubmit() {
-    const month = new Array();
-    month[0] = "January";
-    month[1] = "February";
-    month[2] = "March";
-    month[3] = "April";
-    month[4] = "May";
-    month[5] = "June";
-    month[6] = "July";
-    month[7] = "August";
-    month[8] = "September";
-    month[9] = "October";
-    month[10] = "November";
-    month[11] = "December";
+    const month = new Array()
+    month[0] = "January"
+    month[1] = "February"
+    month[2] = "March"
+    month[3] = "April"
+    month[4] = "May"
+    month[5] = "June"
+    month[6] = "July"
+    month[7] = "August"
+    month[8] = "September"
+    month[9] = "October"
+    month[10] = "November"
+    month[11] = "December"
     this.formSubmitAttempt = true
     const origDate = this.form.value.date_arrived
     this.form.value.date_arrived = Math.floor(Date.parse(`${origDate.year}/${month[origDate.month]}/${origDate.day}`) / 1000)
       this.loadInventoryJsonService.updateRow(this.form.value)
-      // alert('Your Inventory has been updated.');
-      // $('#myModal').modal('hide');
+      // alert('Your Inventory has been updated.')
+      // $('#myModal').modal('hide')
 
   }
 
   reset() {
-    this.form.reset();
-    this.formSubmitAttempt = false;
+    this.form.reset()
+    this.formSubmitAttempt = false
   }
 
-get f() { return this.form.controls; }
+get f() { return this.form.controls }
 
   curField: any
 
@@ -164,32 +164,32 @@ get f() { return this.form.controls; }
 }
 
   isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected == numRows;
+    const numSelected = this.selection.selected.length
+    const numRows = this.dataSource.data.length
+    return numSelected == numRows
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  /** Selects all rows if they are not all selected otherwise clear selection. */
   masterToggle() {
     this.isAllSelected() ?
       this.selection.clear() :
-      this.dataSource.data.forEach((row: any) => this.selection.select(row));
+      this.dataSource.data.forEach((row: any) => this.selection.select(row))
   }
 
   removeSelectedRows() {
     this.selection.selected.forEach(item => {
-      let index: number = Food.findIndex(d => d === item);
+      let index: number = Food.findIndex(d => d === item)
       console.log(index)
-      console.log(item.item_id);
+      console.log(item.item_id)
 
       console.log("++++++++++++++++++==")
       this.loadInventoryJsonService.deleteRow(item.item_id)
       .subscribe(console.log)
 
-      this.dataSource.data.splice(index, 1);
+      this.dataSource.data.splice(index, 1)
 
-      this.dataSource = new MatTableDataSource<Inventory>(Food);
-    });
-    this.selection = new SelectionModel<Inventory>(true, []);
+      this.dataSource = new MatTableDataSource<Inventory>(Food)
+    })
+    this.selection = new SelectionModel<Inventory>(true, [])
   }
 }

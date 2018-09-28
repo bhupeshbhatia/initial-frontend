@@ -1,30 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import swal from 'sweetalert2';
-import PerfectScrollbar from 'perfect-scrollbar';
+import { Component, OnInit } from '@angular/core'
+import swal from 'sweetalert2'
+import PerfectScrollbar from 'perfect-scrollbar'
 
-declare var $: any;
+declare var $: any
 
 @Component({
-    moduleId: module.id,
+
     selector: 'calendar-cmp',
     templateUrl: 'calendar.component.html'
 })
 
 export class CalendarComponent implements OnInit{
   ngOnInit() {
-      const $calendar = $('#fullCalendar');
+      const $calendar = $('#fullCalendar')
 
-      const today = new Date();
-      const y = today.getFullYear();
-      const m = today.getMonth();
-      const d = today.getDate();
+      const today = new Date()
+      const y = today.getFullYear()
+      const m = today.getMonth()
+      const d = today.getDate()
 
       $calendar.fullCalendar({
           viewRender: function(view: any, element: any) {
               // We make sure that we activate the perfect scrollbar when the view isn't on Month
               if (view.name != 'month') {
-                  var elem = $(element).find('.fc-scroller')[0];
-                  let ps = new PerfectScrollbar(elem);
+                  var elem = $(element).find('.fc-scroller')[0]
+                  let ps = new PerfectScrollbar(elem)
               }
           },
           header: {
@@ -62,21 +62,21 @@ export class CalendarComponent implements OnInit{
                   buttonsStyling: false
               }).then(function(result: any) {
 
-                  let eventData;
-                  const event_title = $('#input-field').val();
+                  let eventData
+                  const event_title = $('#input-field').val()
 
                   if (event_title) {
                       eventData = {
                           title: event_title,
                           start: start,
                           end: end
-                      };
-                      $calendar.fullCalendar('renderEvent', eventData, true); // stick? = true
+                      }
+                      $calendar.fullCalendar('renderEvent', eventData, true) // stick? = true
                   }
 
-                  $calendar.fullCalendar('unselect');
+                  $calendar.fullCalendar('unselect')
 
-              });
+              })
           },
           editable: true,
           eventLimit: true, // allow "more" link when too many events
@@ -144,6 +144,6 @@ export class CalendarComponent implements OnInit{
                   className: 'event-orange'
               }
           ]
-      });
+      })
   }
 }

@@ -1,9 +1,9 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'
 
-import { ExtendedFormsComponent } from './extendedforms/extendedforms.component';
-import { RegularFormsComponent } from './regularforms/regularforms.component';
-import { ValidationFormsComponent } from './validationforms/validationforms.component';
-import { WizardComponent } from './wizard/wizard.component';
+import { ExtendedFormsComponent } from './extendedforms/extendedforms.component'
+import { RegularFormsComponent } from './regularforms/regularforms.component'
+import { ValidationFormsComponent } from './validationforms/validationforms.component'
+import { WizardComponent } from './wizard/wizard.component'
 
 export const FormsRoutes: Routes = [
     {
@@ -31,4 +31,4 @@ export const FormsRoutes: Routes = [
             component: WizardComponent
         }]
     }
-];
+]

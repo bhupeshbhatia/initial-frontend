@@ -1,6 +1,6 @@
-import { Routes } from '@angular/router';
+import { Routes } from '@angular/router'
 
-import { WidgetsComponent } from './widgets.component';
+import { WidgetsComponent } from './widgets.component'
 
 export const WidgetsRoutes: Routes = [{
     path: '',
@@ -8,4 +8,4 @@ export const WidgetsRoutes: Routes = [{
         path: 'widgets',
         component: WidgetsComponent
     }]
-}];
+}]

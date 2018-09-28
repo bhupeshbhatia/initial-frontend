@@ -2,9 +2,9 @@
 import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { AuthResponse } from "../../_models/auth-response";
-import { FlashCellsEvent } from 'ag-grid-community';
+import { HttpHeaders, HttpClient } from '@angular/common/http'
+import { AuthResponse } from "../../_models/auth-response"
+import { FlashCellsEvent } from 'ag-grid-community'
 
 @Component({
   selector: 'app-register-emp',

@@ -1,12 +1,10 @@
 import { UserService } from './../../_services/user.service'
-import { first } from 'rxjs/operators'
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
-import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { Component, OnInit } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router'
 import { AuthenticationService } from '../../_services'
 import swal from 'sweetalert2'
-import { LoadInventoryJsonService } from "../../services/load-inventory-json/load-inventory-json.service";
-import uuidv4 from 'uuid';
+import { LoadInventoryJsonService } from "../../services/load-inventory-json/load-inventory-json.service"
 
 export interface Inventory {
   item_id: number
@@ -42,11 +40,7 @@ export class AddComponent implements OnInit {
     private loadJsonData: LoadInventoryJsonService
     ) { }
 
-itemUuidgen: any
-deviceUuidgen: any
-
   ngOnInit() {
-    console.log(uuidv4())
     this.form = this.formBuilder.group({
       item_id: [null, [Validators.required, Validators.minLength(1)]],
       name: [null, [Validators.required, Validators.minLength(1)]],
@@ -59,28 +53,27 @@ deviceUuidgen: any
     })
 
     this.returnUrl = this.route.snapshot.queryParams['add-inv']
-    this.itemUuidgen = uuidv4();
-    this.deviceUuidgen = uuidv4();
+
   }
 
   // convenience getter for easy access to form fields
-f() { return this.form.controls; }
+f() { return this.form.controls }
 
 
   onSubmit() {
-    const month = new Array();
-    month[0] = "January";
-    month[1] = "February";
-    month[2] = "March";
-    month[3] = "April";
-    month[4] = "May";
-    month[5] = "June";
-    month[6] = "July";
-    month[7] = "August";
-    month[8] = "September";
-    month[9] = "October";
-    month[10] = "November";
-    month[11] = "December";
+    const month = new Array()
+    month[0] = "January"
+    month[1] = "February"
+    month[2] = "March"
+    month[3] = "April"
+    month[4] = "May"
+    month[5] = "June"
+    month[6] = "July"
+    month[7] = "August"
+    month[8] = "September"
+    month[9] = "October"
+    month[10] = "November"
+    month[11] = "December"
     this.formSubmitAttempt = true
       const origDate = this.form.value.date_arrived
        this.form.value.date_arrived = Math.floor(Date.parse(`${origDate.year}/${month[origDate.month]}/${origDate.day}`) / 1000)

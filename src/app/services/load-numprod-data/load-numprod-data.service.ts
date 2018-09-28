@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaderResponse } from '@angular/common/http';
-import { interval } from 'rxjs/observable/interval';
-import { timer, pipe } from 'rxjs';
-import { Observable } from "rxjs/observable";
-import { switchMap, catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core'
+import { HttpClient, HttpHeaderResponse } from '@angular/common/http'
+import { interval } from 'rxjs/observable/interval'
+import { timer, pipe } from 'rxjs'
+import { Observable } from "rxjs/observable"
+import { switchMap, catchError } from 'rxjs/operators'
 import { environment } from '../../../config'
 import { SendDate } from '../../_models'
 
@@ -16,28 +16,28 @@ export class LoadNumprodDataService {
   }
     // this.getJSON()
     //   .subscribe(data => {
-    //     console.log(data);
-    //   });
+    //     console.log(data)
+    //   })
 
   public getJSON(days: number): any {
 
     var sendDates = []
 
-    var sendDate = new SendDate();
-    sendDate.end_date = this.getDays()[0];
-    sendDate.start_date = this.getDays(1)[1];
+    var sendDate = new SendDate()
+    sendDate.end_date = this.getDays()[0]
+    sendDate.start_date = this.getDays(1)[1]
 
-    var sendDate2 = new SendDate();
-    sendDate2.end_date = this.getDays()[0];
-    sendDate2.start_date = this.getDays(2)[1];
+    var sendDate2 = new SendDate()
+    sendDate2.end_date = this.getDays()[0]
+    sendDate2.start_date = this.getDays(2)[1]
 
-    var sendDate3 = new SendDate();
-    sendDate3.end_date = this.getDays()[0];
-    sendDate3.start_date = this.getDays(3)[1];
+    var sendDate3 = new SendDate()
+    sendDate3.end_date = this.getDays()[0]
+    sendDate3.start_date = this.getDays(3)[1]
 
-    var sendDate4 = new SendDate();
-    sendDate4.end_date = this.getDays()[0];
-    sendDate4.start_date = this.getDays(4)[1];
+    var sendDate4 = new SendDate()
+    sendDate4.end_date = this.getDays()[0]
+    sendDate4.start_date = this.getDays(4)[1]
 
     sendDates = [sendDate, sendDate2, sendDate3, sendDate4]
 
@@ -47,7 +47,7 @@ export class LoadNumprodDataService {
       headers: {
         "Content-Type": "application/json"
       }
-    });
+    })
   }
 
   public getDays(days?:number): Array<any>{

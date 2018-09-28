@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
-declare var $:any;
+declare var $:any
 
 declare interface DataTable {
-    headerRow: string[];
-    footerRow: string[];
-    dataRows: string[][];
+    headerRow: string[]
+    footerRow: string[]
+    dataRows: string[][]
 }
 
 @Component({
-    moduleId: module.id,
+
     selector: 'data-table-cmp',
     templateUrl: 'datatable.component.html'
 })
 
 export class DataTableComponent implements OnInit{
-    public dataTable: DataTable;
+    public dataTable: DataTable
     ngOnInit(){
         this.dataTable = {
             headerRow: [ 'Name', 'Position', 'Office', 'Age', 'Date', 'Actions' ],
@@ -62,7 +62,7 @@ export class DataTableComponent implements OnInit{
                 ['Vivian Harrell','Mike Monday', 'Marketing', '2013', '49,990', 'btn-round'],
                 ['Yuri Berry','Mike Monday', 'Marketing', '2013', '49,990', 'btn-round']
             ]
-         };
+         }
     }
 
     ngAfterViewInit(){
@@ -78,28 +78,28 @@ export class DataTableComponent implements OnInit{
           searchPlaceholder: "Search records",
         }
 
-      });
+      })
 
-      var table = $('#datatable').DataTable();
+      var table = $('#datatable').DataTable()
 
       // Edit record
       table.on('click', '.edit', function() {
-        let $tr = $(this).closest('tr');
+        let $tr = $(this).closest('tr')
 
-        var data = table.row($tr).data();
-        alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
-      });
+        var data = table.row($tr).data()
+        alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.')
+      })
 
       // Delete a record
       table.on('click', '.remove', function(e) {
-        let $tr = $(this).closest('tr');
-        table.row($tr).remove().draw();
-        e.preventDefault();
-      });
+        let $tr = $(this).closest('tr')
+        table.row($tr).remove().draw()
+        e.preventDefault()
+      })
 
       //Like record
       table.on('click', '.like', function() {
-        alert('You clicked on Like button');
-      });
+        alert('You clicked on Like button')
+      })
     }
 }

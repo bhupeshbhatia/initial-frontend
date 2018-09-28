@@ -4,7 +4,7 @@ import { interval } from 'rxjs/observable/interval';
 import { timer, pipe } from 'rxjs';
 import { Observable } from "rxjs/observable";
 import { switchMap, catchError } from 'rxjs/operators';
-import { environment } from '../../../config'
+import { environment } from 'config'
 import { SendDate } from '../../_models'
 
 @Injectable({

@@ -1,16 +1,16 @@
-import { HttpModule } from '@angular/http';
+import { HttpModule } from '@angular/http'
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { first, timeInterval } from 'rxjs/operators'
 
 import { AuthenticationService } from '../../_services'
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { AuthResponse } from "../../_models/auth-response";
-import { controlNameBinding } from '@angular/forms/src/directives/reactive_directives/form_control_name';
+import { HttpHeaders, HttpClient } from '@angular/common/http'
+import { AuthResponse } from "../../_models/auth-response"
+import { controlNameBinding } from '@angular/forms/src/directives/reactive_directives/form_control_name'
 
 @Component({
-  moduleId: module.id,
+
   selector: 'login-cmp',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
           this.reset()
         }
         // if (data.data.login.access_token == null) {
-        //   this.validateAllFormFields(this.loginForm); //{7}
+        //   this.validateAllFormFields(this.loginForm) //{7}
         // }
         else {
           this.showError = true

@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import * as jwt_decode from 'jwt-decode';
+import { Injectable } from '@angular/core'
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http'
+import { Observable } from 'rxjs'
+import * as jwt_decode from 'jwt-decode'
 
 @Injectable()
 export class TokenExtraction {
@@ -9,7 +9,7 @@ export class TokenExtraction {
     parsedToken: any
 
     getAccessToken(): string {
-        return localStorage.getItem('access_token');
+        return localStorage.getItem('access_token')
     }
 
     getRefreshToken(): string {

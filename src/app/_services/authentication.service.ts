@@ -1,9 +1,9 @@
-import { TokenExtraction } from './../_helpers/token.extraction';
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import * as jwt_decode from 'jwt-decode';
-import { AuthResponse } from "../_models/auth-response";
+import { TokenExtraction } from './../_helpers/token.extraction'
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { map } from 'rxjs/operators'
+import * as jwt_decode from 'jwt-decode'
+import { AuthResponse } from "../_models/auth-response"
 
 
 // used to login and logout of the application, to login it posts the users
@@ -62,13 +62,13 @@ export class AuthenticationService {
     //     // login successful if there's a jwt token in the response
     //     // if (token.access_token) {
     //     //   // store user details and jwt token in local storage to keep user logged in between page refreshes
-    //     //   localStorage.setItem('access_token', token.access_token);
+    //     //   localStorage.setItem('access_token', token.access_token)
     //     //   this.global.parsedToken = this.global.getDecodedAccessToken()
 
     //     //   console.log(token.access_token)
     //     // }
 
-    //     // return token.access_token;
+    //     // return token.access_token
 
     //     if (token.data) {
     //       localStorage.setItem('access_token', token.data.login)

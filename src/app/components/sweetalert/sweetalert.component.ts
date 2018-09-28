@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import swal from 'sweetalert2';
+import { Component } from '@angular/core'
+import swal from 'sweetalert2'
 
-declare var $:any;
+declare var $:any
 
 @Component({
-    moduleId: module.id,
+
     selector: 'sweetalert-cmp',
     templateUrl: 'sweetalert.component.html'
 })

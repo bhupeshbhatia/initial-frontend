@@ -1,12 +1,12 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { LoadWeightDistDataService } from './load-weight-dist-data.service';
+import { LoadWeightDistDataService } from './load-weight-dist-data.service'
 
 describe('LoadWeightDistDataService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  beforeEach(() => TestBed.configureTestingModule({}))
 
   it('should be created', () => {
-    const service: LoadWeightDistDataService = TestBed.get(LoadWeightDistDataService);
-    expect(service).toBeTruthy();
-  });
-});
+    const service: LoadWeightDistDataService = TestBed.get(LoadWeightDistDataService)
+    expect(service).toBeTruthy()
+  })
+})
