@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 
 declare var $: any
 
+
 @Component({
     selector: 'vector-maps-cmp',
     templateUrl: './vectormaps.component.html'

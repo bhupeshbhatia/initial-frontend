@@ -103,9 +103,18 @@
           <ng-container matColumnDef="modify">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Modify</th>
             <td mat-cell *matCellDef="let element">
-              <a id="editBtn" (click)='populateFields(element.item_id)' class="btn btn-warning btn-link btn-icon btn-md edit"
-                    data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></a>
-                  <a id="deleteBtn" class="btn btn-danger btn-link btn-icon btn-md remove" (click)="removeSelectedRows()"><i class="fa fa-times"></i></a>
+              <a id="editBtn"
+                class="btn btn-warning btn-link btn-icon btn-md edit"
+                (click)="openDialog()"
+              >
+                <i class="fa fa-edit"></i>
+              </a>
+              <a id="deleteBtn"
+                class="btn btn-danger btn-link btn-icon btn-md remove"
+                (click)="removeSelectedRows()"
+              >
+                <i class="fa fa-times"></i>
+              </a>
             </td>
           </ng-container>
 

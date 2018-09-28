@@ -24,6 +24,10 @@ export class LoadInventoryJsonService {
     })
   }
 
+  public getJsonTest(){
+    return this.http.get('./assets/MOCK_DATA.json')
+  }
+
   public getDays(days?: number): Array<any> {
     var dates = []
     var end_date = Math.round(new Date().getTime() / 1000) + (86400 * days)

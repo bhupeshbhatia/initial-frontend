@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core'
+import { Component, OnInit, ViewChild, Input, ElementRef, Inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators, FormControl, FormsModule, ReactiveFormsModule, NgForm } from '@angular/forms'
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material'
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog, MAT_DIALOG_DATA } from '@angular/material'
 import { Http, Response, Headers, RequestOptions } from '@angular/http'
 import { Observable } from 'rxjs/Observable'
 import { LoadInventoryJsonService } from '../../services/load-inventory-json/load-inventory-json.service'
@@ -43,11 +43,19 @@ export class ShowComponent implements OnInit {
 
   selection = new SelectionModel<Inventory>(true, [])
 
-  constructor(private formBuilder: FormBuilder, private http: Http, private loadInventoryJsonService: LoadInventoryJsonService) {
+  constructor(private formBuilder: FormBuilder, private http: Http, private loadInventoryJsonService: LoadInventoryJsonService, public dialog: MatDialog) {
+  }
+
+  openDialog() {
+    this.dialog.open(DialogDataDialog, {
+      data: {
+        animal: 'panda'
+      }
+    });
   }
 
   ngOnInit(): void{
-    this.loadInventoryJsonService.getJSON()
+    this.loadInventoryJsonService.getJsonTest()
       .subscribe(data => {
         console.log(data)
 
@@ -152,12 +160,10 @@ get f() { return this.form.controls }
  populateFields(e): Inventory {
    console.log(e)
    if (e != null) {
-    this.curField = Food.find(function(){
-      return e
-    })
+    this.curField = Food.find(() => e)
     console.log(this.curField)
     console.log(this.curField.date_arrived)
-    this.formDate.nativeElement.value = this.curField.date_arrived
+    // this.formDate.nativeElement.value = this.curField.date_arrived
      console.log()
    }
    return e
@@ -192,4 +198,12 @@ get f() { return this.form.controls }
     })
     this.selection = new SelectionModel<Inventory>(true, [])
   }
+}
+
+@Component({
+  selector: 'dialog-data-dialog',
+  templateUrl: 'dialog-data-dialog.html',
+})
+export class DialogDataDialog {
+  constructor() { }
 }
