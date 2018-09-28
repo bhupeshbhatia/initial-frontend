@@ -11,7 +11,6 @@ var misc:any ={
 }
 
 @Component({
-
     selector: 'navbar-cmp',
     templateUrl: 'navbar.component.html',
     styleUrls: ['./navbar.component.css']

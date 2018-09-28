@@ -53,7 +53,6 @@ export class AddComponent implements OnInit {
     })
 
     this.returnUrl = this.route.snapshot.queryParams['add-inv']
-
   }
 
   // convenience getter for easy access to form fields

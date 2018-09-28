@@ -9,7 +9,6 @@ declare interface DataTable {
 }
 
 @Component({
-
     selector: 'data-table-cmp',
     templateUrl: 'datatable.component.html'
 })

@@ -6,7 +6,6 @@ declare interface TableData {
 }
 
 @Component({
-
     selector: 'regular-table-cmp',
     templateUrl: 'regulartable.component.html'
 })

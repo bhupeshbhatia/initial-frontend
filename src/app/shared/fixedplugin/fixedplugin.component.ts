@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core'
 declare var $:any
 
 @Component({
-
     selector: 'fixedplugin-cmp',
     templateUrl: 'fixedplugin.component.html'
 })

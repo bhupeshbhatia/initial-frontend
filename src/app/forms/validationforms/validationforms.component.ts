@@ -14,7 +14,6 @@ declare interface User {
 }
 
 @Component({
-
     selector: 'validationforms-cmp',
     templateUrl: 'validationforms.component.html'
 })

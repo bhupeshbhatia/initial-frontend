@@ -14,7 +14,6 @@ interface FileReaderEvent extends Event {
 }
 
 @Component({
-
     selector: 'wizard-cmp',
     templateUrl: 'wizard.component.html'
 })

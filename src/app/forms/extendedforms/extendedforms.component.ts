@@ -4,7 +4,6 @@ declare var require: any
 declare var $:any
 
 @Component({
-
     selector: 'extendedforms-cmp',
     templateUrl: 'extendedforms.component.html'
 })
