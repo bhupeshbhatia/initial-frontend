@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
 
       console.log(resource)
       resource = `{
-        login(username:"${this.loginForm.controls.username.value}",password:"${this.loginForm.controls.value}")
+        login(username:"${this.loginForm.controls.username.value}",password:"${this.loginForm.controls.password.value}")
         {
           access_token,
           refresh_token

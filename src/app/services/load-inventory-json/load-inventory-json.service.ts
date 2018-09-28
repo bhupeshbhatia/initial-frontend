@@ -67,19 +67,20 @@ export class LoadInventoryJsonService {
     })
   }
 
-  public updateRow(obj: Object): any {
+  public updateRow(obj: any): any {
 
     console.log("}}}}}}}}}}}}}}}}}}}}")
     console.log(obj)
     this.http.post(environment.apiUrl + '/update-product', obj)
       .toPromise()
       .then((data: any) => {
+        console.log(data)
       })
 
   }
 
 
-  public addProd(obj: Object): any {
+  public addProd(obj: any): any {
 
     console.log("}}}}}}}}}}}}}}}}}}}}")
     console.log(obj)

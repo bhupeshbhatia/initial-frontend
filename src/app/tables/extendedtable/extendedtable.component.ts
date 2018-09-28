@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core'
 
-declare var $:any
-
+declare var $: any;
 
 @Component({
     selector: 'extended-table-cmp',

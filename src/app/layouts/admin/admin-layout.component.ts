@@ -6,7 +6,7 @@ import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent, Platfo
 import { Router, NavigationEnd, NavigationStart } from '@angular/router'
 import PerfectScrollbar from 'perfect-scrollbar'
 
-declare var $:any
+
 
 @Component({
     selector: 'app-layout',

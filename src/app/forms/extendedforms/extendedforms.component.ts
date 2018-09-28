@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 
-declare var require: any
-declare var $:any
+declare var require: any;
+declare var $: any;
+
 
 @Component({
     selector: 'extendedforms-cmp',

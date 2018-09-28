@@ -15,7 +15,7 @@ declare interface User {
     idDestination?: string
 }
 
-declare var $: any
+declare var $: any;
 
 @Component({
     selector: 'register-cmp',

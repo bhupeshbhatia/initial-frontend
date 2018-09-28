@@ -34,11 +34,11 @@ namespace Chartist {
     noop: Function;
 
     alphaNumerate(n: number): string;
-    extend(target: Object, ...sources: Object[]): Object;
+    extend(target: any, ...sources: any[]): any;
 
     replaceAll(str: string, subStr: string, newSubStr: string): string;
     ensureUnit(value: number, unit: string): string;
-    quantity(input: string | number): Object;
+    quantity(input: string | number): any;
 
     query(query: Node | string): Node;
     times(length: number): Array<any>;
@@ -50,10 +50,10 @@ namespace Chartist {
 
     getMultiValue(value: any, dimension?: any): number; // this method is not documented, but it is used in the examples
 
-    serialize(data: Object | string | number): string;
-    deserialize(data: string): Object | string | number;
+    serialize(data: any | string | number): string;
+    deserialize(data: string): any | string | number;
 
-    createSvg(container: Node, width: string, height: string, className: string): Object; // TODO: Figure out if this is returning a ChartistSVGWrapper or an actual SVGElement
+    createSvg(container: Node, width: string, height: string, className: string): any; // TODO: Figure out if this is returning a ChartistSVGWrapper or an actual SVGElement
 
     plugins: any;
   }
@@ -107,7 +107,7 @@ namespace Chartist {
 
     plugins?: Array<any>; // all of these plugins seem to be functions with options, but keeping type any for now
 
-    update(data: Object, options?: T, override?: boolean): void;
+    update(data: any, options?: T, override?: boolean): void;
     detach(): void;
 
     /**
@@ -356,7 +356,7 @@ namespace Chartist {
   }
 
   interface ChartistSvgStatic {
-    new (name: HTMLElement | string, attributes: Object, className?: string, parent?: Object, insertFirst?: boolean): IChartistSvg;
+    new (name: HTMLElement | string, attributes: any, className?: string, parent?: any, insertFirst?: boolean): IChartistSvg;
 
     Easing: ChartistEasingStatic;
 
@@ -371,12 +371,12 @@ namespace Chartist {
     /**
      * Set attributes on the current SVG element of the wrapper you're currently working on.
      */
-    attr(attributes: Object | string, ns: string): Object | string;
+    attr(attributes: any | string, ns: string): any | string;
 
     /**
      * Create a new SVG element whose wrapper object will be selected for further operations. This way you can also create nested groups easily.
      */
-    elem(name: string, attributes?: Object, className?: string, insertFirst?: boolean): IChartistSvg;
+    elem(name: string, attributes?: any, className?: string, insertFirst?: boolean): IChartistSvg;
 
     /**
      * Returns the parent Chartist.SVG wrapper object
@@ -401,7 +401,7 @@ namespace Chartist {
     /**
      * This method creates a foreignObject (see https://developer.mozilla.org/en-US/docs/Web/SVG/Element/foreignObject) that allows to embed HTML content into a SVG graphic. With the help of foreignObjects you can enable the usage of regular HTML elements inside of SVG where they are subject for SVG positioning and transformation but the Browser will use the HTML rendering capabilities for the containing DOM.
      */
-    foreignObject(content: any, attributes?: Object, className?: string, insertFirst?: boolean): IChartistSvg;
+    foreignObject(content: any, attributes?: any, className?: string, insertFirst?: boolean): IChartistSvg;
 
     /**
      * This method adds a new text element to the current Chartist.Svg wrapper.
@@ -462,7 +462,7 @@ namespace Chartist {
     /**
      * The animate function lets you animate the current element with SMIL animations. You can add animations for multiple attributes at the same time by using an animation definition object. This object should contain SMIL animation attributes.
      */
-    animate(animations: IChartistAnimations, guided: boolean, eventEmitter: Object): IChartistSvg;
+    animate(animations: IChartistAnimations, guided: boolean, eventEmitter: any): IChartistSvg;
 
     /**
      * "Safe" way to get property value from svg BoundingBox. This is a workaround. Firefox throws an NS_ERROR_FAILURE error if getBBox() is called on an invisible node.

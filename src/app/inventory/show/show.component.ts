@@ -45,9 +45,7 @@ export class ShowComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(DialogDataDialog, {
 
-    });
   }
 
   ngOnInit(): void{
@@ -147,6 +145,11 @@ export class ShowComponent implements OnInit {
    console.log(e)
    if (e != null) {
     this.curField = Food.find(() => e)
+     this.dialog.open(DialogDataDialog, {
+       data: {
+         data: this.curField
+       }
+     });
     console.log(this.curField)
     console.log(this.curField.date_arrived)
     // this.formDate.nativeElement.value = this.curField.date_arrived

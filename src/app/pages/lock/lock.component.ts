@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common'
 
-declare var $:any
+declare var $: any;
 
 @Component({
     selector: 'lock-cmp',

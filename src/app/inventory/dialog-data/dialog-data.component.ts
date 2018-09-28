@@ -1,21 +1,21 @@
-import { Component, Input, EventEmitter } from '@angular/core'
+import { Component, Input, EventEmitter, Inject, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { MAT_DIALOG_DATA } from '@angular/material';
+import { LoadInventoryJsonService } from "../../services/load-inventory-json/load-inventory-json.service";
 
 
 @Component({
   selector: 'dialog-data-dialog',
   templateUrl: 'dialog-data-dialog.html',
 })
-export class DialogDataDialog {
-
-  @Input() event: Event;
-
-
+export class DialogDataDialog implements OnInit {
   form: FormGroup
   private formSubmitAttempt: boolean
   curField: any
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any, private loadInv: LoadInventoryJsonService) {
+  }
 
+  ngOnInit() {
     this.form = this.formBuilder.group({
       item_id: [null, [Validators.required, Validators.minLength(1)]],
       name: [null, [Validators.required, Validators.minLength(1)]],
@@ -26,8 +26,9 @@ export class DialogDataDialog {
       device_id: [null, [Validators.required, Validators.minLength(1)]],
       location: [null, [Validators.required, Validators.minLength(1)]]
     })
+    this.curField = this.data
+    console.log(this.curField.data)
   }
-
 
   get f() { return this.form.controls }
 
@@ -49,7 +50,8 @@ export class DialogDataDialog {
     const origDate = this.form.value.date_arrived
     this.form.value.date_arrived = Math.floor(Date.parse(`${origDate.year}/${month[origDate.month]}/${origDate.day}`) / 1000)
     console.log("submitted");
-    // this.loadInventoryJsonService.updateRow(this.form.value)
+    this.loadInv.updateRow(this.form.value)
+    this.loadInv.getJSON();
     // alert('Your Inventory has been updated.')
     // $('#myModal').modal('hide')
 

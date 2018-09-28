@@ -28,7 +28,6 @@
               "node_modules/c3/c3.min.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.js",
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/moment/moment.js",
@@ -104,7 +103,6 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
-              "node_modules/jquery/dist/jquery.js",
               "node_modules/popper.js/dist/umd/popper.js",
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/moment/moment.js",

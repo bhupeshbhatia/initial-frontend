@@ -47,7 +47,7 @@
             </a>
           </li>
           <li>
-            <a [routerLink]="['/pages/login']">
+            <a routerLink="['/pages/login']">
               <span class="sidebar-mini-icon">LO</span>
               <span class="sidebar-normal">Logout</span>
             </a>
@@ -100,7 +100,7 @@
         <ul class="nav">
             <li routerLinkActive="active" *ngFor="let menuitem of menuItems">
                 <!--If is a single link-->
-                <a [routerLink]="[menuitem.path]" *ngIf="menuitem.type === 'link'">
+                <a routerLink="[menuitem.path]" *ngIf="menuitem.type === 'link'">
                     <i class="{{menuitem.icontype}}"></i>
                     <p>{{menuitem.title}}</p>
                 </a>
@@ -114,7 +114,7 @@
                 <div id="{{menuitem.title}}" class="collapse" *ngIf="menuitem.type === 'sub'">
                     <ul class="nav">
                         <li routerLinkActive="active" *ngFor="let childitem of menuitem.children">
-                            <a [routerLink]="[menuitem.path, childitem.path]">
+                            <a routerLink="[menuitem.path, childitem.path]">
                                 <span class="sidebar-mini-icon">{{childitem.ab}}</span>
                                 <span class="sidebar-normal">{{childitem.title}}</span>
                             </a>

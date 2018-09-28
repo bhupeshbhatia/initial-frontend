@@ -2,8 +2,8 @@ import { Component, OnInit, OnChanges, AfterViewInit, SimpleChanges } from '@ang
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms'
 // import * as $ from 'jquery'
 
-declare var swal:any
-declare var $:any
+declare var swal:any;
+declare var $: any;
 
 interface FileReaderEventTarget extends EventTarget {
     result:string
