@@ -57,7 +57,7 @@ export class LoadInventoryJsonService {
   public deleteRow(item_id): any {
 
     var item = [{
-        item_id: item_id
+        "item_id": item_id
     }]
     console.log("}}}}}}}}}}}}}}}}}}}}")
     console.log(item)

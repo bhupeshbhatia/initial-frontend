@@ -71,7 +71,7 @@
             <div class="row">
                 <label class="col-sm-2 col-md-3 control-label mx-auto"> Date of Arrival </label>
                 <div class="col-sm-8 mx-auto">
-                    <input #date type="string" class="form-control" [ngClass]="{'is-invalid': isFieldValid('date_arrived')}"
+                    <input #date type="date" class="form-control" [ngClass]="{'is-invalid': isFieldValid('date_arrived')}"
                         formControlName="date_arrived" required name="dp">
                 </div>
             </div>

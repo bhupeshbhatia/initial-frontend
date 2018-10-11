@@ -76,7 +76,7 @@ export class ShowComponent implements OnInit {
 
     swal({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this imaginary file!",
+      text: "Once deleted, you will not be able to recover this fruit!",
       icon: "warning",
       buttons: ["Yes", "No"],
       dangerMode: true,
@@ -86,9 +86,11 @@ export class ShowComponent implements OnInit {
           this.selection.selected.forEach(item => {
             let index: number = Food.findIndex(d => d === item)
             console.log("++++++++++++++++++==")
+            console.log(item.item_id)
              this.loadInventoryJsonService.deleteRow(item.item_id)
+             this.resetData();
           })
-          swal("Poof! Your imaginary file has been deleted!", {
+          swal("Your fruit has been deleted!", {
             icon: "success",
           });
         } else {

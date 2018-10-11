@@ -3,6 +3,7 @@ import { Component, OnInit, Inject } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import swal from "sweetalert";
 import MockUtils from './mockutils'
+import { LoadInventoryJsonService } from "../../services/load-inventory-json/load-inventory-json.service";
 
 @Component({
   selector: 'app-add',
@@ -16,7 +17,8 @@ export class AddComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private addService: AddInventoryService
+    private addService: AddInventoryService,
+    private addData: LoadInventoryJsonService
   ) {}
 
   ngOnInit() {
@@ -62,13 +64,7 @@ export class AddComponent implements OnInit {
   onSubmit() {
     this.formSubmitAttempt = true
     if (this.form.valid) {
-      this.addService.addItem(this.form.value)
-      .subscribe(data => {
-        console.log("------------------")
-        swal("Record successfully inserted!");
-        this.reset()
-        this.formSubmitAttempt = false
-      })
+      this.addData.addProd(this.form.value)
     }
   }
 
