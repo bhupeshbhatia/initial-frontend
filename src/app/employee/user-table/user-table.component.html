@@ -1,0 +1,35 @@
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+    </div>
+    <mat-table #table [dataSource]="dataSource" matSort>
+
+      <div class="input-group mb-3">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Search..." aria-label="Search" aria-describedby="basic-addon2">
+          <i class="fa fa-search fa-2x fa-fw" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <!-- Item No Column -->
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">Username</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="text-center"><a class="green-color" routerLink="/update-user">{{ element.username }}</a></mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">Name</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="text-center"><a class="green-color" routerLink="/update-user">{{ element.name }}</a></mat-cell>
+      </ng-container>
+
+      <!-- Location Column -->
+      <ng-container matColumnDef="accountType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header class="text-center">Account Type</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="text-center"><a class="green-color" routerLink="/update-user">{{ element.accountType }}</a></mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>

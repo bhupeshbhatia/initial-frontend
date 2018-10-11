@@ -1,5 +1,4 @@
 import { Component, OnInit, Renderer, ViewChild, ElementRef, Directive } from '@angular/core';
-import { ROUTES } from '../.././sidebar/sidebar.component';
 import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
@@ -11,7 +10,6 @@ var misc:any ={
 }
 
 @Component({
-    moduleId: module.id,
     selector: 'navbar-cmp',
     templateUrl: 'navbar.component.html'
 })
@@ -33,8 +31,6 @@ export class NavbarComponent implements OnInit{
     }
 
     ngOnInit(){
-        this.listTitles = ROUTES.filter(listTitle => listTitle);
-
         const navbar: HTMLElement = this.element.nativeElement;
         const body = document.getElementsByTagName('body')[0];
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -109,8 +105,6 @@ export class NavbarComponent implements OnInit{
         }
     }
     sidebarToggle(){
-        // var toggleButton = this.toggleButton;
-        // var body = document.getElementsByTagName('body')[0];
         if(this.sidebarVisible == false){
             this.sidebarOpen();
         } else {
@@ -119,28 +113,31 @@ export class NavbarComponent implements OnInit{
     }
 
     getTitle(){
-        var titlee = this.location.prepareExternalUrl(this.location.path());
-        if(titlee.charAt(0) === '#'){
-            titlee = titlee.slice( 2 );
+      if (!this.listTitles || this.listTitles.length === 0) {
+        return 'Dashboard'
+      }
+
+      let title = this.location.prepareExternalUrl(this.location.path());
+      if(title.startsWith('#')) {
+        title = title.slice(2)
+      }
+
+      this.listTitles.forEach(parent => {
+        if(parent.path === title){
+          return parent.title;
         }
-        for(var item = 0; item < this.listTitles.length; item++){
-            var parent = this.listTitles[item];
-            if(parent.path === titlee){
-                return parent.title;
-            }else if(parent.children){
-                var children_from_url = titlee.split("/")[2];
-                for(var current = 0; current < parent.children.length; current++){
-                    if(parent.children[current].path === children_from_url ){
-                        return parent.children[current].title;
-                    }
-                }
+        else if(parent.children){
+          let children_from_url = title.split("/")[2]
+          parent.children.forEach(child => {
+            if(child.path === children_from_url ){
+              return child.title;
             }
+          })
         }
-        return 'Dashboard';
+      })
     }
 
     getPath(){
-        // console.log(this.location);
-        return this.location.prepareExternalUrl(this.location.path());
+      return this.location.prepareExternalUrl(this.location.path());
     }
 }

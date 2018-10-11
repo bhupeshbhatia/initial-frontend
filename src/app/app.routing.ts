@@ -1,52 +1,48 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes, Route } from '@angular/router'
 
-import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+import { AdminLayoutComponent } from './layouts/admin/admin-layout.component'
+import { AuthGuard } from './_Auth/auth.guard'
+import { AppRoutes } from 'app/app.routes'
 
-export const AppRoutes: Routes = [{
-        path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-      },{
-        path: '',
-        component: AdminLayoutComponent,
-        children: [{
-            path: '',
-            loadChildren: './dashboard/dashboard.module#DashboardModule'
-        },{
-            path: 'components',
-            loadChildren: './components/components.module#ComponentsModule'
-        },{
-            path: 'forms',
-            loadChildren: './forms/forms.module#Forms'
-        },{
-            path: 'tables',
-            loadChildren: './tables/tables.module#TablesModule'
-        },{
-            path: 'maps',
-            loadChildren: './maps/maps.module#MapsModule'
-        },{
-            path: 'charts',
-            loadChildren: './charts/charts.module#ChartsModule'
-        },{
-            path: 'calendar',
-            loadChildren: './calendar/calendar.module#CalendarModule'
-        },{
-            path: '',
-            loadChildren: './userpage/user.module#UserModule'
-        },{
-            path: '',
-            loadChildren: './timeline/timeline.module#TimelineModule'
-        },{
-            path: '',
-            loadChildren: './widgets/widgets.module#WidgetsModule'
-        }]
-        },{
-            path: '',
-            component: AuthLayoutComponent,
-            children: [{
-                path: 'pages',
-                loadChildren: './pages/pages.module#PagesModule'
-            }]
+function createModuleRoutes(routeDef: any) {
+  return Object.keys(routeDef)
+    .reduce((routes: any, routeName: any): Route[] => {
+      const route = routeDef[routeName]
+
+      const hasChildren = route.children &&
+        Object.keys(route.children).length > 0
+      if (hasChildren) {
+        const newRoute = {
+          path: route.path,
+          component: route.component,
+          canActivate: route.isPublic ? [AuthGuard] : null,
+          children: createModuleRoutes(route.children)
         }
-];
+        return routes.concat(newRoute)
+      }
+
+      return routes.concat({
+        path: route.path,
+        component: route.component,
+        canActivate: route.isPublic ? [AuthGuard] : null
+      })
+    },
+    []
+    )
+}
+
+@NgModule({
+    imports: [RouterModule.forRoot(
+      [
+        {
+          path: '',
+          component: AdminLayoutComponent,
+          children: createModuleRoutes(AppRoutes)
+        }
+      ]
+    )],
+    exports: [RouterModule]
+})
+
+export class AppRoutingModule { }
