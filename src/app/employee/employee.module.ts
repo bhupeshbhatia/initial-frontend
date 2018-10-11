@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterModule } from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 
 // Material Components
 import {
@@ -12,7 +13,10 @@ import {
   MatInputModule,
   MatSelectModule,
   MatTableModule,
-  MatTabsModule
+  MatTabsModule,
+  MatCheckboxModule,
+  MatPaginatorModule,
+  MatButtonModule
 } from '@angular/material'
 
 import { UserAddComponent } from './user-add/user-add.component'
@@ -29,18 +33,23 @@ import { DialogDataDialog } from './dialog-data/dialog-data.component'
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule.forRoot(),
     // Material Components
+    MatCheckboxModule,
     MatDialogModule,
     MatCardModule,
     MatFormFieldModule,
+    MatPaginatorModule,
     MatIconModule,
     MatInputModule,
     MatSelectModule,
     MatTableModule,
     MatTabsModule,
+    MatButtonModule,
   ],
   providers: [],
   exports: [
-  ]
+  ],
+  entryComponents:[DialogDataDialog]
 })
 export class EmployeeModule {}

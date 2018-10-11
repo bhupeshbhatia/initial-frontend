@@ -38,26 +38,15 @@ export class UserAddComponent {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient) {
-    // this.nativeElement = element.nativeElement;
-    // this.sidebarVisible = false;
     this.http = http;
   }
-  // checkFullPageBackgroundImage() {
-  //     // var $page = $('.full-page')
-  //     // var image_src = $page.data('image')
-
-  //     // if (image_src !== undefined) {
-  //     //     var image_container = '<div class="full-page-background" style="background-image: url(' + image_src + ') "/>'
-  //     //     $page.append(image_container)
-  //     // }
-  // }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       firstname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
       lastname: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
-      username: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      password: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      password: ['', [Validators.required, Validators.minLength(5)]],
       email: ['', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
@@ -72,7 +61,6 @@ export class UserAddComponent {
 
 
   f(): any {
-    console.log(this.registerForm.controls.email.errors)
     return this.registerForm.controls
   }
 
@@ -103,9 +91,8 @@ export class UserAddComponent {
         }`;
 
       console.log(resource)
-      this.http.post('http://142.55.32.86:50281/api1', resource)
+      this.http.post('http://162.212.158.16:30653/api', resource)
         .toPromise()
-        // .then(d => this.data)
         .then((data: any) => {
           console.log(data)
           if (data.data.register !== null) {

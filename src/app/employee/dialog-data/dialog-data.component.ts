@@ -1,9 +1,9 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpHeaders, HttpClient } from '@angular/common/http'
 import { AuthResponse } from '../../models/auth-response'
-
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'dialog-data-dialog',
@@ -22,9 +22,9 @@ export class DialogDataDialog implements OnInit {
 
   test: Date = new Date();
   registerForm: FormGroup;
+  curField: any
   formSubmitAttempt: boolean;
   error: string;
-  data: AuthResponse;
   returnUrl: string;
 
   selectedOption: number;
@@ -37,20 +37,10 @@ export class DialogDataDialog implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private http: HttpClient) {
-    // this.nativeElement = element.nativeElement;
-    // this.sidebarVisible = false;
     this.http = http;
   }
-  // checkFullPageBackgroundImage() {
-  //     // var $page = $('.full-page')
-  //     // var image_src = $page.data('image')
-
-  //     // if (image_src !== undefined) {
-  //     //     var image_container = '<div class="full-page-background" style="background-image: url(' + image_src + ') "/>'
-  //     //     $page.append(image_container)
-  //     // }
-  // }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -62,9 +52,15 @@ export class DialogDataDialog implements OnInit {
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
-      roleSelect: ['', [Validators.required]]
+      role: ['', [Validators.required]]
     })
-
+    this.curField = this.data
+    console.log(this.curField)
+    this.registerForm.get('firstname').setValue(this.curField.data.first_name);
+    this.registerForm.get('lastname').setValue(this.curField.data.last_name);
+    this.registerForm.get('username').setValue(this.curField.data.username);
+    this.registerForm.get('email').setValue(this.curField.data.email);
+    this.registerForm.get('role').setValue(this.curField.data.role);
 
     this.returnUrl = this.route.snapshot.queryParams[''] || '/'
   }

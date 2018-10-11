@@ -1,70 +1,63 @@
-.title {
-    font-weight: bolder;
+#btnSearch{
+  padding-right: 10px
 }
 
-.nav-btn {
-    background-color: #C92228;
-    border-color: #C92228;
-    font-weight: bolder;
-    color: white !important;
-    /* margin-top: 3%; */
+img{
+    height: 400px;
+    width: 400px
 }
 
-.input-group mb-3 {
-    margin-bottom: 24px;
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%
 }
 
-.fa-arrow-circle-left,
-.fa-plus-circle,
-.fa-search {
-    color: #C92228;
+.example-full-width {
+  width: 100%
 }
 
-.table-container {
-    display: flex;
-    flex-direction: column;
-    min-width: 300px;
+table {
+  width: 100%
 }
 
-.mat-table {
-    overflow: auto;
-    max-height: 500px;
+td a {
+    color: black;
+    text-decoration: none;
+    display: block
 }
 
-mat-row:nth-child(even) {
-    background-color: #e5e5e5;
+th.mat-sort-header-sorted {
+  color: black
 }
 
-mat-row:nth-child(odd) {
-    background-color: #bfbfbf;
+.yellow{
+  background-color: yellow
 }
 
-.mat-header-row {
-    background-color: #333333;
+.green{
+ background-color: green
 }
 
-.mat-header-cell {
-    color: white;
+.red{
+ background-color: red
 }
 
-h1 {
-    text-align: center;
-    color: #C92228;
-}
-
-.input-group-append {
-    position: relative;
-}
-
-.input-group-append i {
+.control-label.required:after {
+    color: #d00;
+    content: "*";
     position: absolute;
-    left: -1px;
-    top: 3px;
-    padding: 9px 0px 9px 12px;
-    color: #aaa;
-    transition: .3s;
+    margin-left: 5px;
+    top:7px
+  }
+
+.mat-sort-header- {
+  padding-left: 24px;
 }
 
-.green-color{
-    color: green;
-}
+td.mat-cell {
+  padding: 0 24px 0 24px;
+      font-size: 14px;
+      /* text-align: center; */
+      border-right: 1px solid rgb(224, 224, 224);
+  }

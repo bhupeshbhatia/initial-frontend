@@ -22,7 +22,17 @@ export class SidebarComponent implements OnInit {
     },
     {
       route: AppRoutes.employee,
-      icon: 'nc-icon nc-user-run'
+      icon: 'nc-icon nc-user-run',
+      children: [
+        {
+          route: AppRoutes.employee.children.add,
+          ab: 'AD'
+        },
+        {
+          route: AppRoutes.employee.children.show,
+          ab: 'V'
+        }
+      ]
     },
     {
       route: AppRoutes.inventory,

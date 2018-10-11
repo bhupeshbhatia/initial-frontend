@@ -1,6 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
-import { MatSort, MatSortable, MatTableDataSource } from '@angular/material'
+import { MatSort, MatSortable, MatTableDataSource, MatDialog } from '@angular/material'
 import { Employee } from "../../models/employee";
+import { SelectionModel } from '@angular/cdk/collections'
+import { DialogDataDialog } from "../dialog-data/dialog-data.component";
+import swal from "sweetalert";
+
+var Employees: Employee[] = []
 
 @Component({
   selector: 'component-user-table',
@@ -9,55 +14,88 @@ import { Employee } from "../../models/employee";
 })
 export class UserTableComponent implements OnInit {
 
-  displayedColumns = ['username', 'name', 'accountType']
-  ELEMENT_DATA: Element[] = [
+  constructor(public dialog: MatDialog){
+
+  }
+
+  selection = new SelectionModel<Employee>(true, [])
+
+  displayedColumns = ['select', 'first_name', 'last_name', 'username', 'email', 'role', 'modify']
+  ELEMENT_DATA: Employee[] = [
     {
-      username: 'danny.santhos', name: 'Danny Santhos', accountType: 'Corporate'
+      first_name: 'Danny', last_name: 'Santhos', username: 'dsanthos', email: 'dsanthos@gmail.com', role: 'Corporate'
     },
     {
-      username: 'kevin.timmins', name: 'Kevin Timmins', accountType: 'Corporate'
-    },
+      first_name: 'Bob', last_name: 'Santhos', username: 'bsanthos', email: 'bsanthos@gmail.com', role: 'Corporate'    },
     {
-      username: 'keylly74', name: 'Kelly River', accountType: 'Employee'
-    },
+      first_name: 'Manny', last_name: 'Santhos', username: 'msanthos', email: 'msanthos@gmail.com', role: 'Corporate'    },
     {
-      username: 'josh.s', name: 'Josh Stones', accountType: 'Employee'
-    },
+      first_name: 'Nanny', last_name: 'Santhos', username: 'nsanthos', email: 'nsanthos@gmail.com', role: 'Corporate'    },
     {
-      username: 'some.dude', name: 'Some Dude', accountType: 'Employee'
-    },
+      first_name: 'Tammy', last_name: 'Santhos', username: 'tsanthos', email: 'tsanthos@gmail.com', role: 'Corporate'    },
     {
-      username: 'martha.smith', name: 'Martha Smith', accountType: 'Manager'
-    }
+      first_name: 'Nando', last_name: 'Santhos', username: 'nsanthos', email: 'nsanthos@gmail.com', role: 'Corporate'    }
   ]
   dataSource = new MatTableDataSource(this.ELEMENT_DATA)
+  curField: any
+  populateFields(e): Employee {
+    console.log(e)
+    if (e != null) {
+      this.curField = this.ELEMENT_DATA.filter(i => i.email === e)[0]
+      console.log(this.curField)
+      this.dialog.open(DialogDataDialog, {
+        data: {
+          data: this.curField
+        }
+      });
+      // this.formDate.nativeElement.value = this.curField.date_arrived
+      console.log()
+    }
+    return e
+  }
 
-  // curField: any
-  // populateFields(e): Employee {
-  //   console.log(e)
-  //   if (e != null) {
-  //     this.curField = Food.find(() => e)
-  //     this.dialog.open(DialogDataDialog, {
-  //       data: {
-  //         data: this.curField
-  //       }
-  //     });
-  //     console.log(this.curField)
-  //     console.log(this.curField.date_arrived)
-  //     // this.formDate.nativeElement.value = this.curField.date_arrived
-  //     console.log()
-  //   }
-  //   return e
-  // }
+  removeSelectedRows() {
+
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this imaginary file!",
+      icon: "warning",
+      buttons: ["Yes", "No"],
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (!willDelete) {
+          this.selection.selected.forEach(item => {
+            let index: number = Employees.findIndex(d => d === item)
+            console.log("++++++++++++++++++==")
+            // this.loadInventoryJsonService.deleteRow(item.item_id)
+          })
+          swal("Poof! Your imaginary file has been deleted!", {
+            icon: "success",
+          });
+        } else {
+          swal("Inventory not removed");
+        }
+      });
+  }
+
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length
+    const numRows = this.dataSource.data.length
+    return numSelected == numRows
+  }
+
+  /** Selects all rows if they are not all selected otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach((row: any) => this.selection.select(row))
+  }
 
   @ViewChild(MatSort) sort: MatSort
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort
   }
-}
-export interface Element {
-  username: String
-  name: String
-  accountType: String
 }

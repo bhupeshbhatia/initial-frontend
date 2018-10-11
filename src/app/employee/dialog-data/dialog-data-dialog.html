@@ -5,7 +5,7 @@
                 <label class="control-label required"> First name </label>
             </div>
             <div class="col-md-9">
-                <input type="text" id="firstname" class="form-control" formControlName="firstname" ngModel [ngClass]="{ 'is-invalid': formSubmitAttempt && f().firstname.errors }">
+                <input type="text" id="firstname" class="form-control" formControlName="firstname"  [ngClass]="{ 'is-invalid': formSubmitAttempt && f().firstname.errors }">
                 <div *ngIf="formSubmitAttempt && f().firstname.errors" class="invalid-feedback">
                     <div *ngIf="f().firstname.errors.required">
                         First name is required
@@ -18,7 +18,7 @@
                 <label class="control-label required"> Last name </label>
             </div>
             <div class="col-md-9">
-                <input type="text" id="lastname" class="form-control" ngModel formControlName="lastname" [ngClass]="{ 'is-invalid': formSubmitAttempt && f().lastname.errors }">
+                <input type="text" id="lastname" class="form-control"  formControlName="lastname" [ngClass]="{ 'is-invalid': formSubmitAttempt && f().lastname.errors }">
                 <div *ngIf="formSubmitAttempt && f().lastname.errors" class="invalid-feedback">
                     <div *ngIf="f().lastname.errors.required">
                         Last name is required
@@ -31,7 +31,7 @@
                 <label class="control-label required"> Username </label>
             </div>
             <div class="col-md-9">
-                <input type="text" class="form-control" ngModel formControlName="username" id="username" [ngClass]="{ 'is-invalid': formSubmitAttempt && f().username.errors }">
+                <input type="text" class="form-control"  formControlName="username" id="username" [ngClass]="{ 'is-invalid': formSubmitAttempt && f().username.errors }">
                 <div *ngIf="formSubmitAttempt && f().username.errors" class="invalid-feedback">
                     <div *ngIf="f().username.errors.required">
                         Username is required
@@ -41,24 +41,10 @@
         </div>
         <div class="row form-group">
             <div class="col-md-3 text-md-right">
-                <label class="control-label required"> Password </label>
-            </div>
-            <div class="col-md-9">
-                <input type="password" id="password" class="form-control" ngModel formControlName="password" required
-                    [ngClass]="{ 'is-invalid': formSubmitAttempt && f().password.errors }">
-                <div *ngIf="formSubmitAttempt && f().password.errors" class="invalid-feedback">
-                    <div *ngIf="f().password.errors">
-                        Password is required
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row form-group">
-            <div class="col-md-3 text-md-right">
                 <label class="control-label required"> Email </label>
             </div>
             <div class="col-md-9">
-                <input type="email" id="email" class="form-control" ngModel formControlName="email" [ngClass]="{ 'is-invalid': formSubmitAttempt && f().email.errors }">
+                <input type="email" id="email" class="form-control"  formControlName="email" [ngClass]="{ 'is-invalid': formSubmitAttempt && f().email.errors }">
                 <div *ngIf="formSubmitAttempt && f().email.errors" class="invalid-feedback">
                     <div *ngIf="!!f().email.errors">
                         Email is required
@@ -72,36 +58,32 @@
                 <label class="control-label required"> Role </label>
             </div>
             <div class="col-md-9">
-                <select class="form-control" formControlName="roleSelect" name="roleSelect" id="roleSelect">
+                <select class="form-control" formControlName="role" name="roleSelect" id="roleSelect">
                     <option value="" disabled>--Select a Role--</option>
                     <option *ngFor="let role of roleStatus" [ngValue]="role">
                         {{ role }}
                     </option>
                 </select>
-                <div *ngIf="formSubmitAttempt && f().roleSelect.errors || f().roleSelect.touched" class="invalid-feedback">
-                    <div *ngIf="f().roleSelect.errors || f().roleSelect.touched">
+                <div *ngIf="formSubmitAttempt && f().roleSelect.errors || f().role.touched" class="invalid-feedback">
+                    <div *ngIf="f().roleSelect.errors || f().role.touched">
                         Role is required
                     </div>
                 </div>
             </div>
         </div>
 
-
-        <div class="row card-footer">
-            <div class="col-sm-4 offset-sm-2 col-md-3 offset-md-4">
-                <button type="submit" id="addProduct" class="btn btn-info btn-fill w-100" (click)="onSubmit()">
-                    Register
-                </button>
-            </div>
-            <div class="col-sm-4 offset-sm-1 col-md-3 offset-md-1">
-                <button type="submit" id="cancelProduct" class="btn btn-danger btn-fill w-100" (click)="reset()">
-                    Reset
-                </button>
-            </div>
-        </div>
         <br>
         <div *ngIf="showError" class="err-msg">
             {{ message }}
+        </div>
+        <div class="modal-footer mx-auto">
+            <mat-dialog-actions>
+                <button mat-button [mat-dialog-close]="true" (click)="onSubmit()">Update</button>
+                <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+                <button mat-button [mat-dialog-close]="true">Close</button>
+            </mat-dialog-actions>
+            <!-- <button type="submit" id="addProduct" class="btn btn-info btn-fill col-sm-6 col-md-6">Update Product</button>
+                        <button type="submit" id="cancelProduct" class="btn btn-danger btn-fill col-sm-6 col-md-6" (click)="reset()">Reset</button> -->
         </div>
     </form>
 </mat-dialog-content>

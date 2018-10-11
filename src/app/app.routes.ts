@@ -1,8 +1,8 @@
 import { DashboardComponent } from "app/dashboard/dashboard.component"
 import { LoginPageComponent } from "app/login-page/login-page.component"
 import { AddComponent } from "app/inventory/add/add.component"
-import { UserTableComponent } from "app/employee/user-table/user-table.component"
 import { InventoryRoutes } from "app/inventory/inventory.routes";
+import { EmployeeRoutes } from "./employee/employee.routes";
 
 export const AppRoutes = {
   root: {
@@ -18,9 +18,9 @@ export const AppRoutes = {
   },
 
   employee: {
+    path: 'employees',
     title: 'Employees',
-    path: 'employee/show-employees',
-    component: UserTableComponent
+    children: EmployeeRoutes
   },
 
   inventory: {
