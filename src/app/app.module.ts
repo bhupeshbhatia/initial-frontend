@@ -19,7 +19,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { LoginPageModule } from './login-page/login-page.module';
 import { CommonModule } from '@angular/common'
 
-import { AppRoutingModule } from 'app/app.routing';
+import { AppRoutingModule } from './app.routing';
 
 import { AuthGuard } from './_Auth/auth.guard'
 import { JWTService } from './_Auth/jwt.service'

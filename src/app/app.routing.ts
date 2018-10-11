@@ -3,7 +3,7 @@ import { RouterModule, Routes, Route } from '@angular/router'
 
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component'
 import { AuthGuard } from './_Auth/auth.guard'
-import { AppRoutes } from 'app/app.routes'
+import { AppRoutes } from './../app/app.routes'
 
 function createModuleRoutes(routeDef: any) {
   return Object.keys(routeDef)

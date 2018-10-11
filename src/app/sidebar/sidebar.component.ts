@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 
-import { AppRoutes } from 'app/app.routes'
-import { JWTService } from 'app/_Auth/jwt.service';
-import { User } from 'app/_Auth/User.model'
+import { AppRoutes } from '../app.routes'
+import { JWTService } from '../_Auth/jwt.service';
+import { User } from '../_Auth/User.model'
 
 @Component({
   selector: 'sidebar-cmp',

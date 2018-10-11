@@ -21,7 +21,7 @@ import {
   MatTabsModule,
   MatToolbarModule
 } from '@angular/material'
-import { JWTService } from 'app/_Auth/jwt.service'
+import { JWTService } from '../_Auth/jwt.service'
 
 import { Inventory } from '../models/inventory'
 import { AddComponent } from './add/add.component'
