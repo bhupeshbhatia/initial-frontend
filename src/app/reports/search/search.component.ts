@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { SearchDataToTableService } from "../../services/search-data-to-table/search-data-to-table.service";
 
 @Component({
   selector: 'app-search',
@@ -14,7 +13,7 @@ export class SearchComponent implements OnInit {
   @ViewChild('start') start: ElementRef
   @ViewChild('end') end: ElementRef
 
-  constructor(private http: HttpClient, private searchData: SearchDataToTableService) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
@@ -76,7 +75,6 @@ export class SearchComponent implements OnInit {
           .then((data: any) => {
             console.log(data)
             if (data !== null) {
-              this.searchData.setMetData(data)
             }
           })
 
@@ -107,7 +105,6 @@ export class SearchComponent implements OnInit {
           .then((data: any) => {
             console.log(data)
             if (data !== null) {
-              this.searchData.setDevData(data)
             }
           })
 

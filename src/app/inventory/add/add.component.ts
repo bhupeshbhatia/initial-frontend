@@ -50,7 +50,7 @@ export class AddComponent implements OnInit {
     this.form.get('origin')
       .setValue(m.genOrigin());
     this.form.get('date_arrived')
-      .setValue(new Date(m.genDateArrived()).toUTCString());
+      .setValue(new Date(m.genDateArrived()).toLocaleDateString().split("T")[0]);
     this.form.get('total_weight')
       .setValue(m.genWeight().toFixed(2) + ' Kilograms');
     this.form.get('price')
@@ -64,6 +64,25 @@ export class AddComponent implements OnInit {
   onSubmit() {
     this.formSubmitAttempt = true
     if (this.form.valid) {
+
+      const month = new Array()
+      month[0] = "January"
+      month[1] = "February"
+      month[2] = "March"
+      month[3] = "April"
+      month[4] = "May"
+      month[5] = "June"
+      month[6] = "July"
+      month[7] = "August"
+      month[8] = "September"
+      month[9] = "October"
+      month[10] = "November"
+      month[11] = "December"
+      const origDate = this.form.value.date_arrived
+      console.log(origDate)
+      // this.form.value.date_arrived = Math.floor(Date.parse(`${origDate.year}/${month[origDate.month]}/${origDate.day}`) / 1000)
+      this.form.value.date_arrived = Math.floor((new Date(origDate).getTime()/1000))
+      console.log(this.form.value.date_arrived)
       this.addData.addProd(this.form.value)
     }
   }

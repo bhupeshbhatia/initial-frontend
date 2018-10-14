@@ -1,8 +1,9 @@
-import { DashboardComponent } from "app/dashboard/dashboard.component"
-import { LoginPageComponent } from "app/login-page/login-page.component"
-import { AddComponent } from "app/inventory/add/add.component"
-import { InventoryRoutes } from "app/inventory/inventory.routes";
-import { EmployeeRoutes } from "./employee/employee.routes";
+import { DashboardComponent } from "./dashboard/dashboard.component"
+import { LoginPageComponent } from "./login-page/login-page.component"
+import { AddComponent } from "./inventory/add/add.component"
+import { UserTableComponent } from "./employee/user-table/user-table.component"
+import { InventoryRoutes } from "./inventory/inventory.routes";
+import { ReportsRoutes } from "./reports/reports.routes";
 
 export const AppRoutes = {
   root: {
@@ -18,15 +19,21 @@ export const AppRoutes = {
   },
 
   employee: {
-    path: 'employees',
     title: 'Employees',
-    children: EmployeeRoutes
+    path: 'employee/show-employees',
+    component: UserTableComponent
   },
 
   inventory: {
     path: 'inventory',
     title: 'Inventory',
     children: InventoryRoutes
+  },
+
+  reports: {
+    path: 'reports',
+    title: 'Reports',
+    children: ReportsRoutes
   },
 
   monitoring: {

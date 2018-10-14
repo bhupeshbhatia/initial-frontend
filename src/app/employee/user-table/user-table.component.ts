@@ -5,7 +5,7 @@ import { SelectionModel } from '@angular/cdk/collections'
 import { DialogDataDialog } from "../dialog-data/dialog-data.component";
 import swal from "sweetalert";
 
-var Employees: Employee[] = []
+var Employees: any[] = []
 
 @Component({
   selector: 'component-user-table',

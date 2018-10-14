@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 
-import { AppRoutes } from '../app.routes'
-import { JWTService } from '../_Auth/jwt.service';
-import { User } from '../_Auth/User.model'
+import { AppRoutes } from '../../app/app.routes'
+import { JWTService } from '../../app/_Auth/jwt.service';
+import { User } from '../../app/_Auth/User.model'
 
 @Component({
   selector: 'sidebar-cmp',
@@ -22,17 +22,7 @@ export class SidebarComponent implements OnInit {
     },
     {
       route: AppRoutes.employee,
-      icon: 'nc-icon nc-user-run',
-      children: [
-        {
-          route: AppRoutes.employee.children.add,
-          ab: 'AD'
-        },
-        {
-          route: AppRoutes.employee.children.show,
-          ab: 'V'
-        }
-      ]
+      icon: 'nc-icon nc-user-run'
     },
     {
       route: AppRoutes.inventory,
@@ -46,6 +36,40 @@ export class SidebarComponent implements OnInit {
           route: AppRoutes.inventory.children.view,
           ab: 'V'
         }
+      ]
+    },
+    {
+      route: AppRoutes.reports,
+      icon: 'nc-icon nc-box-2',
+      children: [
+        {
+          route: AppRoutes.reports.children.ethylene,
+          ab: 'ET'
+        },
+        {
+          route: AppRoutes.reports.children.flashsale,
+          ab: 'FS'
+        },
+        {
+          route: AppRoutes.reports.children.inventory,
+          ab: 'IN'
+        },
+        {
+          route: AppRoutes.reports.children.savings,
+          ab: 'SA'
+        },
+        {
+          route: AppRoutes.reports.children.sensor,
+          ab: 'SE'
+        },
+        {
+          route: AppRoutes.reports.children.temphumid,
+          ab: 'TE'
+        },
+        {
+          route: AppRoutes.reports.children.waste,
+          ab: 'WA'
+        },
       ]
     },
     {

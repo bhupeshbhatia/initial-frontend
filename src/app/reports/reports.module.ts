@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
 import { CommonModule } from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { ReportRoutes } from "./reports.routing";
 import { CdkTableModule } from '@angular/cdk/table';
 import { EthyleneReportComponent } from "./ethylene-report/ethylene-report.component";
 import { FlashSaleReportComponent } from "./flash-sale-report/flash-sale-report.component";
@@ -37,7 +36,6 @@ import { SearchComponent } from './search/search.component';
     imports: [
         CommonModule,
         CdkTableModule,
-        RouterModule.forChild(ReportRoutes),
         FormsModule,
         FormsModule,
         HttpModule,

@@ -6,39 +6,38 @@
       </div>
     </div>
     <div id="testCapture">
-    <div class="row">
-      <div class="col-lg-8 col-sm-8">
-        <div class="card">
-          <div class="card-body">
-            <!-- <h6></h6> -->
-            <canvas id="ethylene"></canvas>
+      <div class="row">
+        <div class="col-lg-8 col-sm-8">
+          <div class="card">
+            <div class="card-body">
+              <!-- <h6></h6> -->
+              <canvas id="ethylene"></canvas>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-4 col-sm-4">
-        <div class="card report-info">
-          <div class="card-body card-body2">
-            <h6 class="big-title">Report Information</h6>
-            <br>
-            <div>
-              <p>Report Type: Ethylene</p>
+        <div class="col-lg-4 col-sm-4">
+          <div class="card report-info">
+            <div class="card-body card-body2">
+              <h6 class="big-title">Average Ethylene (PPM)</h6>
               <br>
-              <p>Product Name: </p>
-              <br>
-              <p>Date Generated: {{ date | date:'yyyy/MM/dd' }} </p>
-              <br><br>
-              <div class="row">
-                <button mat-raised-button class="mx-auto" color="warn" (click)="captureScreen()">Convert Report to PDF</button>
+              <div>
+                <p>Report Type: Ethylene</p>
+                <br>
+                <!-- <p>Product Name: </p>
+              <br> -->
+                <p>Date Generated: {{ date | date:'yyyy/MM/dd' }} </p>
+                <br><br>
+                <div class="row">
+                  <button mat-raised-button class="mx-auto" color="warn" (click)="captureScreen()">Convert Report to
+                    PDF</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <app-reports-table
-    [jsonFields]="['sku', 'name', 'ethylene', 'timestamp', 'status', 'expiry', 'trend']"
-    [displayedColumns]="['SKU', 'Name', 'Ethylene', 'Timestamp', 'Status', 'Projected Expiry', 'Trend (%)']"
-    ></app-reports-table>
+      <app-reports-table [jsonFields]=1
+        [displayedColumns]="['SKU', 'Name', 'Ethylene', 'Timestamp', 'Status', 'Projected Expiry', 'Trend (%)']"></app-reports-table>
     </div>
   </div>
 </div>

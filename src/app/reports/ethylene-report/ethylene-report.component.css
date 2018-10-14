@@ -1,5 +1,5 @@
 .card-body2{
-height: 445px !important;
+height: 400px !important;
 }
 
 #convert{
@@ -9,4 +9,8 @@ height: 445px !important;
 #ethylene{
     width: 400px;
     height: 400px;
+}
+
+.big-title {
+    font-size: 16px;
 }

@@ -44,7 +44,7 @@ import {
   MatNativeDateModule
 } from "@angular/material";
 import { DialogDataDialog } from './inventory/dialog-data/dialog-data.component'
-
+import { ReportsModule } from "./reports/reports.module";
 import { UserAddComponent } from './employee/user-add/user-add.component'
 import { UserTableComponent } from './employee/user-table/user-table.component'
 
@@ -94,7 +94,8 @@ import { UserTableComponent } from './employee/user-table/user-table.component'
     MatToolbarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTabsModule
+    MatTabsModule,
+    ReportsModule
   ],
   providers: [
     AuthGuard,

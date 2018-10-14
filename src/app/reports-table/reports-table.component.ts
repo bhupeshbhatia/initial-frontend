@@ -7,7 +7,6 @@ import { SelectionModel } from '@angular/cdk/collections'
 import { Observable, of } from 'rxjs';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import swal from "sweetalert";
-import { SearchDataToTableService } from "../services/search-data-to-table/search-data-to-table.service";
 import MockUtils from "../reports/mocks";
 var Food: Inventory[] = []
 
@@ -30,8 +29,9 @@ export class ReportsTableComponent implements OnInit {
   expandedElement: any;
   @ViewChild('table') table: any
   @Input() displayedColumns: string[]
-  @Input() jsonFields: string[]
+  @Input() jsonFields: number
   ethyData: any
+  invData: any
 
   //add device ID to shown rows
   dataSource = new MatTableDataSource()
@@ -46,14 +46,27 @@ export class ReportsTableComponent implements OnInit {
   selection = new SelectionModel<Inventory>(true, [])
 
   constructor(private http: Http, private loadInventoryJsonService: LoadInventoryJsonService,
-     public dialog: MatDialog, private searchData:SearchDataToTableService) {
+     public dialog: MatDialog) {
     }
 
   ngOnInit(): void {
-            var mock = new MockUtils()
-            console.log(mock.genEthyData())
-            this.ethyData = mock.genEthyData()
-            this.dataSource.data = this.ethyData
+
+
+    if (this.jsonFields == 1){
+      var mock = new MockUtils()
+
+      console.log(mock.genEthyData())
+      this.ethyData = mock.genEthyData()
+      this.dataSource.data = this.ethyData
+    }
+    else if(this.jsonFields == 2){
+      var mock = new MockUtils()
+
+      console.log(mock.genInvData())
+      this.ethyData = mock.genInvData()
+      this.dataSource.data = this.invData
+    }
+
     // this.loadInventoryJsonService.getJsonTest()
     //   .subscribe(data => {
         // console.log(data)
